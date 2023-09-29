@@ -17,7 +17,11 @@ const Yarn = ({ auth, yarns = [], filters }) => {
                 <div className="flex justify-between align-center">
                     <h2 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
                         Yarns
-                        <Link href={route("yarns.create")} className="ml-2">
+                        <Link
+                            href={route("yarns.create")}
+                            className="ml-2"
+                            title="Create a new yarn"
+                        >
                             <PlusCircleIcon className="h-[30px] w-[30px] text-blue-500" />
                         </Link>
                     </h2>

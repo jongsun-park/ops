@@ -1,21 +1,28 @@
 import { router } from "@inertiajs/react";
 
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { debounce } from "lodash";
 
 const Search = ({ filters = "" }) => {
     const [query, setQuery] = useState(filters);
 
+    const debouncedQuery = useCallback(
+        debounce((value) => {
+            router.get(
+                route(route().current()),
+                { search: value },
+                {
+                    preserveState: true,
+                    replace: true,
+                }
+            );
+        }, 300),
+        []
+    );
+
     const onChange = (e) => {
         setQuery(e.target.value);
-
-        router.get(
-            route(route().current()),
-            { search: e.target.value },
-            {
-                preserveState: true,
-                replace: true,
-            }
-        );
+        debouncedQuery(e.target.value);
     };
 
     return (
