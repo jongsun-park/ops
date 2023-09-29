@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use App\Models\Yarn;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -59,19 +61,25 @@ Route::middleware('auth')->group(function () {
                 'user_id' => $yarn->user->id,
                 'user_name' => $yarn->user->name,
                 'user_email' => $yarn->user->email,
+                'can' => [
+                    'edit' => true
+                ]
             ]);
 
         $filters = request()->only(['search']);
 
         return Inertia::render('Yarns/Index', [
             'yarns' => $yarns,
-            'filters' => $filters
+            'filters' => $filters,
+            'can' => [
+                'create' => Auth::user()->can('create', User::class)
+            ]
         ]);
     })->name('yarns');
 
     Route::get('/yarns/create', function () {
         return Inertia::render('Yarns/Create');
-    })->name('yarns.create');
+    })->can('create', User::class)->name('yarns.create');
 
 
     Route::post('/yarns', function (Request $request) {

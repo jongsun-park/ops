@@ -1,6 +1,6 @@
 import { router } from "@inertiajs/react";
 
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { debounce } from "lodash";
 
 const Search = ({ filters = "" }) => {
