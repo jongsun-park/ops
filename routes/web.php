@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Models\User;
 use App\Models\Yarn;
 use Inertia\Inertia;
@@ -31,20 +32,13 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // production
-    Route::get('/productions', function () {
-        return Inertia::render('Productions/Index');
-    })->name('productions');
+    Route::resource('productions', ProductController::class);
 
     // product
-    Route::get('/products', function () {
-        return Inertia::render('Products/Index');
-    })->name('products');
+    Route::resource('products', ProductController::class);
 
     // yarn
     Route::resource('yarns', YarnController::class);
-    // Route::get('/yarns', [YarnController::class, 'index'])->name('yarns.index');
-    // Route::get('/yarns/create', [YarnController::class, 'create'])->can('create', User::class)->name('yarns.create');
-    // Route::post('/yarns', [YarnController::class, 'store'])->name('yarns.store');
 });
 
 

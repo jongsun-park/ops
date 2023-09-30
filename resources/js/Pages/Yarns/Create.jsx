@@ -1,6 +1,6 @@
 import Header from "@/Layouts/Header";
 import { Head, useForm } from "@inertiajs/react";
-import { TextInput, PrimaryButton, Button } from "./Partials/Inputs";
+import { TextInput, PrimaryButton, Button } from "@/Components/Inputs";
 
 const Create = ({ auth }) => {
     const { data, setData, post, processing, errors } = useForm({
