@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Product;
 use App\Models\Yarn;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Yarn::factory(100)->create();
+        // Yarn::factory(100)->create();
+
+        Product::factory(50)->create();
     }
 }

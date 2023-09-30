@@ -18,4 +18,12 @@ class Yarn extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // yarb has many products
+    // also can be used in differed threads
+    // products.yarn1 === yarb.id
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
