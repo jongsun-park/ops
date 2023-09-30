@@ -2,26 +2,25 @@ import Header from "@/Layouts/Header";
 import { Head, useForm } from "@inertiajs/react";
 import { TextInput, PrimaryButton, Button } from "./Partials/Inputs";
 
-const Create = ({ auth }) => {
-    const { data, setData, post, processing, errors } = useForm({
+const Edit = ({ auth, yarn }) => {
+    const { data, setData, put, processing, errors } = useForm({
         user_id: auth.user.id,
-        sku: "",
-        name: "",
+        sku: yarn?.sku ?? "",
+        name: yarn?.name ?? "",
     });
 
     function submit(e) {
         e.preventDefault();
-        console.log(data);
-        post("/yarns");
+        put(`/yarns/${yarn.id}`);
     }
 
     return (
         <>
-            <Head title="Create Yarn" />
+            <Head title="Update Yarn" />
             <Header>
                 <div className="flex justify-between align-center">
                     <h2 className="font-semibold text-3xl text-gray-800 leading-tight mx-auto">
-                        Create New Yarn
+                        Update Yarn
                     </h2>
                 </div>
             </Header>
@@ -59,7 +58,7 @@ const Create = ({ auth }) => {
                         <Button type="reset">Reset</Button>
                         {/* Submit Button */}
                         <PrimaryButton type="submit" disabled={processing}>
-                            Save
+                            Update
                         </PrimaryButton>
                     </div>
                 </form>
@@ -68,4 +67,4 @@ const Create = ({ auth }) => {
     );
 };
 
-export default Create;
+export default Edit;

@@ -12,9 +12,9 @@ export default function Authenticated({ user, header, children }) {
     // const routes = ["dashboard", "production", "product", "yarn"];
     const routes = [
         { url: "dashboard", name: "Dashboard" },
-        { url: "productions", name: "Productions" },
+        { url: "productions", name: "Production Order" },
         { url: "products", name: "Products" },
-        { url: "yarns", name: "Yarns" },
+        { url: "yarns.index", name: "Yarns" },
     ];
 
     return (

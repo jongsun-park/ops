@@ -4,12 +4,11 @@ import {
     PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import Header from "@/Layouts/Header";
 
-const Yarn = ({ auth, yarns = [], filters, can = {} }) => {
+const Yarn = ({ yarns = [], filters, can = {} }) => {
     return (
         <>
             <Head title="Yarns" />
@@ -63,12 +62,12 @@ const Yarn = ({ auth, yarns = [], filters, can = {} }) => {
                                     <p className="flex-1 text-sm leading-6 text-gray-900">
                                         {sku}
                                     </p>
-                                    <a
-                                        href={`yarn/${id}`}
+                                    <Link
+                                        href={route("yarns.show", id)}
                                         className="flex-0 mr-3 opacity-75 text-blue-300 hover:text-blue-600 hover:opacity-100"
                                     >
                                         <ChevronDoubleRightIcon className="h-6 w-6 text-blue-500" />
-                                    </a>
+                                    </Link>
                                 </li>
                             )
                         )}
