@@ -1,32 +1,33 @@
 import Header from "@/Layouts/Header";
 import { Head, useForm } from "@inertiajs/react";
 import { TextInput, PrimaryButton, Button } from "@/Components/Inputs";
+import { useEffect } from "react";
 import SelectInput from "@/Components/SelectInput";
 
-const Create = ({ auth, yarns }) => {
-  const { data, setData, post, processing, errors } = useForm({
-    user_id: auth.user.id,
-    sku: "",
-    name: "",
-    description: "",
-    yarn1_id: "",
-    yarn2_id: "",
-    yarn3_id: "",
-    yarn4_id: "",
-  });
+const Edit = ({ auth, product, yarns }) => {
+  const init = {
+    ...product,
+    user_id: product.user_id ?? auth.user.id,
+  };
+
+  const { data, setData, put, processing, errors } = useForm(init);
 
   function submit(e) {
     e.preventDefault();
-    post("/products");
+    put(`/products/${data.id}`);
+  }
+
+  function onChange(e) {
+    setData(e.target.name, e.target.value);
   }
 
   return (
     <>
-      <Head title="Create Product" />
+      <Head title="Update Product" />
       <Header>
         <div className="flex justify-between align-center">
           <h2 className="font-semibold text-3xl text-gray-800 leading-tight mx-auto">
-            Create New Product
+            Update Product
           </h2>
         </div>
       </Header>
@@ -43,7 +44,7 @@ const Create = ({ auth, yarns }) => {
                 label="SKU"
                 value={data.sku}
                 error={errors.sku}
-                onChange={(e) => setData("sku", e.target.value)}
+                onChange={onChange}
                 required
               />
               {/* NAME */}
@@ -52,16 +53,16 @@ const Create = ({ auth, yarns }) => {
                 label="Name"
                 value={data.name}
                 error={errors.name}
-                onChange={(e) => setData("name", e.target.value)}
+                onChange={onChange}
                 required
               />
-              {/* Descrpition */}
+              {/* DESCRIPTION */}
               <TextInput
                 id="description"
-                label="description"
+                label="Descripiton"
                 value={data.description}
                 error={errors.description}
-                onChange={(e) => setData("description", e.target.value)}
+                onChange={onChange}
                 required
               />
               {/* Yarn1_id */}
@@ -106,12 +107,11 @@ const Create = ({ auth, yarns }) => {
               />
             </div>
           </div>
-
           <div className="mt-6 flex items-center justify-end gap-x-6">
             <Button type="reset">Reset</Button>
             {/* Submit Button */}
             <PrimaryButton type="submit" disabled={processing}>
-              Save
+              Update
             </PrimaryButton>
           </div>
         </form>
@@ -120,4 +120,4 @@ const Create = ({ auth, yarns }) => {
   );
 };
 
-export default Create;
+export default Edit;

@@ -127,7 +127,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $yarns = Yarn::select('id', 'name')->orderBy('name')->get();
+
+        return Inertia::render('Products/Edit', [
+            'product' => $product,
+            'yarns' => $yarns
+        ]);
     }
 
     /**
@@ -135,7 +140,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $attributes = $request->validate([
+            'user_id' => 'required',
+            'name' => 'required|max:255',
+            'sku' => 'required',
+            'description' => '',
+            'yarn1_id' => '',
+            'yarn2_id' => '',
+            'yarn3_id' => '',
+            'yarn4_id' => '',
+        ]);
+
+        // update product
+        $product->update($attributes);
+
+        // redirect
+        return to_route('products.index');
     }
 
     public function destroy(Product $product)

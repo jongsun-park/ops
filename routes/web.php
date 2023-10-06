@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProductController;
 use App\Models\User;
 use App\Models\Yarn;
 use Inertia\Inertia;
@@ -8,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\YarnController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductionController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -32,7 +33,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     // production
-    Route::resource('productions', ProductController::class);
+    Route::resource('productions', ProductionController::class);
 
     // product
     Route::resource('products', ProductController::class);

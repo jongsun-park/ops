@@ -109,7 +109,7 @@ class YarnController extends Controller
         ]);
 
         // update yarn
-        $yarn->save($attributes);
+        $yarn->update($attributes);
 
         // redirect
         return to_route('yarns.index');
