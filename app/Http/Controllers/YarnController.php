@@ -12,6 +12,8 @@ class YarnController extends Controller
     public function index()
     {
 
+        // Yarn::with(['grade', 'color', 'material', 'supplier'])->find(2)
+
         $yarns = Yarn::query()
             ->when(request('search'), function ($query, $search) {
                 $query

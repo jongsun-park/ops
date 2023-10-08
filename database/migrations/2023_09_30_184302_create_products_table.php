@@ -11,6 +11,38 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::create('units', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('looms', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('labels', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('hem_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('hem_sizes', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('corners', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
@@ -23,6 +55,22 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('sku')->unique();
             $table->text('description');
+
+            $table->text('tf_number');
+            $table->text('divs');
+            $table->text('ppcm');
+            $table->text('pprepeat');
+            $table->text('cut_width');
+            $table->text('cut_length');
+            $table->text('finish_width');
+            $table->text('finish_length');
+
+            $table->foreignId('unit_id')->constrained()->noActionOnDelete();
+            $table->foreignId('loom_id')->constrained()->noActionOnDelete();
+            $table->foreignId('label_id')->constrained()->noActionOnDelete();
+            $table->foreignId('hem_type_id')->constrained()->noActionOnDelete();
+            $table->foreignId('hem_size_id')->constrained()->noActionOnDelete();
+            $table->foreignId('corner_id')->constrained()->noActionOnDelete();
 
             $table->timestamps();
         });

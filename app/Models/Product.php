@@ -35,4 +35,29 @@ class Product extends Model
     {
         return $this->belongsTo(Yarn::class);
     }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+    public function loom()
+    {
+        return $this->belongsTo(Loom::class);
+    }
+    public function label()
+    {
+        return $this->belongsTo(Label::class);
+    }
+    public function hemType()
+    {
+        return $this->belongsTo(HemType::class);
+    }
+    public function hemSize()
+    {
+        return $this->belongsTo(hemSize::class);
+    }
+    public function corner()
+    {
+        return $this->belongsTo(Corner::class);
+    }
 }

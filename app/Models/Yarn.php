@@ -11,18 +11,31 @@ class Yarn extends Model
 
     protected $guarded = [];
 
-
-    // Yarn belongs to Many Products (Many to Many Relationship)
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // yarb has many products
-    // also can be used in differed threads
-    // products.yarn1 === yarb.id
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
+    }
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }
