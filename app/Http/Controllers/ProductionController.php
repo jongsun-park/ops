@@ -43,7 +43,7 @@ class ProductionController extends Controller
                 'note' => $pro->note,
                 'status' => $pro->status,
                 'can' => [
-                    'edit' => true
+                    'edit' => auth()->user()->can('update', $pro)
                 ]
             ]);
 
@@ -53,7 +53,7 @@ class ProductionController extends Controller
             'productions' => $productions,
             'filters' => $filters,
             'can' => [
-                'create' => Auth::user()->can('create', User::class)
+                'create' => auth()->user()->can('create', Production::class)
             ]
         ]);
     }
@@ -90,9 +90,9 @@ class ProductionController extends Controller
 
         $user_data = [
             'can' => [
-                'create' => true,
-                'update' => true,
-                'delete' => true
+                'create' => auth()->user()->can('create', Production::class),
+                'update' => auth()->user()->can('update', $production),
+                'delete' => auth()->user()->can('delete', $production),
             ]
         ];
 

@@ -19,7 +19,12 @@ class ProductionFactory extends Factory
     public function definition(): array
     {
         $user_id = User::all()->first()?->id;
-        if (!$user_id) $user_id = User::factory()->create()->id;
+        if (!$user_id) $user_id = User::factory()->create([
+            'name' => 'Jongsun Park',
+            'email' => 'jongsun250@gmail.com',
+            'role' => 'admin',
+            'password' => 'password123'
+        ])->id;
         $product_id = Product::factory()->create()->id;
 
         return [

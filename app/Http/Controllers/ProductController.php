@@ -37,7 +37,8 @@ class ProductController extends Controller
                 'user_name' => $product->user->name,
                 'user_email' => $product->user->email,
                 'can' => [
-                    'edit' => true
+                    'edit' => auth()->user()->can('edit', $product),
+                    'delete' => auth()->user()->can('delete', $product),
                 ]
             ]);
 
@@ -47,7 +48,7 @@ class ProductController extends Controller
             'products' => $products,
             'filters' => $filters,
             'can' => [
-                'create' => Auth::user()->can('create', User::class)
+                'create' => auth()->user()->can('create', Product::class)
             ]
         ]);
     }
@@ -110,8 +111,8 @@ class ProductController extends Controller
             'name' => $product->user->name,
             'email' => $product->user->email,
             'can' => [
-                'update' => true,
-                'delete' => true
+                'update' => auth()->user()->can('update', $product),
+                'delete' => auth()->user()->can('delete', $product),
             ]
         ];
 
