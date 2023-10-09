@@ -82,5 +82,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('products');
+
+        Schema::dropIfExists('units');
+        Schema::dropIfExists('looms');
+        Schema::dropIfExists('labels');
+        Schema::dropIfExists('hem_types');
+        Schema::dropIfExists('hem_sizes');
+        Schema::dropIfExists('corners');
     }
 };

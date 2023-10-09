@@ -11,6 +11,33 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('urgencies', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('wash_options', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('packings', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('statuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        Schema::create('production_log', function (Blueprint $table) {
+            $table->foreignId('production_id');
+            $table->foreignId('status_id');
+            $table->foreignId('user_id');
+            $table->timestamps();
+        });
+
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -23,12 +50,13 @@ return new class extends Migration
             $table->text('weave_by')->nullable();
             $table->text('quantity')->nullable();
             $table->text('total_length')->nullable();
+            $table->text('number_of_repeats')->nullable();
             $table->text('note')->nullable();
 
-            $table->text('urgency')->nullable(); // FK
-            $table->text('wash_option')->nullable(); // FK
-            $table->text('packing')->nullable(); // FK
-            $table->text('status')->nullable(); // FK
+            $table->foreignId('urgency_id')->constrained()->noActionOnDelete();
+            $table->foreignId('wash_option')->constrained()->noActionOnDelete();
+            $table->foreignId('packing')->constrained()->noActionOnDelete();
+            $table->foreignId('status')->constrained()->noActionOnDelete();
         });
     }
 
@@ -37,6 +65,13 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('productions');
+
+        Schema::dropIfExists('urgencies');
+        Schema::dropIfExists('wash_options');
+        Schema::dropIfExists('packings');
+        Schema::dropIfExists('statuses');
+        Schema::dropIfExists('production_log');
         Schema::dropIfExists('productions');
     }
 };

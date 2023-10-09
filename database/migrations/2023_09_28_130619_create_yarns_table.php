@@ -53,6 +53,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('yarns');
+
         Schema::dropIfExists('grades');
         Schema::dropIfExists('colors');
         Schema::dropIfExists('materials');
