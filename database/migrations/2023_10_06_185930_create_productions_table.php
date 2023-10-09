@@ -54,9 +54,9 @@ return new class extends Migration
             $table->text('note')->nullable();
 
             $table->foreignId('urgency_id')->constrained()->noActionOnDelete();
-            $table->foreignId('wash_option')->constrained()->noActionOnDelete();
-            $table->foreignId('packing')->constrained()->noActionOnDelete();
-            $table->foreignId('status')->constrained()->noActionOnDelete();
+            $table->foreignId('wash_option_id')->constrained()->noActionOnDelete();
+            $table->foreignId('packing_id')->constrained()->noActionOnDelete();
+            $table->foreignId('status_id')->constrained()->noActionOnDelete();
         });
     }
 

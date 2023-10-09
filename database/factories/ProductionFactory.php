@@ -2,8 +2,12 @@
 
 namespace Database\Factories;
 
+use App\Models\Packing;
 use App\Models\Product;
+use App\Models\Status;
+use App\Models\Urgency;
 use App\Models\User;
+use App\Models\WashOption;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,6 +31,22 @@ class ProductionFactory extends Factory
         ])->id;
         $product_id = Product::factory()->create()->id;
 
+        if (!Urgency::first()) {
+            Urgency::factory(5)->create();
+        }
+
+        if (!WashOption::first()) {
+            WashOption::factory(5)->create();
+        }
+
+        if (!Packing::first()) {
+            Packing::factory(5)->create();
+        }
+
+        if (!Status::first()) {
+            Status::factory(5)->create();
+        }
+
         return [
             'user_id' => $user_id,
             'product_id' => $product_id,
@@ -36,12 +56,14 @@ class ProductionFactory extends Factory
             'weave_by' => fake()->words(1, true),
             'quantity' => fake()->words(1, true),
             'total_length' => fake()->words(1, true),
+            'number_of_repeats' => fake()->words(1, true),
             'note' => fake()->words(3, true),
 
-            'urgency' => fake()->words(1, true),
-            'wash_option' => fake()->words(1, true),
-            'packing' => fake()->words(1, true),
-            'status' => fake()->words(1, true),
+            'urgency_id' => Urgency::all()->random(1)->first()->id,
+            'wash_option_id' => WashOption::all()->random(1)->first()->id,
+            'packing_id' => Packing::all()->random(1)->first()->id,
+            'status_id' => Status::all()->random(1)->first()->id,
+
         ];
     }
 }
