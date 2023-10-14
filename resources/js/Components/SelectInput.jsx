@@ -24,11 +24,11 @@ export default function SelectInput({
   return (
     <div className="w-full">
       <Listbox value={selected} onChange={onChange}>
-        <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">
+        <Listbox.Label className="block text-xs font-bold leading-6 text-gray-900 uppercase">
           {label}
         </Listbox.Label>
-        <div className="relative mt-1">
-          <Listbox.Button className="rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset w-full p-2 px-2 text-left text-sm focus-within:ring-blue-600">
+        <div className="relative mt-1 ">
+          <Listbox.Button className="rounded-md shadow-sm ring-1 ring-inset ring-gray-100 focus-within:ring-2 focus-within:ring-inset w-full p-4 px-2 text-left text-sm focus-within:ring-blue-600 bg-white">
             <span className="block truncate">{selectedText}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon

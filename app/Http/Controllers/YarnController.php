@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Color;
+use App\Models\Grade;
+use App\Models\Material;
+use App\Models\Supplier;
 use App\Models\Yarn;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
@@ -29,13 +33,12 @@ class YarnController extends Controller
                 'id' => $yarn->id,
                 'name' => $yarn->name,
                 'sku' => $yarn->sku,
-                'created_at' => $yarn->created_at,
-                'user_id' => $yarn->user->id,
+                'created_at' => $yarn->created_at->diffForHumans(),
                 'user_name' => $yarn->user->name,
-                'user_email' => $yarn->user->email,
-                'can' => [
-                    'edit' => true
-                ]
+                'grade' => $yarn->grade->name,
+                'color' => $yarn->color->name,
+                'material' => $yarn->material->name,
+                'supplier' => $yarn->supplier->name,
             ]);
 
         $filters = request()->only(['search']);
@@ -51,7 +54,12 @@ class YarnController extends Controller
 
     public function create()
     {
-        return Inertia::render('Yarns/Create');
+        return Inertia::render('Yarns/Form', [
+            'colors' => Color::all()->toArray(),
+            'grades' => Grade::all()->toArray(),
+            'suppliers' => Supplier::all()->toArray(),
+            'materials' => Material::all()->toArray(),
+        ]);
     }
 
     public function store(Request $request)
@@ -61,13 +69,17 @@ class YarnController extends Controller
             'user_id' => 'required',
             'name' => 'required|max:255',
             'sku' => 'required|unique:yarns',
+            'color_id' => 'required',
+            'grade_id' => 'required',
+            'material_id' => 'required',
+            'supplier_id' => 'required',
         ]);
 
         // create yarn
-        Yarn::create($attributes);
+        $id = Yarn::create($attributes)->id;
 
         // redirect
-        return to_route('yarns.index');
+        return to_route('yarns.show', ['yarn' => $id]);
     }
 
     public function show(Yarn $yarn)
@@ -76,7 +88,12 @@ class YarnController extends Controller
             'id' => $yarn->id,
             'name' => $yarn->name,
             'sku' => $yarn->sku,
-            'created_at' => $yarn->created_at->diffForHumans()
+            'created_at' => $yarn->created_at->diffForHumans(),
+            'user_name' => $yarn->user->name,
+            'grade' => $yarn->grade->name,
+            'color' => $yarn->color->name,
+            'material' => $yarn->material->name,
+            'supplier' => $yarn->supplier->name,
         ];
 
         $user_date = [
@@ -84,8 +101,8 @@ class YarnController extends Controller
             'name' => $yarn->user->name,
             'email' => $yarn->user->email,
             'can' => [
-                'update' => true,
-                'delete' => true
+                'update' => Auth::user()->can('update', $yarn),
+                'delete' => Auth::user()->can('delete', $yarn),
             ]
         ];
 
@@ -97,8 +114,13 @@ class YarnController extends Controller
 
     public function edit(Yarn $yarn)
     {
-        return Inertia::render('Yarns/Edit', [
-            'yarn' => $yarn
+
+        return Inertia::render('Yarns/Form', [
+            'yarn' => $yarn,
+            'colors' => Color::all()->toArray(),
+            'grades' => Grade::all()->toArray(),
+            'suppliers' => Supplier::all()->toArray(),
+            'materials' => Material::all()->toArray(),
         ]);
     }
 
@@ -108,13 +130,17 @@ class YarnController extends Controller
             'user_id' => 'required',
             'name' => 'required|max:255',
             'sku' => 'required',
+            'color_id' => '',
+            'grade_id' => '',
+            'material_id' => '',
+            'supplier_id' => '',
         ]);
 
         // update yarn
         $yarn->update($attributes);
 
         // redirect
-        return to_route('yarns.index');
+        return to_route('yarns.show',  ['yarn' => $yarn->id]);
     }
 
     public function destroy(Yarn $yarn)

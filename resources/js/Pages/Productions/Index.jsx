@@ -100,7 +100,7 @@ const ProductionOrders = ({ productions = [], filters, can = {} }) => {
         )}
 
         <div className="m-5 pb-10">
-          <Pagination class="mt-6" links={productions.links} />
+          <Pagination className="mt-6" links={productions.links} />
         </div>
       </main>
     </>

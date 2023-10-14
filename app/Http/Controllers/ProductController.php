@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Corner;
+use App\Models\HemSize;
+use App\Models\HemType;
+use App\Models\Label;
+use App\Models\Loom;
 use Inertia\Inertia;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Models\Yarn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,22 +30,11 @@ class ProductController extends Controller
             ->withQueryString()
             ->through(fn ($product) => [
                 'id' => $product->id,
-                'name' => $product->name,
                 'sku' => $product->sku,
-                'yarns' => [
-                    $product->yarn1,
-                    $product->yarn2,
-                    $product->yarn3,
-                    $product->yarn4,
-                ],
-                'created_at' => $product->created_at,
-                'user_id' => $product->user->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'created_at' => $product->created_at->diffForHumans(),
                 'user_name' => $product->user->name,
-                'user_email' => $product->user->email,
-                'can' => [
-                    'edit' => auth()->user()->can('edit', $product),
-                    'delete' => auth()->user()->can('delete', $product),
-                ]
             ]);
 
         $filters = request()->only(['search']);
@@ -58,10 +53,15 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $yarns = Yarn::select('id', 'name')->orderBy('name')->get();
 
-        return Inertia::render('Products/Create', [
-            'yarns' => $yarns
+        return Inertia::render('Products/Form', [
+            'yarns' => Yarn::select('id', 'name')->orderBy('name')->get(),
+            'units' => Unit::all()->toArray(),
+            'looms' => Loom::all()->toArray(),
+            'labels' => Label::all()->toArray(),
+            'hem_types' => HemType::all()->toArray(),
+            'hem_sizes' => HemSize::all()->toArray(),
+            'corners' => Corner::all()->toArray(),
         ]);
     }
 
@@ -75,18 +75,35 @@ class ProductController extends Controller
             'user_id' => 'required',
             'name' => 'required|max:255',
             'sku' => 'required|unique:products',
-            'description' => '',
-            'yarn1_id' => '',
-            'yarn2_id' => '',
-            'yarn3_id' => '',
-            'yarn4_id' => '',
+            'description' => 'required',
+            'yarn1_id' => 'required',
+            'yarn2_id' => 'required',
+            'yarn3_id' => 'required',
+            'yarn4_id' => 'required',
+
+            'tf_number' => 'required',
+            'divs' => 'required',
+            'ppcm' => 'required',
+            'pprepeat' => 'required',
+            'cut_width' => 'required',
+            'cut_length' => 'required',
+            'finish_width' => 'required',
+            'finish_length' => 'required',
+
+            'unit_id' => 'required',
+            'loom_id' => 'required',
+            'label_id' => 'required',
+            'hem_type_id' => 'required',
+            'hem_size_id' => 'required',
+            'corner_id' => 'required',
+
         ]);
 
         // create product
-        Product::create($attributes);
+        $id = Product::create($attributes)->id;
 
         // redirect
-        return to_route('products.index');
+        return to_route('products.show', ['product' => $id]);
     }
 
     public function show(Product $product)
@@ -96,14 +113,25 @@ class ProductController extends Controller
             'name' => $product->name,
             'sku' => $product->sku,
             'description' => $product->description,
-            'created_at' => $product->created_at->diffForHumans()
-        ];
-
-        $yarns_data = [
-            "yarn1" => $product->yarn1,
-            "yarn2" => $product->yarn2,
-            "yarn3" => $product->yarn3,
-            "yarn4" => $product->yarn4,
+            'tf_number' => $product->tf_number,
+            'divs' => $product->divs,
+            'ppcm' => $product->ppcm,
+            'pprepeat' => $product->pprepeat,
+            'cut_width' => $product->cut_width,
+            'cut_length' => $product->cut_length,
+            'finish_width' => $product->finish_width,
+            'finish_length' => $product->finish_length,
+            'unit' => $product->unit->name,
+            'loom' => $product->loom->name,
+            'label' => $product->label->name,
+            'hem_type' => $product->hemType->name,
+            'hem_size' => $product->hemSize->name,
+            'corner' => $product->corner->name,
+            'created_at' => $product->created_at->diffForHumans(),
+            "yarn1" => $product->yarn1->name,
+            "yarn2" => $product->yarn2->name,
+            "yarn3" => $product->yarn3->name,
+            "yarn4" => $product->yarn4->name,
         ];
 
         $user_date = [
@@ -118,7 +146,6 @@ class ProductController extends Controller
 
         return Inertia::render('Products/Show', [
             'product' => $product_data,
-            'yarns' => $yarns_data,
             'user' => $user_date
         ]);
     }
@@ -128,11 +155,16 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $yarns = Yarn::select('id', 'name')->orderBy('name')->get();
 
-        return Inertia::render('Products/Edit', [
+        return Inertia::render('Products/Form', [
             'product' => $product,
-            'yarns' => $yarns
+            'yarns' => Yarn::select('id', 'name')->orderBy('name')->get(),
+            'units' => Unit::all()->toArray(),
+            'looms' => Loom::all()->toArray(),
+            'labels' => Label::all()->toArray(),
+            'hem_types' => HemType::all()->toArray(),
+            'hem_sizes' => HemSize::all()->toArray(),
+            'corners' => Corner::all()->toArray(),
         ]);
     }
 

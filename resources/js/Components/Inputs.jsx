@@ -13,12 +13,12 @@ export const TextInput = ({
     <div className="sm:col-span-4">
       <label
         htmlFor={id}
-        className="block text-sm font-bold uppercase leading-4 text-gray-900"
+        className="block text-xs font-bold uppercase leading-4 text-gray-900"
       >
         {betterLabel(label)}
       </label>
       <div className="mt-2">
-        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-blue-600 px-2">
+        <div className="">
           <input
             type="text"
             value={value}
@@ -26,7 +26,7 @@ export const TextInput = ({
             name={id}
             id={id}
             autoComplete={id}
-            className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder={placeholder}
             required={required}
           />
@@ -37,6 +37,7 @@ export const TextInput = ({
   );
 };
 
+// Simple and Icon on Hover
 export const PrimaryButton = ({
   type = "button",
   disabled = false,
@@ -44,15 +45,54 @@ export const PrimaryButton = ({
 }) => (
   <button
     type={type}
-    className="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-50 disabled:cursor-progress"
+    className="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
     disabled={disabled}
   >
-    {children}
+    <span className="absolute -end-full transition-all group-hover:end-4">
+      <svg
+        className="h-5 w-5 rtl:rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+    </span>
+    <span className="text-sm font-medium transition-all group-hover:me-4">
+      {children}
+    </span>
   </button>
 );
 
 export const Button = ({ type = "button", children }) => (
-  <button type={type} className="text-sm font-semibold leading-6 text-gray-900">
-    {children}
+  <button
+    type={type}
+    className="group relative inline-flex items-center overflow-hidden rounded border border-current px-8 py-3 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+  >
+    <span className="absolute -end-full transition-all group-hover:end-4">
+      <svg
+        className="h-5 w-5 rtl:rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M17 8l4 4m0 0l-4 4m4-4H3"
+        />
+      </svg>
+    </span>
+    <span className="text-sm font-medium transition-all group-hover:me-4">
+      {children}
+    </span>
   </button>
 );

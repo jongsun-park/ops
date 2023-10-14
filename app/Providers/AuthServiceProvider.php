@@ -7,9 +7,11 @@ namespace App\Providers;
 use App\Models\Product;
 use App\Models\Production;
 use App\Models\User;
+use App\Models\Yarn;
 use App\Policies\ProductionPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\UserPolicy;
+use App\Policies\YarnPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -23,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         User::class => UserPolicy::class,
         Production::class => ProductionPolicy::class,
         Product::class => ProductPolicy::class,
+        Yarn::class => YarnPolicy::class,
     ];
 
     /**
