@@ -8,6 +8,7 @@ import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import Header from "@/Layouts/Header";
 import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const Yarn = ({ yarns = [], filters, can = {} }) => {
   return (
@@ -30,34 +31,32 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
           <Search filters={filters.search} />
         </div>
       </Header>
-      <main>
-        <div className="mx-5 px-5">
-          <div className="space-y-2">
-            {yarns.data.map(
-              ({
-                id,
-                name,
-                sku,
-                supplier,
-                user_name,
-                created_at,
-                color,
-                material,
-              }) => (
-                <Link href={route("yarns.show", id)} key={id} className="block">
-                  <DetailsList>
-                    <Detail dt="Name" dd={name} />
-                    <Detail dt="SKU" dd={sku} />
-                    <Detail dt="Supplier" dd={supplier} />
-                    <Detail dt="Color" dd={color} />
-                    <Detail dt="Material" dd={material} />
-                    <Detail dt="Written By" dd={user_name} />
-                    <Detail dt="Created at" dd={created_at} />
-                  </DetailsList>
-                </Link>
-              )
-            )}
-          </div>
+      <Main>
+        <div className="space-y-2">
+          {yarns.data.map(
+            ({
+              id,
+              name,
+              sku,
+              supplier,
+              user_name,
+              created_at,
+              color,
+              material,
+            }) => (
+              <Link href={route("yarns.show", id)} key={id} className="block">
+                <DetailsList>
+                  <Detail dt="Name" dd={name} />
+                  <Detail dt="SKU" dd={sku} />
+                  <Detail dt="Supplier" dd={supplier} />
+                  <Detail dt="Color" dd={color} />
+                  <Detail dt="Material" dd={material} />
+                  <Detail dt="Written By" dd={user_name} />
+                  <Detail dt="Created at" dd={created_at} />
+                </DetailsList>
+              </Link>
+            )
+          )}
         </div>
 
         {yarns.data.length == 0 && (
@@ -69,7 +68,7 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
         <div className="m-5 pb-10">
           <Pagination class="mt-6" links={yarns.links} />
         </div>
-      </main>
+      </Main>
     </>
   );
 };

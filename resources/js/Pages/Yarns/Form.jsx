@@ -3,6 +3,8 @@ import { Head, useForm } from "@inertiajs/react";
 import { TextInput, PrimaryButton, Button } from "@/Components/Inputs";
 import SelectInput from "@/Components/SelectInput";
 import FormContainer from "@/Components/FormContainer";
+import FormHeader from "@/Components/FormHeader";
+import Main from "@/Layouts/Main";
 
 const Edit = ({ auth, yarn, colors, grades, suppliers, materials }) => {
   const { data, setData, post, put, processing, errors } = useForm({
@@ -27,15 +29,9 @@ const Edit = ({ auth, yarn, colors, grades, suppliers, materials }) => {
     <>
       <Head title={title} />
 
-      <main className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <Main>
         <Header>
-          <div className="mx-auto max-w-lg text-center">
-            <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-            <p className="mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-              nulla eaque error neque ipsa culpa autem, at itaque nostrum!
-            </p>
-          </div>
+          <FormHeader title={title} />
         </Header>
         <FormContainer
           onSubmit={submit}
@@ -104,7 +100,7 @@ const Edit = ({ auth, yarn, colors, grades, suppliers, materials }) => {
             }}
           />
         </FormContainer>
-      </main>
+      </Main>
     </>
   );
 };

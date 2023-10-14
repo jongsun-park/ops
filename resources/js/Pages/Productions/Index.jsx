@@ -7,65 +7,8 @@ import {
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import Header from "@/Layouts/Header";
-
-const Row = ({ label, children }) => {
-  if (!children) return;
-
-  return (
-    <div>
-      <label className="uppercase text-blue-400 font-bold text-xs">
-        {label}
-      </label>
-      <p>{children}</p>
-    </div>
-  );
-};
-
-const ProductionOrderList = ({ pros = [] }) => {
-  return (
-    <ul role="list" className="space-y-4">
-      {pros.map(
-        ({
-          id,
-          product,
-          created_at,
-          created_by,
-          order_id,
-          customer_name,
-          weave_by,
-          note,
-          status,
-          can,
-        }) => (
-          <div key={id}>
-            <li className="flex justify-between gap-x-6 p-5 pt-3 rounded bg-white">
-              <div className="mt-1 space-y-4">
-                <Row label="Product">
-                  {product.name} - {product.sku}
-                </Row>
-                <Row label="Created At">{created_at}</Row>
-                <Row label="Written By">
-                  {`${created_by.name} - ${created_by.email}`}
-                </Row>
-                <Row label="Order">{order_id}</Row>
-                <Row label="Customer">{customer_name}</Row>
-                <Row label="Weave by">{weave_by}</Row>
-                <Row label="Note">{note}</Row>
-                <Row label="Status">{status}</Row>
-              </div>
-              <Link
-                href={route("productions.show", id)}
-                className="flex-0 mr-3 opacity-75 text-blue-300 hover:text-blue-600 hover:opacity-100"
-              >
-                <ChevronDoubleRightIcon className="h-6 w-6 text-blue-500" />
-              </Link>
-            </li>
-          </div>
-        )
-      )}
-    </ul>
-  );
-};
+import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const ProductionOrders = ({ productions = [], filters, can = {} }) => {
   return (
@@ -88,9 +31,38 @@ const ProductionOrders = ({ productions = [], filters, can = {} }) => {
           <Search filters={filters.search} />
         </div>
       </Header>
-      <main>
-        <div className="mx-5 px-5 pb-2">
-          <ProductionOrderList pros={productions.data} />
+      <Main>
+        <div className="space-y-2">
+          {productions.data.map(
+            ({
+              id,
+              product_name,
+              created_at,
+              created_by,
+              order_id,
+              customer_name,
+              weave_by,
+              note,
+              status,
+            }) => (
+              <Link
+                href={route("productions.show", id)}
+                key={id}
+                className="block"
+              >
+                <DetailsList>
+                  <Detail dt="Product Name" dd={product_name} />
+                  <Detail dt="Created At" dd={created_at} />
+                  <Detail dt="Created By" dd={created_by} />
+                  <Detail dt="Order ID" dd={order_id} />
+                  <Detail dt="Customer Name" dd={customer_name} />
+                  <Detail dt="Weave By" dd={weave_by} />
+                  <Detail dt="Note" dd={note} />
+                  <Detail dt="Status" dd={status} />
+                </DetailsList>
+              </Link>
+            )
+          )}
         </div>
 
         {productions.data.length == 0 && (
@@ -102,7 +74,7 @@ const ProductionOrders = ({ productions = [], filters, can = {} }) => {
         <div className="m-5 pb-10">
           <Pagination className="mt-6" links={productions.links} />
         </div>
-      </main>
+      </Main>
     </>
   );
 };

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Packing;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Production;
+use App\Models\Status;
+use App\Models\Urgency;
+use App\Models\WashOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,29 +29,18 @@ class ProductionController extends Controller
             ->withQueryString()
             ->through(fn ($pro) => [
                 'id' => $pro->id,
-                'product' => [
-                    'id' => $pro->product->id,
-                    'name' => $pro->product->name,
-                    'sku' => $pro->product->sku,
-                    'description' => $pro->product->description,
-                ],
+                'product_name' =>  $pro->product->name,
                 'created_at' => $pro->created_at->diffForHumans(),
-                'created_by' => [
-                    'id' => $pro->user->id,
-                    'name' => $pro->user->name,
-                    'email' => $pro->user->email,
-                ],
+                'created_by' => $pro->user->name,
                 'order_id' => $pro->order_id,
                 'customer_name' => $pro->customer_name,
                 'weave_by' => $pro->weave_by,
                 'note' => $pro->note,
-                'status' => $pro->status,
-                'can' => [
-                    'edit' => auth()->user()->can('update', $pro)
-                ]
+                'status' => $pro->status->name,
             ]);
 
         $filters = request()->only(['search']);
+
 
         return Inertia::render('Productions/Index', [
             'productions' => $productions,
@@ -65,28 +58,24 @@ class ProductionController extends Controller
             'id' => $production->id,
             'created_at' => $production->created_at->diffForHumans(),
             'updated_at' => $production->updated_at->diffForHumans(),
-            'product' => [
-                'id' => $production->product->id,
-                'name' => $production->product->name,
-                'sku' => $production->product->sku,
-                'description' => $production->product->description
-            ],
-            'written_by' => [
-                'id' =>  $production->user->id,
-                'name' =>  $production->user->name,
-                'email' =>  $production->user->email
-            ],
+            'product_name' => $production->product->name,
+            'product_sku' => $production->product->sku,
+            'product_description' => $production->product->description,
+
+            'written_by' => $production->user->name,
             'order_id' => $production->order_id,
             'customer_name' => $production->customer_name,
             'weave_by' => $production->weave_by,
             'quantity' => $production->quantity,
             'total_length' => $production->total_length,
             'note' => $production->note,
-            'urgency' => $production->urgency,
-            'wash_option' => $production->wash_option,
-            'packing' => $production->packing,
-            'status' => $production->status,
+            'urgency' => $production->urgency->name,
+            'wash_option' => $production->wash_option->name,
+            'packing' => $production->packing->name,
+            'status' => $production->status->name,
         ];
+
+
 
         $user_data = [
             'can' => [
@@ -113,27 +102,31 @@ class ProductionController extends Controller
             'weave_by' => '',
             'quantity' => '',
             'total_length' => '',
+            'number_of_repeats' => '',
             'note' => '',
-            'urgency' => '',
-            'wash_option' => '',
-            'packing' => '',
-            'status' => '',
+            'urgency_id' => '',
+            'wash_option_id' => '',
+            'packing_id' => '',
+            'status_id' => '',
         ]);
 
         // create Production
-        Production::create($attributes);
+        $id = Production::create($attributes)->id;
 
         // redirect
-        return to_route('productions.index');
+        return to_route('productions.show', ['production' => $id]);
     }
 
 
     public function create()
     {
-        $products = Product::select('id', 'name')->orderBy('name')->get();
 
-        return Inertia::render('Productions/Create', [
-            'products' => $products
+        return Inertia::render('Productions/Form', [
+            'products' => Product::select('id', 'name')->orderBy('name')->get(),
+            'urgencies' => Urgency::all()->toArray(),
+            'wash_options' => WashOption::all()->toArray(),
+            'packings' => Packing::all()->toArray(),
+            'statuses' => Status::all()->toArray(),
         ]);
     }
 
@@ -147,21 +140,20 @@ class ProductionController extends Controller
             'weave_by' => '',
             'quantity' => '',
             'total_length' => '',
+            'number_of_repeats' => '',
             'note' => '',
-            'urgency' => '',
-            'wash_option' => '',
-            'packing' => '',
-            'status' => '',
+            'urgency_id' => '',
+            'wash_option_id' => '',
+            'packing_id' => '',
+            'status_id' => '',
         ]);
 
         // update products
         $production->update($attributes);
 
         // redirect
-        return to_route('productions.index');
+        return to_route('productions.show', ['production' => $production->id]);
     }
-
-
 
 
 
@@ -176,9 +168,13 @@ class ProductionController extends Controller
     {
         $products = Product::select('id', 'name')->orderBy('name')->get();
 
-        return Inertia::render('Productions/Edit', [
+        return Inertia::render('Productions/Form', [
             'production' => $production,
-            'products' => $products
+            'products' => $products,
+            'urgencies' => Urgency::all()->toArray(),
+            'wash_options' => WashOption::all()->toArray(),
+            'packings' => Packing::all()->toArray(),
+            'statuses' => Status::all()->toArray(),
         ]);
     }
 }

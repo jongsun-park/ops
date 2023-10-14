@@ -3,6 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import Header from "@/Layouts/Header";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const Show = ({ yarn, user }) => {
   const title = `Yarn - ${yarn?.name}`;
@@ -37,7 +38,7 @@ const Show = ({ yarn, user }) => {
           </h2>
         </div>
       </Header>
-      <main className="mx-5 px-5">
+      <Main>
         <DetailsList>
           <Detail dt="Name" dd={yarn.name} />
           <Detail dt="SKU" dd={yarn.sku} />
@@ -47,7 +48,7 @@ const Show = ({ yarn, user }) => {
           <Detail dt="Written By" dd={user.name} />
           <Detail dt="Created at" dd={yarn.created_at} />
         </DetailsList>
-      </main>
+      </Main>
     </>
   );
 };

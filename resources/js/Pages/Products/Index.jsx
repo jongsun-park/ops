@@ -5,6 +5,7 @@ import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import Header from "@/Layouts/Header";
 import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const Products = ({ products = [], filters, can = {} }) => {
   return (
@@ -27,27 +28,25 @@ const Products = ({ products = [], filters, can = {} }) => {
           <Search filters={filters.search} />
         </div>
       </Header>
-      <main>
-        <div className="mx-5 px-5">
-          <div className="space-y-2">
-            {products.data.map(
-              ({ id, name, user_name, sku, description, created_at }) => (
-                <Link
-                  href={route("products.show", id)}
-                  key={id}
-                  className="block"
-                >
-                  <DetailsList>
-                    <Detail dt="Sku" dd={sku} />
-                    <Detail dt="Name" dd={name} />
-                    <Detail dt="Description" dd={description} />
-                    <Detail dt="Written By" dd={user_name} />
-                    <Detail dt="Created At" dd={created_at} />
-                  </DetailsList>
-                </Link>
-              )
-            )}
-          </div>
+      <Main>
+        <div className="space-y-2">
+          {products.data.map(
+            ({ id, name, user_name, sku, description, created_at }) => (
+              <Link
+                href={route("products.show", id)}
+                key={id}
+                className="block"
+              >
+                <DetailsList>
+                  <Detail dt="Sku" dd={sku} />
+                  <Detail dt="Name" dd={name} />
+                  <Detail dt="Description" dd={description} />
+                  <Detail dt="Written By" dd={user_name} />
+                  <Detail dt="Created At" dd={created_at} />
+                </DetailsList>
+              </Link>
+            )
+          )}
         </div>
 
         {products.data.length == 0 && (
@@ -59,7 +58,7 @@ const Products = ({ products = [], filters, can = {} }) => {
         <div className="m-5 pb-10">
           <Pagination className="mt-6" links={products.links} />
         </div>
-      </main>
+      </Main>
     </>
   );
 };

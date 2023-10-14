@@ -2,6 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Header from "@/Layouts/Header";
 import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const Show = ({ product, user }) => {
   const title = `Product - ${product?.name}`;
@@ -36,7 +37,7 @@ const Show = ({ product, user }) => {
           </h2>
         </div>
       </Header>
-      <main className="mx-5 px-5">
+      <Main>
         <DetailsList>
           <Detail dt="Product Name" dd={product.name} />
           <Detail dt="SKU" dd={product.sku} />
@@ -61,7 +62,7 @@ const Show = ({ product, user }) => {
           <Detail dt="Yarn 3" dd={product.yarn3} />
           <Detail dt="Yarn 4" dd={product.yarn4} />
         </DetailsList>
-      </main>
+      </Main>
     </>
   );
 };

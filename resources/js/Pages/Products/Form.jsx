@@ -3,6 +3,8 @@ import { Head, useForm } from "@inertiajs/react";
 import { TextInput, PrimaryButton, Button } from "@/Components/Inputs";
 import SelectInput from "@/Components/SelectInput";
 import FormContainer from "@/Components/FormContainer";
+import FormHeader from "@/Components/FormHeader";
+import Main from "@/Layouts/Main";
 
 const Form = ({
   auth,
@@ -55,22 +57,16 @@ const Form = ({
     setData(e.target.name, e.target.value);
   }
 
-  const title = product ? "Update Yarn" : "Create Yarn";
+  const title = product ? "Update Product" : "Create Product";
   const buttonText = product ? "Update" : "Create";
 
   return (
     <>
       <Head title={title} />
 
-      <main>
+      <Main>
         <Header>
-          <div className="mx-auto max-w-lg text-center">
-            <h1 className="text-2xl font-bold sm:text-3xl">{title}</h1>
-            <p className="mt-4 text-gray-500">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
-              nulla eaque error neque ipsa culpa autem, at itaque nostrum!
-            </p>
-          </div>
+          <FormHeader title={title} />
         </Header>
 
         <FormContainer
@@ -291,7 +287,7 @@ const Form = ({
             }}
           />
         </FormContainer>
-      </main>
+      </Main>
     </>
   );
 };

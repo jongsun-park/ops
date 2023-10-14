@@ -5,6 +5,8 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import Header from "@/Layouts/Header";
+import { Detail, DetailsList } from "@/Components/DetailsList";
+import Main from "@/Layouts/Main";
 
 const UpdateProductionOder = ({ id }) => (
   <Link
@@ -28,25 +30,15 @@ const DeleteProductionOder = ({ id }) => (
   </Link>
 );
 
-const Row = ({ label, children }) => {
-  if (!children) return;
-
-  return (
-    <div>
-      <label className="uppercase text-blue-400 font-bold text-xs">
-        {label}
-      </label>
-      <p>{children}</p>
-    </div>
-  );
-};
-
 const Show = ({ production, user }) => {
   const {
     id,
     created_at,
     updated_at,
-    product,
+    product_name,
+    product_sku,
+    product_description,
+
     written_by,
     order_id,
     customer_name,
@@ -60,7 +52,7 @@ const Show = ({ production, user }) => {
     status,
   } = production;
 
-  const title = `Production Order - ${product.name}`;
+  const title = `Production Order Details`;
 
   return (
     <>
@@ -74,33 +66,26 @@ const Show = ({ production, user }) => {
           </h2>
         </div>
       </Header>
-      <main>
-        <div className="mx-5 px-5 py-5 rounded bg-white space-y-3">
-          <Row label="created_at">{created_at}</Row>
-          <Row label="updated_at">{updated_at}</Row>
-          <Row label="product">
-            <Link
-              href={route("products.show", product.id)}
-              as="button"
-              title="Show Product"
-            >
-              {product.name}{" "}
-              <ChevronDoubleRightIcon className="inline h-[24px] w-[24px] text-blue-500" />
-            </Link>
-          </Row>
-          <Row label="written_by">{written_by.name}</Row>
-          <Row label="order_id">{order_id}</Row>
-          <Row label="customer_name">{customer_name}</Row>
-          <Row label="weave_by">{weave_by}</Row>
-          <Row label="quantity">{quantity}</Row>
-          <Row label="total_length">{total_length}</Row>
-          <Row label="note">{note}</Row>
-          <Row label="urgency">{urgency}</Row>
-          <Row label="wash_option">{wash_option}</Row>
-          <Row label="packing">{packing}</Row>
-          <Row label="status">{status}</Row>
-        </div>
-      </main>
+      <Main>
+        <DetailsList>
+          <Detail dt="Created At" dd={created_at} />
+          <Detail dt="Updated At" dd={updated_at} />
+          <Detail dt="Product Name" dd={product_name} />
+          <Detail dt="Product Sku" dd={product_sku} />
+          <Detail dt="Product Description" dd={product_description} />
+          <Detail dt="Written By" dd={written_by} />
+          <Detail dt="Order Id" dd={order_id} />
+          <Detail dt="Customer Name" dd={customer_name} />
+          <Detail dt="Weave By" dd={weave_by} />
+          <Detail dt="Quantity" dd={quantity} />
+          <Detail dt="Total Length" dd={total_length} />
+          <Detail dt="Note" dd={note} />
+          <Detail dt="Urgency" dd={urgency} />
+          <Detail dt="Wash_option" dd={wash_option} />
+          <Detail dt="Packing" dd={packing} />
+          <Detail dt="Status" dd={status} />
+        </DetailsList>
+      </Main>
     </>
   );
 };
