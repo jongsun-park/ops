@@ -13,7 +13,7 @@ const Show = ({ yarn, user }) => {
       <Head title={title} />
       <Header>
         <div className="flex justify-between align-center">
-          <h2 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+          <h1 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
             {title}
             {user?.can?.update && (
               <Link
@@ -35,7 +35,7 @@ const Show = ({ yarn, user }) => {
                 <TrashIcon className="h-[24px] w-[24px] text-red-500" />
               </Link>
             )}
-          </h2>
+          </h1>
         </div>
       </Header>
       <Main>

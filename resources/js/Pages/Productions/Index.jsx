@@ -15,7 +15,7 @@ const ProductionOrders = ({ productions = [], filters, can = {} }) => {
     <>
       <Head title="Production Orders" />
       <Header>
-        <div className="flex justify-between align-center">
+        <div className="flex flex-col justify-between align-center sm:flex-row">
           <h2 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
             Production Orders
             {can?.create && (

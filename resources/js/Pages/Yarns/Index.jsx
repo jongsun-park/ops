@@ -16,7 +16,7 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
       <Head title="Yarns" />
       <Header>
         <div className="flex justify-between align-center">
-          <h2 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+          <h1 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
             Yarns
             {can?.create && (
               <Link
@@ -27,7 +27,7 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
                 <PlusCircleIcon className="h-[30px] w-[30px] text-blue-500" />
               </Link>
             )}
-          </h2>
+          </h1>
           <Search filters={filters.search} />
         </div>
       </Header>

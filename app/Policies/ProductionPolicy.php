@@ -11,6 +11,7 @@ class ProductionPolicy
     // admin, designer can create production
     public function create(User $user): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or in_array($user->role, ['admin', 'designer']);
     }
 
@@ -18,12 +19,14 @@ class ProductionPolicy
     // designer can update own production
     public function update(User $user, Production $production): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $production->user_id;
     }
 
     // admin, designer, updator can update production status
     public function updateStatus(User $user): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or in_array($user->role, ['admin', 'designer', 'updator']);
     }
 
@@ -32,6 +35,7 @@ class ProductionPolicy
     // designer can delete own production
     public function delete(User $user, Production $production): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $production->user_id;
     }
 }

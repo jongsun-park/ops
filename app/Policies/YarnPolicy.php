@@ -12,6 +12,7 @@ class YarnPolicy
     // admin, designer can create yarn
     public function create(User $user): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or in_array($user->role, ['admin', 'designer']);
     }
 
@@ -19,6 +20,7 @@ class YarnPolicy
     // designer can update own yarn
     public function update(User $user, Yarn $yarn): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $yarn->user_id;
     }
 
@@ -26,6 +28,7 @@ class YarnPolicy
     // designer can delete own yarn
     public function delete(User $user, Yarn $yarn): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $yarn->user_id;
     }
 }

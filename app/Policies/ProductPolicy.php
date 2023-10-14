@@ -12,6 +12,7 @@ class ProductPolicy
     // admin, designer can create product
     public function create(User $user): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or in_array($user->role, ['admin', 'designer']);
     }
 
@@ -19,6 +20,7 @@ class ProductPolicy
     // designer can update own product
     public function update(User $user, Product $product): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $product->user_id;
     }
 
@@ -26,6 +28,7 @@ class ProductPolicy
     // designer can delete own product
     public function delete(User $user, Product $product): bool
     {
+        if ($user->role === "guest") return false;
         return $user->isAdmin() or $user->id == $product->user_id;
     }
 }
