@@ -1,6 +1,12 @@
 import { Button, PrimaryButton } from "./Inputs";
 
-const FormContainer = ({ onSubmit, processing, buttonText, children }) => (
+const FormContainer = ({
+  id = "",
+  onSubmit,
+  processing,
+  buttonText,
+  children,
+}) => (
   <form onSubmit={onSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
     <div className="space-y-12">
       <div className="pb-12 space-y-4">{children}</div>

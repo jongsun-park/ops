@@ -45,13 +45,13 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained();
 
-            $table->text('order_id')->nullable();
-            $table->text('customer_name')->nullable();
-            $table->text('weave_by')->nullable();
-            $table->text('quantity')->nullable();
-            $table->text('total_length')->nullable();
-            $table->text('number_of_repeats')->nullable();
-            $table->text('note')->nullable();
+            $table->string('order_id')->nullable();
+            $table->string('customer_name')->nullable();
+            $table->string('weave_by')->nullable();
+            $table->string('quantity')->nullable();
+            $table->string('total_length')->nullable();
+            $table->string('number_of_repeats')->nullable();
+            $table->string('note')->nullable();
 
             $table->foreignId('urgency_id')->constrained()->noActionOnDelete();
             $table->foreignId('wash_option_id')->constrained()->noActionOnDelete();

@@ -11,6 +11,20 @@ use App\Http\Controllers\YarnController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductionController;
+use App\Models\Color;
+use App\Models\Corner;
+use App\Models\Grade;
+use App\Models\HemSize;
+use App\Models\HemType;
+use App\Models\Label;
+use App\Models\Loom;
+use App\Models\Material;
+use App\Models\Packing;
+use App\Models\Status;
+use App\Models\Supplier;
+use App\Models\Unit;
+use App\Models\Urgency;
+use App\Models\WashOption;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -43,7 +57,6 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
-
+require __DIR__ . '/options.php';
 
 require __DIR__ . '/auth.php';

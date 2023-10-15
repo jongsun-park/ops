@@ -15,6 +15,7 @@ export default function Authenticated({ user, header, children }) {
     { url: "productions.index", name: "Production Order" },
     { url: "products.index", name: "Products" },
     { url: "yarns.index", name: "Yarns" },
+    { url: "options.index", name: "Options" },
   ];
 
   return (

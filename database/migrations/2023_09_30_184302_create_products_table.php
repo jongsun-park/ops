@@ -54,16 +54,16 @@ return new class extends Migration
 
             $table->string('name')->unique();
             $table->string('sku')->unique();
-            $table->text('description');
+            $table->string('description');
 
-            $table->text('tf_number');
-            $table->text('divs');
-            $table->text('ppcm');
-            $table->text('pprepeat');
-            $table->text('cut_width');
-            $table->text('cut_length');
-            $table->text('finish_width');
-            $table->text('finish_length');
+            $table->string('tf_number');
+            $table->string('divs');
+            $table->string('ppcm');
+            $table->string('pprepeat');
+            $table->string('cut_width');
+            $table->string('cut_length');
+            $table->string('finish_width');
+            $table->string('finish_length');
 
             $table->foreignId('unit_id')->constrained()->noActionOnDelete();
             $table->foreignId('loom_id')->constrained()->noActionOnDelete();
