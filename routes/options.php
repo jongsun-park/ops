@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
             ['name' => 'required']
         );
         Color::create($attributes);
+
+        return back()->with('success', 'Success to create');
     });
 
     Route::post('/options/colors/{color}', function (Request $request, Color $color) {
@@ -54,10 +56,14 @@ Route::middleware('auth')->group(function () {
             ['name' => 'required']
         );
         $color->update($attributes);
+
+        return back()->with('success', 'Success to update');
     });
 
     Route::delete('/options/colors/{color}', function (Color $color) {
         $color->delete();
+
+        return back()->with('success', 'Success to delete');
     });
 
     // corner

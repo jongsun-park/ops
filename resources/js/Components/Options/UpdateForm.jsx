@@ -8,7 +8,6 @@ export const UpdateForm = ({ table, id, name }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("update");
 
     post(`/options/${table}/${id}`, {
       preserveScroll: true,

@@ -54,8 +54,17 @@ Route::middleware('auth')->group(function () {
 
     // yarn
     Route::resource('yarns', YarnController::class);
+
+    // user
+    Route::get("/users", function () {
+        return "User List managed by Admin";
+    })->name('users.index');
 });
 
+
+Route::get("/search", function () {
+    return "SEARCH PAGE - LATER";
+});
 
 require __DIR__ . '/options.php';
 

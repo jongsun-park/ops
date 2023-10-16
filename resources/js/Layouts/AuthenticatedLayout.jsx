@@ -3,7 +3,7 @@ import ApplicationLogo from "@/Components/ApplicationLogo";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function Authenticated({ user, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -15,8 +15,14 @@ export default function Authenticated({ user, header, children }) {
     { url: "productions.index", name: "Production Order" },
     { url: "products.index", name: "Products" },
     { url: "yarns.index", name: "Yarns" },
-    { url: "options.index", name: "Options" },
   ];
+
+  const adminRoutes = [
+    { url: "options.index", name: "Options" },
+    { url: "users.index", name: "Users" },
+  ];
+
+  const isAdmin = usePage().props.auth.user.isAdmin || false;
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -41,6 +47,17 @@ export default function Authenticated({ user, header, children }) {
                     {name}
                   </NavLink>
                 ))}
+
+                {isAdmin &&
+                  adminRoutes.map(({ url, name }) => (
+                    <NavLink
+                      key={url}
+                      href={route(url)}
+                      active={route().current(url)}
+                    >
+                      {name}
+                    </NavLink>
+                  ))}
               </div>
             </div>
 
@@ -141,6 +158,17 @@ export default function Authenticated({ user, header, children }) {
                 {name}
               </ResponsiveNavLink>
             ))}
+
+            {isAdmin &&
+              adminRoutes.map(({ url, name }) => (
+                <ResponsiveNavLink
+                  key={url}
+                  href={route(url)}
+                  active={route().current(url)}
+                >
+                  {name}
+                </ResponsiveNavLink>
+              ))}
           </div>
 
           <div className="pt-4 pb-1 border-t border-gray-200">

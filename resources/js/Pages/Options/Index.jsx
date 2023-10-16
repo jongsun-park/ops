@@ -95,7 +95,7 @@ const Options = (props) => {
       preserveScroll: true,
       onSuccess: () => {
         reset("name");
-        router.visit(`/options`);
+        // router.visit(`/options`);
       },
     });
   };
@@ -105,7 +105,7 @@ const Options = (props) => {
     destroy(`/options/${data.table}/${id}`, {
       preserveScroll: true,
       onSuccess: () => {
-        router.visit(`/options`);
+        // router.visit(`/options`);
       },
     });
   };

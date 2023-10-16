@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@heroicons/react": "^2.0.18"
+        "@heroicons/react": "^2.0.18",
+        "react-transition-group": "^4.4.5"
     }
 }
