@@ -1,15 +1,15 @@
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { usePage } from "@inertiajs/react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 const FlashMessage = ({ role = "alert", color = "gray", children }) => {
   const [visible, setVisible] = useState(true);
 
   const closeHandler = () => setVisible(false);
 
-  //   setTimeout(() => {
-  //     closeHandler();
-  //   }, 3000);
+  setTimeout(() => {
+    closeHandler();
+  }, 3000);
 
   if (!visible) return "";
 

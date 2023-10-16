@@ -1,4 +1,4 @@
-import { Head, Link, router, useForm } from "@inertiajs/react";
+import { Head, Link, router, useForm, usePage } from "@inertiajs/react";
 
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
@@ -21,38 +21,21 @@ function classNames(...classes) {
 }
 
 const Options = (props) => {
-  const {
-    colors,
-    corners,
-    grades,
-    hem_sizes,
-    hem_types,
-    labels,
-    looms,
-    materials,
-    packings,
-    statuses,
-    suppliers,
-    units,
-    urgencies,
-    wash_options,
-  } = props;
-
-  let [options] = useState({
-    Color: colors,
-    Corner: corners,
-    Grade: grades,
-    "Hem Size": hem_sizes,
-    "Hem Type": hem_types,
-    Label: labels,
-    Loom: looms,
-    Fibre: materials,
-    Packing: packings,
-    Status: statuses,
-    Supplier: suppliers,
-    Unit: units,
-    Urgency: urgencies,
-    "Wash Option": wash_options,
+  let [options, setOptions] = useState({
+    Color: props.colors,
+    Corner: props.corners,
+    Grade: props.grades,
+    "Hem Size": props.hem_sizes,
+    "Hem Type": props.hem_types,
+    Label: props.labels,
+    Loom: props.looms,
+    Fibre: props.materials,
+    Packing: props.packings,
+    Status: props.statuses,
+    Supplier: props.suppliers,
+    Unit: props.units,
+    Urgency: props.urgencies,
+    "Wash Option": props.wash_options,
   });
 
   const tables = [
@@ -85,17 +68,14 @@ const Options = (props) => {
     name: "",
   });
 
-  /**
-   * TODO - Tab index is resetted when it redirect from options.php controller
-   */
-
   const onSubmit = (e) => {
     e.preventDefault();
     post(`/options/${data.table}`, {
       preserveScroll: true,
       onSuccess: () => {
         reset("name");
-        // router.visit(`/options`);
+        router.visit(`/options`);
+        // resetOption();
       },
     });
   };
@@ -105,7 +85,8 @@ const Options = (props) => {
     destroy(`/options/${data.table}/${id}`, {
       preserveScroll: true,
       onSuccess: () => {
-        // router.visit(`/options`);
+        router.visit(`/options`);
+        // resetOption();
       },
     });
   };
