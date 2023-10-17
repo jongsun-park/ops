@@ -104,10 +104,10 @@ Route::prefix('options')->middleware('auth')->group(function () {
         'wash_options' => WashOption::class,
     ];
 
-    Route::get('/', function () use ($options) {
+    Route::get('/', function () use ($options, $classMap) {
         return Inertia::render('Options/Index', [
             'options_keys' => array_keys($options),
-            'options' => []
+            'options' => Color::all()->toArray()
         ]);
     })->name('options.index');
 

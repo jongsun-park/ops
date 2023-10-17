@@ -14,8 +14,6 @@ const Tab = ({ options = [] }) => {
     });
   };
 
-  console.log(selected);
-
   return (
     <div>
       <div className="sm:hidden">
@@ -39,17 +37,17 @@ const Tab = ({ options = [] }) => {
         </select>
       </div>
 
-      <div className="hidden sm:block mb-4">
+      <div className="hidden sm:block mb-10">
         <nav className="flex gap-2 flex-wrap">
           {options.map((option) => (
             <Link
               key={option}
               href="#"
               onClick={(e) => onClickVisit(e, option)}
-              className={`uppercase shrink-0 rounded text-sm font-bold p-2 ${
+              className={`uppercase shrink-0 rounded text-xs font-bold p-2 border-2 border-transparent ${
                 option === selected
                   ? "bg-blue-500 text-white shadow"
-                  : "text-gray-400 hover:bg-gray-50 hover:text-gray-700"
+                  : "text-gray-400 hover:text-blue-500 hover:border-blue-500"
               }`}
             >
               {betterLabel(option)}
