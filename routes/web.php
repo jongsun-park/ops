@@ -25,6 +25,7 @@ use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Urgency;
 use App\Models\WashOption;
+use Illuminate\Database\Eloquent\Model;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -66,6 +67,86 @@ Route::get("/search", function () {
     return "SEARCH PAGE - LATER";
 });
 
-require __DIR__ . '/options.php';
+
+
+Route::prefix('options')->middleware('auth')->group(function () {
+    $options = [
+        'colors' => Color::all()->toArray(),
+        'corners' => Corner::all()->toArray(),
+        'grades' => Grade::all()->toArray(),
+        'hem_sizes' => HemSize::all()->toArray(),
+        'hem_types' => HemType::all()->toArray(),
+        'labels' => Label::all()->toArray(),
+        'looms' => Loom::all()->toArray(),
+        'materials' => Material::all()->toArray(),
+        'packings' => Packing::all()->toArray(),
+        'statuses' => Status::all()->toArray(),
+        'suppliers' => Supplier::all()->toArray(),
+        'units' => Unit::all()->toArray(),
+        'urgencies' => Urgency::all()->toArray(),
+        'wash_options' => WashOption::all()->toArray(),
+    ];
+
+    $classMap = [
+        'colors' => Color::class,
+        'corners' => Corner::class,
+        'grades' => Grade::class,
+        'hem_sizes' => HemSize::class,
+        'hem_types' => HemType::class,
+        'labels' => Label::class,
+        'looms' => Loom::class,
+        'materials' => Material::class,
+        'packings' => Packing::class,
+        'statuses' => Status::class,
+        'suppliers' => Supplier::class,
+        'units' => Unit::class,
+        'urgencies' => Urgency::class,
+        'wash_options' => WashOption::class,
+    ];
+
+    Route::get('/', function () use ($options) {
+        return Inertia::render('Options/Index', [
+            'options_keys' => array_keys($options),
+            'options' => []
+        ]);
+    })->name('options.index');
+
+    Route::get('/{tableName}', function ($tableName) use ($options) {
+
+        // case - invalid options
+        if (!isset($options[$tableName])) return redirect('/');
+
+        return Inertia::render('Options/Index', [
+            'options_keys' => array_keys($options),
+            'options' =>  $options[$tableName]
+        ]);
+    });
+
+    Route::post('/{tableName}', function (Request $request, $tableName) use ($classMap) {
+
+        // case - invalid options
+        if (!isset($options[$tableName])) return redirect('/');
+
+        $attributes = $request->validate(
+            ['name' => 'required']
+        );
+
+        $classMap[$tableName]::create($attributes);
+
+        return back()->with('success', 'Success to create');
+    });
+
+    Route::delete('/{tableName}/{id}', function ($tableName, $id) use ($classMap) {
+
+        // case - invalid options
+        if (!isset($options[$tableName])) return redirect('/');
+
+        $classMap[$tableName]::find($id)->delete();
+
+        return back()->with('success', 'Success to delete');
+    });
+});
+
+// require __DIR__ . '/options.php';
 
 require __DIR__ . '/auth.php';
