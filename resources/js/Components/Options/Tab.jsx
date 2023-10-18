@@ -1,15 +1,16 @@
-import { Link, router } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import { useState } from "react";
 
 const betterLabel = (label) => label.replaceAll("_", " ");
 
-const Tab = ({ options = [] }) => {
-  const [selected, setSelected] = useState(options[0]);
+const Tab = ({ options = [], selectedTable = "" }) => {
+  const [selected, setSelected] = useState(selectedTable);
 
-  const onClickVisit = (e, option) => {
-    e.preventDefault();
-    setSelected(option);
+  const onOptionChange = (option) => {
     router.visit(`/options/${option}`, {
+      onSuccess: () => {
+        setSelected(option);
+      },
       preserveState: true,
     });
   };
@@ -23,35 +24,32 @@ const Tab = ({ options = [] }) => {
 
         <select
           id="Tab"
-          className="w-full rounded-md border-gray-200 capitalize"
+          className="mb-5 w-full rounded-md border-gray-200 capitalize"
+          onChange={(e) => onOptionChange(e.target.value)}
+          defaultValue={selected}
         >
           {options.map((option) => (
-            <option
-              key={option}
-              onClick={(e) => onClickVisit(e, option)}
-              select={(option === selected).toString()}
-            >
+            <option key={option} value={option}>
               {betterLabel(option)}
             </option>
           ))}
         </select>
       </div>
 
-      <div className="hidden sm:block mb-10">
-        <nav className="flex gap-2 flex-wrap">
+      <div className="mb-10 hidden sm:block">
+        <nav className="flex flex-wrap gap-2">
           {options.map((option) => (
-            <Link
+            <button
               key={option}
-              href="#"
-              onClick={(e) => onClickVisit(e, option)}
-              className={`uppercase shrink-0 rounded text-xs font-bold p-2 border-2 border-transparent ${
+              onClick={() => onOptionChange(option)}
+              className={`shrink-0 rounded border-2 border-transparent p-2 text-xs font-bold uppercase ${
                 option === selected
                   ? "bg-blue-500 text-white shadow"
-                  : "text-gray-400 hover:text-blue-500 hover:border-blue-500"
+                  : "text-gray-400 hover:border-blue-500 hover:text-blue-500"
               }`}
             >
               {betterLabel(option)}
-            </Link>
+            </button>
           ))}
         </nav>
       </div>

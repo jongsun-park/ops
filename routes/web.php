@@ -107,7 +107,8 @@ Route::prefix('options')->middleware('auth')->group(function () {
     Route::get('/', function () use ($options, $classMap) {
         return Inertia::render('Options/Index', [
             'options_keys' => array_keys($options),
-            'options' => Color::all()->toArray()
+            'options' => Color::all()->toArray(), // default
+            'tableName' => 'colors' // default
         ]);
     })->name('options.index');
 
@@ -118,7 +119,8 @@ Route::prefix('options')->middleware('auth')->group(function () {
 
         return Inertia::render('Options/Index', [
             'options_keys' => array_keys($options),
-            'options' =>  $options[$tableName]
+            'options' =>  $options[$tableName],
+            'tableName' => $tableName
         ]);
     });
 
@@ -147,6 +149,5 @@ Route::prefix('options')->middleware('auth')->group(function () {
     });
 });
 
-// require __DIR__ . '/options.php';
 
 require __DIR__ . '/auth.php';
