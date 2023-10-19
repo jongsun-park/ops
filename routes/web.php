@@ -29,12 +29,11 @@ use App\Models\WashOption;
 use Illuminate\Database\Eloquent\Model;
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    if (Auth::user()?->isAdmin()) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('login');
+    }
 });
 
 Route::get('/dashboard', function () {
@@ -62,6 +61,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('admin')->group(function () {
     // user
     Route::get("/users", [UserController::class, 'index'])->name('users.index');
+    Route::get("/users/{user}/edit", [UserController::class, 'index'])->name('users.show');
+    Route::delete("/users/{user}", [UserController::class, 'index'])->name('users.destory');
 });
 
 Route::get("/search", function () {

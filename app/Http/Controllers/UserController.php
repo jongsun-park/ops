@@ -31,11 +31,19 @@ class UserController extends Controller
             ]);
         }
 
+        $filters = request()->only(['search']);
+
         return Inertia::render('Users/Index', [
             'users' => User::query()
                 ->when(request('role'), function ($query, $role) {
                     $query
                         ->where('users.role', 'like', "%{$role}%");
+                })
+                ->when(request('search'), function ($query, $search) {
+                    $query
+                        ->where('users.name', 'like', "%{$search}%")
+                        ->orWhere('users.email', 'like', "%{$search}%")
+                        ->orWhere('users.role', 'like', "%{$search}%");
                 })
                 ->orderByDesc('created_at')
                 ->paginate(10)
@@ -50,7 +58,8 @@ class UserController extends Controller
             'can' => [
                 'create' => Auth::user()->isAdmin()
             ],
-            'role' => request('role') ?? 'all'
+            'role' => request('role') ?? 'all',
+            'filters' => $filters
         ]);
     }
 }
