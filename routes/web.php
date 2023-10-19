@@ -67,8 +67,6 @@ Route::get("/search", function () {
     return "SEARCH PAGE - LATER";
 });
 
-
-
 Route::prefix('options')->middleware('auth')->group(function () {
     $options = [
         'colors' => Color::all()->toArray(),
@@ -124,10 +122,12 @@ Route::prefix('options')->middleware('auth')->group(function () {
         ]);
     });
 
-    Route::post('/{tableName}', function (Request $request, $tableName) use ($classMap) {
+    Route::post('/{tableName}', function (Request $request, $tableName) use ($options, $classMap) {
 
         // case - invalid options
-        if (!isset($options[$tableName])) return redirect('/');
+        if (!isset($options[$tableName])) {
+            return back()->with('error', 'Fail to add new option');
+        }
 
         $attributes = $request->validate(
             ['name' => 'required']
