@@ -1,8 +1,23 @@
-import { XCircleIcon } from "@heroicons/react/24/outline";
 import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-const FlashMessage = ({ role = "alert", color = "gray", children }) => {
+const InfoContainer = ({ children }) => (
+  <div className="fixed bottom-10 right-10 flex cursor-pointer flex-row space-x-2 rounded border border-blue-400 bg-blue-300 px-4 py-3 text-blue-700 shadow">
+    {children}
+  </div>
+);
+const ErrorContainer = ({ children }) => (
+  <div className="fixed bottom-10 right-10 flex cursor-pointer flex-row space-x-2 rounded border border-red-400 bg-red-300 px-4 py-3 text-red-700 shadow">
+    {children}
+  </div>
+);
+const SuccessContainer = ({ children }) => (
+  <div className="fixed bottom-10 right-10 flex cursor-pointer flex-row space-x-2 rounded border border-green-400 bg-green-200 px-4 py-3 font-bold text-green-600 shadow">
+    {children}
+  </div>
+);
+
+const FlashMessage = ({ role = "alert", color, children }) => {
   const [visible, setVisible] = useState(true);
 
   const closeHandler = () => setVisible(false);
@@ -14,15 +29,8 @@ const FlashMessage = ({ role = "alert", color = "gray", children }) => {
   if (!visible) return "";
 
   return (
-    <div
-      className={`bg-${color}-100 border border-${color}-400 text-${color}-700 px-4 py-3 rounded fixed bottom-10 right-10 space-x-2 flex flex-row cursor-pointer shadow`}
-      role={role}
-      onClick={closeHandler}
-    >
+    <div role={role} onClick={closeHandler}>
       {children}
-      <button onClick={closeHandler}>
-        <XCircleIcon className="x-6 w-6" />
-      </button>
     </div>
   );
 };
@@ -33,21 +41,27 @@ const Flash = () => {
   return (
     <>
       {message && (
-        <FlashMessage color="blue">
-          <strong className="font-bold">Info</strong>
-          <span className="block sm:inline">{message}</span>
+        <FlashMessage>
+          <InfoContainer>
+            <strong className="font-bold">Info</strong>
+            <span className="block sm:inline">{message}</span>
+          </InfoContainer>
         </FlashMessage>
       )}
       {error && (
-        <FlashMessage color="red">
-          <strong className="font-bold">Holy smokes!</strong>
-          <span className="block sm:inline">{error}</span>
+        <FlashMessage>
+          <ErrorContainer>
+            <strong className="font-bold">Holy smokes!</strong>
+            <span className="block sm:inline">{error}</span>
+          </ErrorContainer>
         </FlashMessage>
       )}
       {success && (
-        <FlashMessage color="slate">
-          <strong className="font-bold">Yay!</strong>
-          <span className="block sm:inline">{success}</span>
+        <FlashMessage>
+          <SuccessContainer>
+            <strong className="font-bold">Yay!</strong>
+            <span className="block sm:inline">{success}</span>
+          </SuccessContainer>
         </FlashMessage>
       )}
     </>

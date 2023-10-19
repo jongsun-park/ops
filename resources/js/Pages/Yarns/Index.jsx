@@ -1,13 +1,10 @@
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { Head, Link } from "@inertiajs/react";
-import {
-  ChevronDoubleRightIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/outline";
 
+import { Detail, DetailsList } from "@/Components/DetailsList";
 import Pagination from "@/Components/Pagination";
 import Search from "@/Components/Search";
 import Header from "@/Layouts/Header";
-import { Detail, DetailsList } from "@/Components/DetailsList";
 import Main from "@/Layouts/Main";
 
 const Yarn = ({ yarns = [], filters, can = {} }) => {
@@ -15,8 +12,8 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
     <>
       <Head title="Yarns" />
       <Header>
-        <div className="flex justify-between align-center">
-          <h1 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+        <div className="align-center flex justify-between">
+          <h1 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             Yarns
             {can?.create && (
               <Link
@@ -55,12 +52,12 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
                   <Detail dt="Created at" dd={created_at} />
                 </DetailsList>
               </Link>
-            )
+            ),
           )}
         </div>
 
         {yarns.data.length == 0 && (
-          <div className="grid place-content-center h-24 border border-gray-300 bg-slate-50 rounded-md m-5">
+          <div className="m-5 grid h-24 place-content-center rounded-md border border-gray-300 bg-slate-50">
             <p className="text-gray-600">Please enter different keywords</p>
           </div>
         )}

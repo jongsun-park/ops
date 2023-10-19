@@ -2,6 +2,7 @@ import { Head } from "@inertiajs/react";
 
 import AddOptionForm from "@/Components/Options/AddOptionForm";
 import Tab from "@/Components/Options/Tab";
+import UpdateDeleteOptionForm from "@/Components/Options/UpdateDeleteOptionForm";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
 
@@ -21,17 +22,12 @@ const Options = ({ options_keys, options = [], tableName }) => {
         <Tab options={options_keys} selectedTable={tableName} />
         <div className="space-y-2">
           {options.map(({ id, name }) => (
-            <p
+            <UpdateDeleteOptionForm
               key={id}
-              className="w-full rounded border border-gray-300 px-2 py-2 text-gray-400"
-            >
-              {name}
-
-              {/* TODO */}
-              {/* CREATE FORM */}
-              {/* EDIT BUTTON */}
-              {/* DELETE BUTTON */}
-            </p>
+              id={id}
+              name={name}
+              tableName={tableName}
+            />
           ))}
         </div>
       </Main>

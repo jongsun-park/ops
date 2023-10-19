@@ -24,7 +24,7 @@ const AddOptionForm = ({ tableName = "" }) => {
             Name
           </label>
           <input
-            className="w-full rounded border-gray-200 p-3 text-sm sm:min-w-[240px]"
+            className="mr-1 min-w-[240px] rounded border-gray-50 shadow"
             placeholder={`New Option in ${betterTableName}`}
             type="text"
             id="name"
@@ -35,9 +35,10 @@ const AddOptionForm = ({ tableName = "" }) => {
 
         <button
           type="submit"
-          className="inline-block rounded bg-gray-400 p-2 font-medium text-white hover:bg-blue-500 sm:w-auto"
+          className="text-sm font-bold uppercase text-blue-400 hover:text-blue-600 disabled:cursor-wait disabled:opacity-75"
+          disabled={processing}
         >
-          <PlusCircleIcon className="h-6 w-6" />
+          <PlusCircleIcon className="h-8 w-8" />
         </button>
         {errors.name && (
           <div className="absolute bottom-[-16px] text-xs text-red-500">

@@ -11,6 +11,7 @@ use App\Http\Controllers\YarnController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductionController;
+use App\Http\Controllers\UserController;
 use App\Models\Color;
 use App\Models\Corner;
 use App\Models\Grade;
@@ -55,13 +56,13 @@ Route::middleware('auth')->group(function () {
 
     // yarn
     Route::resource('yarns', YarnController::class);
-
-    // user
-    Route::get("/users", function () {
-        return "User List managed by Admin";
-    })->name('users.index');
 });
 
+
+Route::middleware('admin')->group(function () {
+    // user
+    Route::get("/users", [UserController::class, 'index'])->name('users.index');
+});
 
 Route::get("/search", function () {
     return "SEARCH PAGE - LATER";
@@ -130,7 +131,7 @@ Route::prefix('options')->middleware('auth')->group(function () {
         }
 
         $attributes = $request->validate(
-            ['name' => 'required']
+            ['name' => "required|unique:{$tableName},name"]
         );
 
         $classMap[$tableName]::create($attributes);
@@ -138,10 +139,26 @@ Route::prefix('options')->middleware('auth')->group(function () {
         return back()->with('success', 'Success to create');
     });
 
-    Route::delete('/{tableName}/{id}', function ($tableName, $id) use ($classMap) {
+    Route::post('/{tableName}/{id}/edit', function (Request $request, $tableName, $id) use ($options, $classMap) {
 
         // case - invalid options
-        if (!isset($options[$tableName])) return redirect('/');
+        if (!isset($options[$tableName])) {
+            return back()->with('error', 'Fail to update option');
+        }
+
+        $attributes = $request->validate(
+            ['name' => 'required']
+        );
+
+        $classMap[$tableName]::find($id)->update($attributes);
+
+        return back()->with('success', 'Success to create');
+    });
+
+    Route::delete('/{tableName}/{id}', function ($tableName, $id) use ($options, $classMap) {
+
+        // case - invalid options
+        if (!isset($options[$tableName])) return redirect('/options');
 
         $classMap[$tableName]::find($id)->delete();
 
