@@ -5,3 +5,15 @@
 * {
   scroll-behavior: smooth;
 }
+
+.animate__animated {
+  transition: all ease-in-out 200ms;
+}
+
+.animate__fadeIn {
+  opacity: 1;
+}
+
+.animate__fadeOut {
+  opacity: 0;
+}
