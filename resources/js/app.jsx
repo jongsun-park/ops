@@ -2,8 +2,8 @@ import "../css/app.css";
 import "./bootstrap";
 
 import { createInertiaApp } from "@inertiajs/react";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { createRoot } from "react-dom/client";
-// import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
 import Layout from "./Layouts/Layoput";
 
@@ -16,12 +16,13 @@ createInertiaApp({
     let page = pages[`./Pages/${name}.jsx`];
     page.default.layout =
       page.default.layout || ((page) => <Layout children={page} />);
-    return page;
+    // return page;
 
-    // return resolvePageComponent(
-    //     `./Pages/${name}.jsx`,
-    //     import.meta.glob("./Pages/**/*.jsx")
-    // );
+    return resolvePageComponent(
+      `./Pages/${name}.jsx`,
+      pages,
+      //   import.meta.glob("./Pages/**/*.jsx"),
+    );
   },
 
   setup({ el, App, props }) {
