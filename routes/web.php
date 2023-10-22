@@ -1,5 +1,9 @@
 <?php
 
+phpinfo();
+
+return;
+
 use App\Models\User;
 use App\Models\Yarn;
 use Inertia\Inertia;
