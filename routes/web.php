@@ -61,8 +61,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware('admin')->group(function () {
     // user
     Route::get("/users", [UserController::class, 'index'])->name('users.index');
-    Route::get("/users/{user}/edit", [UserController::class, 'index'])->name('users.show');
-    Route::delete("/users/{user}", [UserController::class, 'index'])->name('users.destory');
+
+
+    Route::get("/users/{user}/edit", [UserController::class, 'edit'])->name('users.edit');
+    Route::put("/users/{user}", [UserController::class, 'update'])->name('users.update');
+    Route::delete("/users/{user}", [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 Route::get("/search", function () {

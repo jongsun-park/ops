@@ -7,7 +7,7 @@ import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
 import { useState } from "react";
 
-const roles = [
+export const roles = [
   { id: 0, name: "all" },
   { id: 1, name: "admin" },
   { id: 2, name: "designer" },
@@ -72,14 +72,14 @@ const UserList = ({ users, can = {}, role, filters }) => {
                 <Link
                   as="button"
                   className="rounded border-2 border-gray-300 bg-white px-3 py-1 text-gray-900"
-                  href={route("users.show", id)}
+                  href={route("users.edit", id)}
                 >
                   Update
                 </Link>
                 <Link
                   as="button"
                   className="rounded border-2 border-red-300 bg-red-200 px-3 py-1 text-red-900"
-                  href={route("users.destory", id)}
+                  href={route("users.destroy", id)}
                   method="delete"
                 >
                   Delete

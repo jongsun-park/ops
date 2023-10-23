@@ -62,4 +62,39 @@ class UserController extends Controller
             'filters' => $filters
         ]);
     }
+
+    public function edit(User $user)
+    {
+
+        return Inertia::render('Users/Form', [
+            'user' => $user,
+        ]);
+    }
+
+    public function update(User $user, Request $request)
+    {
+
+        $attributes = $request->validate([
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        // update user
+        $user->update($attributes);
+
+        // redirect
+        return to_route('users.index');
+    }
+
+    public function destroy(User $user)
+    {
+
+        if ($user->isAdmin()) {
+            return to_route('users.index')->with('error', 'You can not delete Admin user');
+        }
+
+        $user->delete();
+        return to_route('users.index')->with('success', 'Success to delete user');
+    }
 }
