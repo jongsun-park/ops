@@ -1,50 +1,41 @@
 import { PrimaryButton as Button } from "@/Components/Inputs";
-import { AcademicCapIcon } from "@heroicons/react/24/outline";
 import Container from "./Container";
 
-{
-  /* <div>
-3. Portfolio: Project Thumbnails: Showcase your best work with
-thumbnails of your projects. Clicking on each thumbnail should lead to a
-detailed project page. Project Pages: For each project, include: Project
-name and description Technologies used Screenshots or demos Your role
-and contributions Links to the live project (if applicable) Links to the
-project's code repository (e.g., GitHub)
-</div> */
-}
-
-const ProjectSourceCode = ({ url }) => (
-  <a href={url} className="">
-    {url}
-  </a>
-);
+import irp_logo from "./Images/ILP_logo.png";
+import je_logo from "./Images/JE_logo.png";
+import doggos_logo from "./Images/doggos_logo.png";
+import ops_logo from "./Images/ops_logo.png";
 
 const works = [
   {
-    icon: <AcademicCapIcon className="h-8 w-8" />,
-    title: "John England Irish Linen Fabrics (since 1962)",
-    description: "Lorem ipsum dolor sit amet consectetur.",
-    url: "https://johnengland.com/",
-  },
-  {
-    icon: <AcademicCapIcon className="h-8 w-8" />,
-    title: "Irish Linen Properties: Linen For Everyday Living",
-    description: "Lorem ipsum dolor sit amet consectetur.",
-    url: "https://irishlinenproperties.com/",
-  },
-  {
-    icon: <AcademicCapIcon className="h-8 w-8" />,
+    icon: <img src={ops_logo} className="h-8 w-8 bg-cover" />,
     title: "Order Production Management System",
-    description: "Lorem ipsum dolor sit amet consectetur.",
+    description:
+      "OPS is a production order system built with Laravel and React, offering role-based database access. Hosted on Digital Ocean, its repository is meticulously managed on GitHub",
     url: "https://www.jongsun.co.uk/dashboard",
     repo: "https://github.com/jongsun-park/ops",
   },
   {
-    icon: <AcademicCapIcon className="h-8 w-8" />,
+    icon: <img src={doggos_logo} className="h-8 w-8" />,
     title: "Doggos - Submit your Dog",
-    description: "Lorem ipsum dolor sit amet consectetur.",
+    description:
+      "Doggos is a React-based gallery hosted on Netlify, featuring my canine companions and enhanced with CSS libraries like Styled Components and Framer for captivating user interfaces.",
     url: "https://park-doggos.netlify.app/",
     repo: "https://github.com/jongsun-park/doggos",
+  },
+  {
+    icon: <img src={je_logo} className="h-8 w-8" />,
+    title: "John England Irish Linen Fabrics (since 1962)",
+    description:
+      "John England, hosted on WPEngine, was rebranded and rebuilt using the Total Theme in WordPress. It now serves as a robust marketing funnel for new products and the catalog.",
+    url: "https://johnengland.com/",
+  },
+  {
+    icon: <img src={irp_logo} className="h-8 w-8" />,
+    title: "Irish Linen Properties: Linen For Everyday Living",
+    description:
+      "ILP was created using Shopify, customized with Liquid. I developed this website from scratch, including the publication of all its blog content.",
+    url: "https://irishlinenproperties.com/",
   },
 ];
 
@@ -74,7 +65,7 @@ const Work = () => {
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
               {works.map(({ icon, title, description, url, repo }) => (
                 <div
-                  className="block rounded-xl border-2 border-gray-200 p-4"
+                  className="block rounded-xl border-2 border-gray-200 bg-white p-4"
                   key={title}
                 >
                   <span className="inline-block rounded-lg bg-gray-50 p-3">
