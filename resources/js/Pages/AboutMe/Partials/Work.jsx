@@ -57,7 +57,6 @@ const Work = () => {
               </p>
 
               <Button className="mt-10">
-                Ping me via email
                 <a href="mailto:jongsun-dev@gmail.com">Ping me via email</a>
               </Button>
             </div>

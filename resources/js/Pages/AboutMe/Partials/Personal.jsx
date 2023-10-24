@@ -6,6 +6,7 @@
  */
 
 import { Tab } from "@headlessui/react";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import Container from "./Container";
 
@@ -113,9 +114,12 @@ const Personal = () => {
             >
               <ul>
                 {posts.map((post) => (
-                  <li
+                  <motion.li
                     key={post.id}
                     className="relative rounded-md p-3 hover:bg-gray-100"
+                    initial={{ opacity: 1, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 1, x: -10 }}
                   >
                     <h3 className="text-sm font-bold leading-5">
                       {post.title}
@@ -136,7 +140,7 @@ const Personal = () => {
                         "ring-blue-400 focus:z-10 focus:outline-none focus:ring-2",
                       )}
                     />
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </Tab.Panel>

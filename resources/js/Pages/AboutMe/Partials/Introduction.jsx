@@ -6,6 +6,7 @@
  */
 
 // import Container from "./Container";
+import { motion } from "framer-motion";
 import email from "./Icons/at-sign-svgrepo-com.svg";
 import github from "./Icons/github-svgrepo-com.svg";
 import linkedin from "./Icons/linkedin-svgrepo-com.svg";
@@ -18,9 +19,11 @@ const Icon = ({ src, alt, className }) => (
 );
 
 const Introduction = () => (
-  <section
+  <motion.div
     className="relative mx-3 overflow-hidden rounded-xl bg-cover bg-fixed bg-center bg-no-repeat shadow sm:mx-3"
     style={{ backgroundImage: `url(${bg})` }}
+    initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1 }}
   >
     <div className="absolute inset-0 bg-blue-800/75"></div>
 
@@ -66,7 +69,7 @@ const Introduction = () => (
         </div>
       </div>
     </div>
-  </section>
+  </motion.div>
 );
 
 export default Introduction;
