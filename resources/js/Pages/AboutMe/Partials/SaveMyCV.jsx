@@ -1,5 +1,5 @@
 import { PrimaryButton } from "@/Components/Inputs";
-import cv from "./Jongsun_Park_CV_2023.pdf";
+import cv from "./assets/Jongsun_Park_CV_2023.pdf";
 
 const SaveMyCV = () => {
   return (

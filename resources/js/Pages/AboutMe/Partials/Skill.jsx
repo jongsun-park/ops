@@ -1,18 +1,18 @@
 import styled, { keyframes } from "styled-components";
-import css from "./skills/css-3-svgrepo-com.svg";
-import gatsby from "./skills/gatsby-svgrepo-com.svg";
-import html from "./skills/html-5-svgrepo-com.svg";
-import javascript from "./skills/javascript-svgrepo-com.svg";
-import laravel from "./skills/laravel-svgrepo-com.svg";
-import mongo from "./skills/mongo-svgrepo-com.svg";
-import mysql from "./skills/mysql-logo-svgrepo-com.svg";
-import nextjs from "./skills/nextjs-svgrepo-com.svg";
-import nodejs from "./skills/nodejs-icon-svgrepo-com.svg";
-import php from "./skills/php-svgrepo-com.svg";
-import react from "./skills/react-svgrepo-com.svg";
-import shopify from "./skills/shopify-svgrepo-com.svg";
-import woocommerce from "./skills/woocommerce-icon-svgrepo-com.svg";
-import wordpress from "./skills/wordpress-color-svgrepo-com.svg";
+import css from "./svgs/css-3-svgrepo-com.svg";
+import gatsby from "./svgs/gatsby-svgrepo-com.svg";
+import html from "./svgs/html-5-svgrepo-com.svg";
+import javascript from "./svgs/javascript-svgrepo-com.svg";
+import laravel from "./svgs/laravel-svgrepo-com.svg";
+import mongo from "./svgs/mongo-svgrepo-com.svg";
+import mysql from "./svgs/mysql-logo-svgrepo-com.svg";
+import nextjs from "./svgs/nextjs-svgrepo-com.svg";
+import nodejs from "./svgs/nodejs-icon-svgrepo-com.svg";
+import php from "./svgs/php-svgrepo-com.svg";
+import react from "./svgs/react-svgrepo-com.svg";
+import shopify from "./svgs/shopify-svgrepo-com.svg";
+import woocommerce from "./svgs/woocommerce-icon-svgrepo-com.svg";
+import wordpress from "./svgs/wordpress-color-svgrepo-com.svg";
 
 const Skill = () => {
   const skills = Object.entries({

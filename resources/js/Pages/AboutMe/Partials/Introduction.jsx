@@ -7,15 +7,22 @@
 
 // import Container from "./Container";
 import { motion } from "framer-motion";
-import email from "./Icons/at-sign-svgrepo-com.svg";
-import github from "./Icons/github-svgrepo-com.svg";
-import linkedin from "./Icons/linkedin-svgrepo-com.svg";
 import bg from "./Images/micah-boswell-OPnBJ5L2oxs-unsplash.jpg";
+import github from "./svgs/github-svgrepo-com.svg";
+import email from "./svgs/google-svgrepo-com.svg";
+import linkedin from "./svgs/linkedin-svgrepo-com.svg";
 
 const Icon = ({ src, alt, className }) => (
-  <div className="rounded bg-blue-100/75 p-2 text-white duration-100 hover:cursor-pointer hover:bg-blue-100/100">
-    <img src={src} alt={alt} className={`h-4 w-4 ${className}`} />
-  </div>
+  <motion.div
+    className="rounded bg-white p-1 text-white hover:cursor-pointer"
+    whileHover={{
+      scale: 1.1,
+      transition: { duration: 0.1 },
+    }}
+    whileTap={{ scale: 0.9 }}
+  >
+    <img src={src} alt={alt} className={`h-8 w-8 ${className}`} />
+  </motion.div>
 );
 
 const Introduction = () => (
