@@ -1,13 +1,130 @@
 {
+  "resources/js/Pages/AboutMe/Partials/Images/ILP_logo.png": {
+    "file": "assets/ILP_logo-b239491f.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/ILP_logo.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/JE_logo.png": {
+    "file": "assets/JE_logo-01430250.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/JE_logo.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/doggos_logo.png": {
+    "file": "assets/doggos_logo-665e4f10.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/doggos_logo.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/micah-boswell-OPnBJ5L2oxs-unsplash.jpg": {
+    "file": "assets/micah-boswell-OPnBJ5L2oxs-unsplash-8e1d5d0c.jpg",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/micah-boswell-OPnBJ5L2oxs-unsplash.jpg"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/ops_logo.png": {
+    "file": "assets/ops_logo-2afdb275.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/ops_logo.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/assets/Jongsun_Park_CV_2023.pdf": {
+    "file": "assets/Jongsun_Park_CV_2023-c5422f58.pdf",
+    "src": "resources/js/Pages/AboutMe/Partials/assets/Jongsun_Park_CV_2023.pdf"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/css-3-svgrepo-com.svg": {
+    "file": "assets/css-3-svgrepo-com-fa745604.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/css-3-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/gatsby-svgrepo-com.svg": {
+    "file": "assets/gatsby-svgrepo-com-9e9c8697.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/gatsby-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/github-svgrepo-com.svg": {
+    "file": "assets/github-svgrepo-com-994a99ee.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/github-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/google-svgrepo-com.svg": {
+    "file": "assets/google-svgrepo-com-ad9ffc48.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/google-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/html-5-svgrepo-com.svg": {
+    "file": "assets/html-5-svgrepo-com-34f0c762.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/html-5-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/javascript-svgrepo-com.svg": {
+    "file": "assets/javascript-svgrepo-com-e4f7047f.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/javascript-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/laravel-svgrepo-com.svg": {
+    "file": "assets/laravel-svgrepo-com-a7126e50.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/laravel-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/linkedin-svgrepo-com.svg": {
+    "file": "assets/linkedin-svgrepo-com-971d829a.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/linkedin-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/mongo-svgrepo-com.svg": {
+    "file": "assets/mongo-svgrepo-com-b03aea34.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/mongo-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/mysql-logo-svgrepo-com.svg": {
+    "file": "assets/mysql-logo-svgrepo-com-704666c6.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/mysql-logo-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/nextjs-svgrepo-com.svg": {
+    "file": "assets/nextjs-svgrepo-com-87f66a55.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/nextjs-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/nodejs-icon-svgrepo-com.svg": {
+    "file": "assets/nodejs-icon-svgrepo-com-3013b930.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/nodejs-icon-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/php-svgrepo-com.svg": {
+    "file": "assets/php-svgrepo-com-c006bcbb.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/php-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/react-svgrepo-com.svg": {
+    "file": "assets/react-svgrepo-com-42c08455.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/react-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/shopify-svgrepo-com.svg": {
+    "file": "assets/shopify-svgrepo-com-b3126e81.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/shopify-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/woocommerce-icon-svgrepo-com.svg": {
+    "file": "assets/woocommerce-icon-svgrepo-com-669798a1.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/woocommerce-icon-svgrepo-com.svg"
+  },
+  "resources/js/Pages/AboutMe/Partials/svgs/wordpress-color-svgrepo-com.svg": {
+    "file": "assets/wordpress-color-svgrepo-com-71856d1d.svg",
+    "src": "resources/js/Pages/AboutMe/Partials/svgs/wordpress-color-svgrepo-com.svg"
+  },
   "resources/js/app.css": {
-    "file": "assets/app-f0c4b0f8.css",
+    "file": "assets/app-739a430e.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
-    "css": [
-      "assets/app-f0c4b0f8.css"
+    "assets": [
+      "assets/micah-boswell-OPnBJ5L2oxs-unsplash-8e1d5d0c.jpg",
+      "assets/github-svgrepo-com-994a99ee.svg",
+      "assets/google-svgrepo-com-ad9ffc48.svg",
+      "assets/linkedin-svgrepo-com-971d829a.svg",
+      "assets/Jongsun_Park_CV_2023-c5422f58.pdf",
+      "assets/css-3-svgrepo-com-fa745604.svg",
+      "assets/gatsby-svgrepo-com-9e9c8697.svg",
+      "assets/html-5-svgrepo-com-34f0c762.svg",
+      "assets/javascript-svgrepo-com-e4f7047f.svg",
+      "assets/laravel-svgrepo-com-a7126e50.svg",
+      "assets/mongo-svgrepo-com-b03aea34.svg",
+      "assets/mysql-logo-svgrepo-com-704666c6.svg",
+      "assets/nextjs-svgrepo-com-87f66a55.svg",
+      "assets/nodejs-icon-svgrepo-com-3013b930.svg",
+      "assets/php-svgrepo-com-c006bcbb.svg",
+      "assets/react-svgrepo-com-42c08455.svg",
+      "assets/shopify-svgrepo-com-b3126e81.svg",
+      "assets/woocommerce-icon-svgrepo-com-669798a1.svg",
+      "assets/wordpress-color-svgrepo-com-71856d1d.svg",
+      "assets/ILP_logo-b239491f.png",
+      "assets/JE_logo-01430250.png",
+      "assets/doggos_logo-665e4f10.png",
+      "assets/ops_logo-2afdb275.png"
     ],
-    "file": "assets/app-fc74c09f.js",
+    "css": [
+      "assets/app-739a430e.css"
+    ],
+    "file": "assets/app-d33c1943.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }
