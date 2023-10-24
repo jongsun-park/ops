@@ -8,6 +8,11 @@ import GuestLayout from "./GuestLayout";
 const Layout = ({ children }) => {
   const user = usePage().props.auth.user;
 
+  // Layout for Portfolio - Disable default layout
+  if (usePage().component == "AboutMe/Index") {
+    return <>{children}</>;
+  }
+
   //   Page Transition
   const [transitioning, setTransitioning] = useState(null);
 

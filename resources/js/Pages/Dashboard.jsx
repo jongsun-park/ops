@@ -1,4 +1,7 @@
+import Stat from "@/Components/UI/Stat";
 import Header from "@/Layouts/Header";
+import Main from "@/Layouts/Main";
+import { Square3Stack3DIcon } from "@heroicons/react/24/outline";
 import { Head } from "@inertiajs/react";
 
 export default function Dashboard() {
@@ -6,19 +9,37 @@ export default function Dashboard() {
     <>
       <Head title="Dashboard" />
       <Header>
-        <h1 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+        <h1 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
           Dashboard
         </h1>
       </Header>
-      <main>
-        <div className="py-12">
-          <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-              <div className="p-6 text-gray-900">You're logged in!</div>
-            </div>
-          </div>
+      <Main>
+        <div className="grid gap-x-2 gap-y-2 sm:grid-cols-3">
+          <Stat
+            Icon={<Square3Stack3DIcon className="h-8 w-8" />}
+            stat="$240.94"
+            title="Total Active Pro"
+          />
+          <Stat
+            Icon={<Square3Stack3DIcon className="h-8 w-8" />}
+            stat="$240.94"
+            title="Total Complete Pro"
+          />
+          <Stat
+            Icon={<Square3Stack3DIcon className="h-8 w-8" />}
+            stat="$240.94"
+            title="Total Draft Draft"
+          />
         </div>
-      </main>
+        <div>
+          <h2>Recent Products</h2>
+          <p>production order list... name / status</p>
+          <p>production order list... name / status</p>
+          <p>production order list... name / status</p>
+          <p>production order list... name / status</p>
+          <p>production order list... name / status</p>
+        </div>
+      </Main>
     </>
   );
 }

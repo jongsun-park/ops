@@ -36,6 +36,11 @@ Route::get('/', function () {
     }
 });
 
+// portfolio
+Route::get('/about-me', function () {
+    return Inertia::render('AboutMe/Index');
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

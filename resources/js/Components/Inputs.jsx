@@ -31,7 +31,7 @@ export const TextInput = ({
             required={required}
           />
         </div>
-        {error && <div className="text-red-500 text-xs">{error}</div>}
+        {error && <div className="text-xs text-red-500">{error}</div>}
       </div>
     </div>
   );
@@ -41,11 +41,12 @@ export const TextInput = ({
 export const PrimaryButton = ({
   type = "button",
   disabled = false,
+  className,
   children,
 }) => (
   <button
     type={type}
-    className="group relative inline-flex items-center overflow-hidden rounded bg-indigo-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
+    className={`group relative inline-flex items-center overflow-hidden rounded bg-blue-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-blue-500 ${className}`}
     disabled={disabled}
   >
     <span className="absolute -end-full transition-all group-hover:end-4">
