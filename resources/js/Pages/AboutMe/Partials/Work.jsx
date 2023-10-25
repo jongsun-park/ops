@@ -1,10 +1,16 @@
 import { PrimaryButton as Button } from "@/Components/Inputs";
 import Container from "./Container";
 
+import { useRef, useState } from "react";
 import irp_logo from "./Images/ILP_logo.png";
 import je_logo from "./Images/JE_logo.png";
 import doggos_logo from "./Images/doggos_logo.png";
 import ops_logo from "./Images/ops_logo.png";
+
+import doggos_screenshot from "./Images/doggos_screenshot.png";
+import ilp_screenshot from "./Images/ilp_screenshot.png";
+import je_screenshot from "./Images/je_screenshot.png";
+import ops_screenshot from "./Images/ops_screenshot.png";
 
 const works = [
   {
@@ -14,6 +20,7 @@ const works = [
       "OPS is a production order system built with Laravel and React, offering role-based database access. Hosted on Digital Ocean, its repository is meticulously managed on GitHub",
     url: "https://www.jongsun.co.uk/dashboard",
     repo: "https://github.com/jongsun-park/ops",
+    screenshot: ops_screenshot,
   },
   {
     icon: <img src={doggos_logo} className="h-8 w-8" />,
@@ -22,6 +29,7 @@ const works = [
       "Doggos is a React-based gallery hosted on Netlify, featuring my canine companions and enhanced with CSS libraries like Styled Components and Framer for captivating user interfaces.",
     url: "https://park-doggos.netlify.app/",
     repo: "https://github.com/jongsun-park/doggos",
+    screenshot: doggos_screenshot,
   },
   {
     icon: <img src={je_logo} className="h-8 w-8" />,
@@ -29,6 +37,7 @@ const works = [
     description:
       "John England, hosted on WPEngine, was rebranded and rebuilt using the Total Theme in WordPress. It now serves as a robust marketing funnel for new products and the catalog.",
     url: "https://johnengland.com/",
+    screenshot: je_screenshot,
   },
   {
     icon: <img src={irp_logo} className="h-8 w-8" />,
@@ -36,10 +45,35 @@ const works = [
     description:
       "ILP was created using Shopify, customized with Liquid. I developed this website from scratch, including the publication of all its blog content.",
     url: "https://irishlinenproperties.com/",
+    screenshot: ilp_screenshot,
   },
 ];
 
 const Work = () => {
+  const [avtiveCursor, setActiveCursor] = useState(null);
+
+  const handleMouseEnter = (e, screenshot = "") => {
+    setActiveCursor(screenshot);
+  };
+
+  const handleMouseLeave = () => {
+    // setActiveCursor(null);
+  };
+
+  const cursorRangeRef = useRef();
+
+  const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
+
+  const coordinate = (e) => {
+    const getBoundingClientRect =
+      cursorRangeRef.current.getBoundingClientRect();
+
+    setMouseLocation({
+      x: e.clientX - getBoundingClientRect.x,
+      y: e.clientY - getBoundingClientRect.y,
+    });
+  };
+
   return (
     <Container>
       <section>
@@ -47,7 +81,6 @@ const Work = () => {
           <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
             <div className="mx-auto max-w-lg text-center lg:mx-0">
               <h2 className="text-3xl font-bold sm:text-4xl">My Portfolio</h2>
-
               <p className="mt-4 text-gray-600">
                 I have experience creating websites using WordPress and Shopify
                 and have also provided support for various website-related
@@ -61,39 +94,58 @@ const Work = () => {
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
-              {works.map(({ icon, title, description, url, repo }) => (
-                <div
-                  className="block rounded-xl border-2 border-gray-200 bg-white p-4"
-                  key={title}
-                >
-                  <span className="inline-block rounded-lg bg-gray-50 p-3">
-                    {icon}
-                  </span>
+            <div
+              className="relative grid grid-cols-2 gap-4 sm:grid-cols-2"
+              onMouseMove={coordinate}
+              ref={cursorRangeRef}
+            >
+              {avtiveCursor && (
+                <img
+                  className="pt-15 absolute w-[30vw] rounded shadow-lg"
+                  src={avtiveCursor}
+                  style={{
+                    top: mouseLocation.y,
+                    left: mouseLocation.x,
+                  }}
+                />
+              )}
 
-                  <h2 className="mt-2 font-bold">
-                    <a
-                      href={url ?? "#"}
-                      target="_blank"
-                      className="duration-100 hover:text-blue-400"
-                    >
-                      {title}
-                    </a>
-                  </h2>
+              {works.map(
+                ({ icon, title, description, url, repo, screenshot }) => (
+                  <div
+                    className="block rounded-xl border-2 border-gray-200 bg-white p-4"
+                    key={title}
+                    onMouseEnter={(e) => handleMouseEnter(e, screenshot)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <span className="inline-block rounded-lg bg-gray-50 p-3">
+                      {icon}
+                    </span>
 
-                  <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                    {description}
-                  </p>
-                  {repo && (
-                    <a
-                      href={repo}
-                      className="mt-3 block w-fit rounded-full bg-blue-100 px-4 py-1 text-xs font-bold uppercase text-blue-400 duration-100 hover:bg-blue-200 hover:text-blue-600"
-                    >
-                      Source Code
-                    </a>
-                  )}
-                </div>
-              ))}
+                    <h2 className="mt-2 font-bold">
+                      <a
+                        href={url ?? "#"}
+                        target="_blank"
+                        className="duration-100 hover:text-blue-400"
+                      >
+                        {title}
+                      </a>
+                    </h2>
+
+                    <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+                      {description}
+                    </p>
+                    {repo && (
+                      <a
+                        href={repo}
+                        className="mt-3 block w-fit rounded-full bg-blue-100 px-4 py-1 text-xs font-bold uppercase text-blue-400 duration-100 hover:bg-blue-200 hover:text-blue-600"
+                      >
+                        Source Code
+                      </a>
+                    )}
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </div>

@@ -31,14 +31,6 @@ export default function Dashboard() {
             title="Total Draft Draft"
           />
         </div>
-        <div>
-          <h2>Recent Products</h2>
-          <p>production order list... name / status</p>
-          <p>production order list... name / status</p>
-          <p>production order list... name / status</p>
-          <p>production order list... name / status</p>
-          <p>production order list... name / status</p>
-        </div>
       </Main>
     </>
   );

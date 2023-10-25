@@ -1,10 +1,3 @@
-/**
- *   2. About Me: Personal Information: Provide some background information
-        about yourself, such as your location and contact information.
-        Professional Background: Share a concise overview of your education,
-        work experience, and any relevant certifications.
- */
-
 import { Tab } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -16,7 +9,7 @@ function classNames(...classes) {
 
 const Personal = () => {
   let [categories] = useState({
-    Experiences: [
+    Experience: [
       {
         id: 1,
         title: "Specific Matter Expert at CPL for Twitter",
@@ -39,7 +32,7 @@ const Personal = () => {
           "Creating websites using WordPress and Shopify, as well as developing software and website prototypes with Adobe XD. Additionally, I assist in establishing marketing platforms with integrated automated reporting, utilizing React.js and Gatsby.",
       },
     ],
-    Educations: [
+    Education: [
       {
         id: 1,
         title: "Certificate in Programming (LV 6) at DKIT, IRE",
@@ -59,7 +52,7 @@ const Personal = () => {
         id: 1,
         title: "Programming",
         items: [
-          "Let's Learn Laravel: A GuidedPath For Beginners by Brad Schiff",
+          "Let's Learn Laravel: A Guided Path For Beginners by Brad Schiff",
           "Become a WordPress Developer: Unlocking Power With Code by Brad Schiff",
           "The Advanced Web Developer Bootcamp by Colt Steele",
           "React and Typescript: Build a Portfolio Project by Stephen Grider",
