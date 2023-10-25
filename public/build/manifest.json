@@ -11,6 +11,18 @@
     "file": "assets/doggos_logo-665e4f10.png",
     "src": "resources/js/Pages/AboutMe/Partials/Images/doggos_logo.png"
   },
+  "resources/js/Pages/AboutMe/Partials/Images/doggos_screenshot.png": {
+    "file": "assets/doggos_screenshot-e8a6edc1.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/doggos_screenshot.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/ilp_screenshot.png": {
+    "file": "assets/ilp_screenshot-62f6996c.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/ilp_screenshot.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/je_screenshot.png": {
+    "file": "assets/je_screenshot-3df392df.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/je_screenshot.png"
+  },
   "resources/js/Pages/AboutMe/Partials/Images/micah-boswell-OPnBJ5L2oxs-unsplash.jpg": {
     "file": "assets/micah-boswell-OPnBJ5L2oxs-unsplash-8e1d5d0c.jpg",
     "src": "resources/js/Pages/AboutMe/Partials/Images/micah-boswell-OPnBJ5L2oxs-unsplash.jpg"
@@ -18,6 +30,10 @@
   "resources/js/Pages/AboutMe/Partials/Images/ops_logo.png": {
     "file": "assets/ops_logo-2afdb275.png",
     "src": "resources/js/Pages/AboutMe/Partials/Images/ops_logo.png"
+  },
+  "resources/js/Pages/AboutMe/Partials/Images/ops_screenshot.png": {
+    "file": "assets/ops_screenshot-a5a4cd4f.png",
+    "src": "resources/js/Pages/AboutMe/Partials/Images/ops_screenshot.png"
   },
   "resources/js/Pages/AboutMe/Partials/assets/Jongsun_Park_CV_2023.pdf": {
     "file": "assets/Jongsun_Park_CV_2023-c5422f58.pdf",
@@ -92,7 +108,7 @@
     "src": "resources/js/Pages/AboutMe/Partials/svgs/wordpress-color-svgrepo-com.svg"
   },
   "resources/js/app.css": {
-    "file": "assets/app-739a430e.css",
+    "file": "assets/app-3637e9ab.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
@@ -119,12 +135,16 @@
       "assets/ILP_logo-b239491f.png",
       "assets/JE_logo-01430250.png",
       "assets/doggos_logo-665e4f10.png",
-      "assets/ops_logo-2afdb275.png"
+      "assets/ops_logo-2afdb275.png",
+      "assets/doggos_screenshot-e8a6edc1.png",
+      "assets/ilp_screenshot-62f6996c.png",
+      "assets/je_screenshot-3df392df.png",
+      "assets/ops_screenshot-a5a4cd4f.png"
     ],
     "css": [
-      "assets/app-739a430e.css"
+      "assets/app-3637e9ab.css"
     ],
-    "file": "assets/app-fb88887e.js",
+    "file": "assets/app-e904382e.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }
