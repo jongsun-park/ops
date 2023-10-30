@@ -66,7 +66,7 @@ const Show = ({ production, user }) => {
       </Header>
       <Main>
         <div className="mb-10">
-          <div className="space-y-2">
+          <div className="space-y-4">
             <ProductionOrder />
             <MakingUpOrder />
           </div>

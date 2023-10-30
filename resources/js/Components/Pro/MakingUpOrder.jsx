@@ -1,7 +1,7 @@
 import { Cell, Col, Grid } from "./Shared";
 
 const MakingUpOrder = () => (
-  <div className="round min-w-[920px] bg-white p-4 shadow">
+  <div className="min-w-[920px] rounded-md bg-white p-4 shadow">
     <div className="border-1 bg-whit2 grid grid-cols-12 gap-2">
       {/* ROW 1 */}
       <>
@@ -20,16 +20,15 @@ const MakingUpOrder = () => (
       <>
         <div className="col-span-5">
           <Grid
-            cols={3}
             label="ORDER"
             value="ORDER_ID / CUSOTMER"
             className="bg-yellow-100"
           />
 
-          <Grid cols={3} label="SKU/SPEC" value="SKU_ID" />
+          <Grid label="SKU/SPEC" value="SKU_ID" />
 
-          <Grid cols={3} label="DESC" value="DESCRIPTION" />
-          <Grid cols={3} label="QUANTITY" value="15" />
+          <Grid label="DESC" value="DESCRIPTION" />
+          <Grid label="QUANTITY" value="15" />
         </div>
 
         <div className="col-span-5">

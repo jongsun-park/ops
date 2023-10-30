@@ -1,7 +1,7 @@
 import { Cell, Grid } from "./Shared";
 
 const ProductionOrder = () => (
-  <div className="round min-w-[920px] bg-white p-4 shadow">
+  <div className="min-w-[920px] rounded-md bg-white p-4 shadow">
     <div className="border-1 bg-whit2 grid grid-cols-12 gap-2">
       {/* ROW 1 */}
       <>
@@ -20,21 +20,20 @@ const ProductionOrder = () => (
       <>
         <div className="col-span-5">
           <Grid
-            cols={3}
             label="ORDER"
             value="ORDER_ID / CUSOTMER"
             className="bg-yellow-100"
           />
 
-          <Grid cols={3} label="SKU/SPEC" value="SKU_ID" />
+          <Grid label="SKU/SPEC" value="SKU_ID" />
 
-          <Grid cols={3} label="DESC" value="DESCRIPTION" />
+          <Grid label="DESC" value="DESCRIPTION" />
         </div>
 
         <div className="col-span-5">
-          <Grid cols={2} label="PRO PRINTED" value="DATE" />
-          <Grid cols={2} label="PRO WEAVE BY" value="DATE" />
-          <Grid cols={2} label="URGENCY" value="URGENCY" />
+          <Grid label="PRO PRINTED" value="DATE" />
+          <Grid label="PRO WEAVE BY" value="DATE" />
+          <Grid label="URGENCY" value="URGENCY" />
         </div>
         <Cell className="col-span-2 grid h-full grid-cols-1 text-xl">
           <span className="font-bold">LOOM ID</span> <span>LOOM ID</span>
@@ -44,12 +43,12 @@ const ProductionOrder = () => (
       {/* ROW 3 */}
       <>
         <div className="col-span-5">
-          <Grid cols={3} label="TF #" value="TF #" className="text-xl" />
-          <Grid cols={3} label="QUANTITY" value="QUANTITY" />
-          <Grid cols={3} label="TOTAL LENGTH" value="TOTAL LENGTH" />
-          <Grid cols={3} label="DIVISORS" value="DIVISORS" />
-          <Grid cols={3} label="PPCM" value="PPCM" />
-          <Grid cols={3} label="# of Repeats" value="Repeats" />
+          <Grid label="TF #" value="TF #" className="text-xl" />
+          <Grid label="QUANTITY" value="QUANTITY" />
+          <Grid label="TOTAL LENGTH" value="TOTAL LENGTH" />
+          <Grid label="DIVISORS" value="DIVISORS" />
+          <Grid label="PPCM" value="PPCM" />
+          <Grid label="# of Repeats" value="Repeats" />
         </div>
         <div className="col-span-7">
           <div className="p-2">

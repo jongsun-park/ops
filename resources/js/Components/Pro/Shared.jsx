@@ -8,13 +8,13 @@ export const Cell = ({ className, children, border }) => (
   </div>
 );
 
-export const Grid = ({ cols = 1, className, label, value }) => (
-  <Cell className={`grid-cols-${cols} grid w-full ${className}`}>
+export const Grid = ({ className = "", label, value }) => (
+  <Cell className={`grid w-full grid-cols-3 ${className}`}>
     <div className="font-bold">{label}</div>
-    <div className={cols == 3 ? `col-span-2` : "col-span-1"}>{value}</div>
+    <div className="col-span-2">{value}</div>
   </Cell>
 );
-export const Col = ({ className, label, value }) => (
+export const Col = ({ className = "", label, value }) => (
   <div className={`h-full ${className}`}>
     <div className="pb-2 font-bold">{label}</div>
     <div>{value}</div>
