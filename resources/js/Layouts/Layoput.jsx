@@ -34,13 +34,19 @@ const Layout = ({ children }) => {
   );
 
   if (!user) {
-    return <GuestLayout className={pageTransition}>{children}</GuestLayout>;
+    return (
+      <GuestLayout>
+        <div className={pageTransition}>{children}</div>
+      </GuestLayout>
+    );
   }
 
   return (
-    <AuthenticatedLayout user={user} className={pageTransition}>
-      {children}
-      <Flash />
+    <AuthenticatedLayout user={user}>
+      <div className={pageTransition}>
+        {children}
+        <Flash />
+      </div>
     </AuthenticatedLayout>
   );
 };

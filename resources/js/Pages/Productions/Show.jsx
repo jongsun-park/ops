@@ -1,12 +1,10 @@
-import { Head, Link } from "@inertiajs/react";
-import {
-  PencilSquareIcon,
-  ChevronDoubleRightIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
-import Header from "@/Layouts/Header";
 import { Detail, DetailsList } from "@/Components/DetailsList";
+import MakingUpOrder from "@/Components/Pro/MakingUpOrder";
+import ProductionOrder from "@/Components/Pro/ProductionOrder";
+import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { Head, Link } from "@inertiajs/react";
 
 const UpdateProductionOder = ({ id }) => (
   <Link
@@ -58,8 +56,8 @@ const Show = ({ production, user }) => {
     <>
       <Head title={title} />
       <Header>
-        <div className="flex justify-between align-center">
-          <h2 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+        <div className="align-center flex justify-between">
+          <h2 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
             {user?.can?.update && <UpdateProductionOder id={id} />}
             {user?.can?.delete && <DeleteProductionOder id={id} />}
@@ -67,6 +65,12 @@ const Show = ({ production, user }) => {
         </div>
       </Header>
       <Main>
+        <div className="mb-10">
+          <div className="space-y-2">
+            <ProductionOrder />
+            <MakingUpOrder />
+          </div>
+        </div>
         <DetailsList>
           <Detail dt="Created At" dd={created_at} />
           <Detail dt="Updated At" dd={updated_at} />
