@@ -6,7 +6,7 @@ use App\Models\Packing;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Production;
-use App\Models\Status;
+
 use App\Models\Urgency;
 use App\Models\WashOption;
 use Illuminate\Http\Request;
@@ -36,7 +36,6 @@ class ProductionController extends Controller
                 'customer_name' => $pro->customer_name,
                 'weave_by' => $pro->weave_by,
                 'note' => $pro->note,
-                'status' => $pro->status->name,
             ]);
 
         $filters = request()->only(['search']);
@@ -72,7 +71,6 @@ class ProductionController extends Controller
             'urgency' => $production->urgency->name,
             'wash_option' => $production->wash_option->name,
             'packing' => $production->packing->name,
-            'status' => $production->status->name,
         ];
 
 
@@ -107,7 +105,6 @@ class ProductionController extends Controller
             'urgency_id' => '',
             'wash_option_id' => '',
             'packing_id' => '',
-            'status_id' => '',
         ]);
 
         // create Production
@@ -126,7 +123,7 @@ class ProductionController extends Controller
             'urgencies' => Urgency::all()->toArray(),
             'wash_options' => WashOption::all()->toArray(),
             'packings' => Packing::all()->toArray(),
-            'statuses' => Status::all()->toArray(),
+
         ]);
     }
 
@@ -145,7 +142,7 @@ class ProductionController extends Controller
             'urgency_id' => '',
             'wash_option_id' => '',
             'packing_id' => '',
-            'status_id' => '',
+
         ]);
 
         // update products
@@ -174,7 +171,7 @@ class ProductionController extends Controller
             'urgencies' => Urgency::all()->toArray(),
             'wash_options' => WashOption::all()->toArray(),
             'packings' => Packing::all()->toArray(),
-            'statuses' => Status::all()->toArray(),
+
         ]);
     }
 }

@@ -26,18 +26,6 @@ return new class extends Migration
             $table->string('name');
         });
 
-        Schema::create('statuses', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-        });
-
-        Schema::create('production_log', function (Blueprint $table) {
-            $table->foreignId('production_id');
-            $table->foreignId('status_id');
-            $table->foreignId('user_id');
-            $table->timestamps();
-        });
-
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -56,7 +44,8 @@ return new class extends Migration
             $table->foreignId('urgency_id')->constrained()->noActionOnDelete();
             $table->foreignId('wash_option_id')->constrained()->noActionOnDelete();
             $table->foreignId('packing_id')->constrained()->noActionOnDelete();
-            $table->foreignId('status_id')->constrained()->noActionOnDelete();
+
+            // $table->foreignId('production_order_status_id');
         });
     }
 

@@ -21,7 +21,6 @@ use App\Models\Label;
 use App\Models\Loom;
 use App\Models\Material;
 use App\Models\Packing;
-use App\Models\Status;
 use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Urgency;
@@ -88,7 +87,6 @@ Route::prefix('options')->middleware('auth')->group(function () {
         'looms' => Loom::all()->toArray(),
         'materials' => Material::all()->toArray(),
         'packings' => Packing::all()->toArray(),
-        'statuses' => Status::all()->toArray(),
         'suppliers' => Supplier::all()->toArray(),
         'units' => Unit::all()->toArray(),
         'urgencies' => Urgency::all()->toArray(),
@@ -105,7 +103,6 @@ Route::prefix('options')->middleware('auth')->group(function () {
         'looms' => Loom::class,
         'materials' => Material::class,
         'packings' => Packing::class,
-        'statuses' => Status::class,
         'suppliers' => Supplier::class,
         'units' => Unit::class,
         'urgencies' => Urgency::class,

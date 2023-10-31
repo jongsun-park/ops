@@ -27,6 +27,7 @@
         "@heroicons/react": "^2.0.18",
         "framer-motion": "^10.16.4",
         "react-transition-group": "^4.4.5",
-        "styled-components": "^6.1.0"
+        "styled-components": "^6.1.0",
+        "swiper": "^11.0.3"
     }
 }

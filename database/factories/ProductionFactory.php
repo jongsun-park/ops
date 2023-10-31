@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Packing;
 use App\Models\Product;
-use App\Models\Status;
+use App\Models\ProductionOrderStatus;
 use App\Models\Urgency;
 use App\Models\User;
 use App\Models\WashOption;
@@ -43,10 +43,6 @@ class ProductionFactory extends Factory
             Packing::factory(5)->create();
         }
 
-        if (!Status::first()) {
-            Status::factory(5)->create();
-        }
-
         return [
             'user_id' => $user_id,
             'product_id' => $product_id,
@@ -62,7 +58,8 @@ class ProductionFactory extends Factory
             'urgency_id' => Urgency::all()->random(1)->first()->id,
             'wash_option_id' => WashOption::all()->random(1)->first()->id,
             'packing_id' => Packing::all()->random(1)->first()->id,
-            'status_id' => Status::all()->random(1)->first()->id,
+
+            'production_order_status_id' => ProductionOrderStatus::factory()->create()->id
 
         ];
     }
