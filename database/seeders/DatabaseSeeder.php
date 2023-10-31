@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Production;
+use App\Models\ProductionOrderStatus;
 use App\Models\Yarn;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,14 @@ class DatabaseSeeder extends Seeder
         // Product::factory(50)->create();
 
 
-        Production::factory(100)->create();
+        // Production Factory without Status
+        $productions = Production::factory(100)->create();
+
+        foreach ($productions as $production) {
+            // Connect Production with Status
+            ProductionOrderStatus::factory()->create(([
+                'production_id' =>  $production->id
+            ]));
+        }
     }
 }

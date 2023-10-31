@@ -30,7 +30,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->nullable();
             $table->foreignId('user_id')->constrained();
 
             $table->string('order_id')->nullable();
@@ -41,11 +41,11 @@ return new class extends Migration
             $table->string('number_of_repeats')->nullable();
             $table->string('note')->nullable();
 
-            $table->foreignId('urgency_id')->constrained()->noActionOnDelete();
-            $table->foreignId('wash_option_id')->constrained()->noActionOnDelete();
-            $table->foreignId('packing_id')->constrained()->noActionOnDelete();
+            $table->foreignId('urgency_id')->constrained();
+            $table->foreignId('wash_option_id')->constrained();
+            $table->foreignId('packing_id')->constrained();
 
-            // $table->foreignId('production_order_status_id');
+            // $table->foreignId('production_order_status_id')->constrained();
         });
     }
 

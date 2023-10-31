@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('productions', function (Blueprint $table) {
-            $table->foreignId('production_order_status_id');
-        });
+        // Schema::table('productions', function (Blueprint $table) {
+        //     $table->foreignId('production_order_status_id');
+        // });
 
 
         Schema::create('production_order_statuses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('production_id');
+
             $table->boolean('loom_status')->default(false);
             $table->text('loom_updated_by')->nullable();
             $table->text('loom_updated_at')->nullable();

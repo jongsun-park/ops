@@ -35,4 +35,10 @@ class Production extends Model
     {
         return $this->belongsTo(Packing::class);
     }
+
+    public function production_order_status()
+    {
+        // return $this->production_order_status_id;
+        return $this->hasOne(ProductionOrderStatus::class);
+    }
 }

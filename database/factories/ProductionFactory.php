@@ -58,9 +58,6 @@ class ProductionFactory extends Factory
             'urgency_id' => Urgency::all()->random(1)->first()->id,
             'wash_option_id' => WashOption::all()->random(1)->first()->id,
             'packing_id' => Packing::all()->random(1)->first()->id,
-
-            'production_order_status_id' => ProductionOrderStatus::factory()->create()->id
-
         ];
     }
 }
