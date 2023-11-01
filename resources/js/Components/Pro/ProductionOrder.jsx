@@ -1,7 +1,7 @@
 import { Cell, Grid } from "./Shared";
 
 const ProductionOrder = () => (
-  <div className="min-w-[920px] rounded-md bg-white p-4 shadow">
+  <div className="min-w-[920px] rounded-md bg-white p-4 text-sm shadow">
     <div className="border-1 bg-whit2 grid grid-cols-12 gap-2">
       {/* ROW 1 */}
       <>

@@ -1,34 +1,15 @@
 import MakingUpOrder from "@/Components/Pro/MakingUpOrder";
 import ProductionDetail from "@/Components/Pro/ProductionDetail";
+import {
+  DeleteProductionOrder,
+  UpdateProductionOrder,
+} from "@/Components/Pro/ProductionLink";
 import ProductionOrder from "@/Components/Pro/ProductionOrder";
 import ProductionOrderStatus from "@/Components/Pro/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { Head, Link, usePage } from "@inertiajs/react";
-
-const UpdateProductionOder = ({ id }) => (
-  <Link
-    href={route("productions.edit", id)}
-    className="ml-2"
-    title="Update product"
-  >
-    <PencilSquareIcon className="h-[24px] w-[24px] text-blue-500" />
-  </Link>
-);
-
-const DeleteProductionOder = ({ id }) => (
-  <Link
-    href={route("productions.destroy", id)}
-    method="delete"
-    as="button"
-    className="ml-2"
-    title="Delete product"
-  >
-    <TrashIcon className="h-[24px] w-[24px] text-red-500" />
-  </Link>
-);
+import { Head, usePage } from "@inertiajs/react";
 
 /**
  *
@@ -36,6 +17,7 @@ const DeleteProductionOder = ({ id }) => (
  * 1. Remove Edit Button - Don't need Edit page as Show page has edit features
  * 2. PRO Template update with variables
  * 3. Yarn Table
+ * 4. Product ID / User ID - Make it as Select not Text Input
  */
 
 const Show = ({ production, user }) => {
@@ -52,8 +34,8 @@ const Show = ({ production, user }) => {
         <div className="align-center flex justify-between">
           <h2 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
-            {user?.can?.update && <UpdateProductionOder id={id} />}
-            {user?.can?.delete && <DeleteProductionOder id={id} />}
+            {user?.can?.update && <UpdateProductionOrder id={id} />}
+            {user?.can?.delete && <DeleteProductionOrder id={id} />}
           </h2>
         </div>
       </Header>

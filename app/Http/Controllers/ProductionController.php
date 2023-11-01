@@ -72,6 +72,9 @@ class ProductionController extends Controller
             'wash_option' => $production->wash_option->name,
             'packing' => $production->packing->name,
             'status' => $production->status,
+
+            'user_id' => $production->user_id,
+            'product_id' => $production->product_id,
         ];
 
 
@@ -131,9 +134,12 @@ class ProductionController extends Controller
 
     public function update(Request $request, Production $production)
     {
+
         $attributes = $request->validate([
             'product_id' => 'required|exists:App\Models\Product,id',
             'user_id' => 'required|exists:App\Models\User,id',
+            // 'product_id' => '',
+            // 'user_id' => '',
             'order_id' => '',
             'customer_name' => '',
             'weave_by' => '',
@@ -144,15 +150,13 @@ class ProductionController extends Controller
             'urgency_id' => '',
             'wash_option_id' => '',
             'packing_id' => '',
-
         ]);
 
         // update products
         $production->update($attributes);
 
         // redirect
-        return back('productions.show', ['production' => $production->id])
-            ->with('message', "Production Updated");
+        return back()->with('message', "Production Updated");
     }
 
 
@@ -177,7 +181,6 @@ class ProductionController extends Controller
 
         ]);
     }
-
 
 
     public function statusUpdate(ProductionOrderStatus $productionOrderStatus)
