@@ -1,72 +1,141 @@
 import { useForm } from "@inertiajs/react";
-import { useState } from "react";
 
+import { PrimaryButton } from "../Inputs";
 import Toggle from "../UI/Toggle";
 
-const ProductionOrderStatus = ({
-  status_id,
-  type = "",
-  title = "",
-  user = {},
-}) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [updatedBy, setUpdatedBy] = useState();
-  const [updatedAt, setUpdatedAt] = useState(null);
+const Status = ({ type, setData, data, can = false, user = "" }) => {
+  const status = data[`${type}_status`];
+  const updated_at = data[`${type}_updated_at`];
+  const updated_by = data[`${type}_updated_by`];
 
+  const onChangeStatus = () => {
+    if (status == false) {
+      setData({
+        ...data,
+        [`${type}_status`]: !status,
+        [`${type}_updated_at`]: new Date(Date.now()).toISOString(),
+        [`${type}_updated_by`]: user,
+      });
+    } else {
+      setData({
+        ...data,
+        [`${type}_status`]: !status,
+        [`${type}_updated_at`]: "",
+        [`${type}_updated_by`]: "",
+      });
+    }
+  };
+
+  const onChange = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <div className="flex flex-row space-x-10">
+      <Toggle
+        enabled={status}
+        setEnabled={onChangeStatus}
+        label={type}
+        value={status}
+      />
+
+      <input
+        type="hidden"
+        name={type}
+        id={type}
+        checked={status}
+        onChange={onChangeStatus}
+        value={status}
+      />
+
+      {/* If User is Admin show Value otherwise it's hidden */}
+      <input
+        type={can ? "text" : "hidden"}
+        placeholder={`${type}_updated_by`}
+        name={`${type}_updated_by`}
+        value={updated_by ?? ""}
+        className="min-w-[25ch] border-0 bg-transparent p-0"
+        onChange={onChange}
+      />
+      {/* If whne it's status has changed, update this value */}
+      <input
+        type={can ? "text" : "hidden"}
+        placeholder={`${type}_updated_at`}
+        name={`${type}_updated_at`}
+        value={updated_at ?? ""}
+        className="min-w-[25ch] border-0 bg-transparent p-0"
+        onChange={onChange}
+      />
+    </div>
+  );
+};
+
+const ProductionOrderStatus = ({
+  user = "",
+  can = false,
+  id: status_id,
+  status,
+}) => {
   const { data, setData, patch, processing, errors } = useForm({
-    status: "",
-    updatedAt: "",
-    updatedBy: "",
+    cut_status: status.cut_status,
+    cut_updated_at: status.cut_updated_at,
+    cut_updated_by: status.cut_updated_by,
+    laundry_status: status.laundry_status,
+    laundry_updated_at: status.laundry_updated_at,
+    laundry_updated_by: status.laundry_updated_by,
+    loom_status: status.loom_status,
+    loom_updated_at: status.loom_updated_at,
+    loom_updated_by: status.loom_updated_by,
+    stitch_status: status.stitch_status,
+    stitch_updated_at: status.stitch_updated_at,
+    stitch_updated_by: status.stitch_updated_by,
+    woven_status: status.woven_status,
+    woven_updated_at: status.woven_updated_at,
+    woven_updated_by: status.woven_updated_by,
   });
 
   const updateStatus = () => {
     patch(`/production_order_status/${status_id}`, data);
   };
 
-  const isAdmin = user.role === "admin";
+  const statuses = ["cut", "laundry", "loom", "stitch", "woven"];
 
-  const onChange = (e) => {
-    setIsChecked((prev) => !prev);
-
-    if (!isChecked === true) {
-      const today = new Date(Date.now()).toISOString();
-      setUpdatedAt(today);
-      setUpdatedBy(user.name);
-    } else {
-      setUpdatedAt(null);
-      setUpdatedBy(null);
-    }
-  };
+  const isComplete =
+    data.cut_status &&
+    data.laundry_status &&
+    data.loom_status &&
+    data.stitch_status &&
+    data.woven_status;
 
   return (
-    <div className="flex flex-row space-x-10">
-      <Toggle enabled={isChecked} setEnabled={onChange} label={title} />
+    <div className="space-y-3">
+      <div className="mb-8 flex flex-row items-center justify-between">
+        <h2 className="mb-3 text-xl font-bold uppercase">Status</h2>
+        <PrimaryButton
+          onClick={updateStatus}
+          disabled={processing}
+          className={isComplete ? "bg-green-700" : "bg-blue-700"}
+        >
+          {isComplete ? "Complete Production Order" : "Update Status"}
+        </PrimaryButton>
+      </div>
 
-      <input
-        type="hidden"
-        name={`status_${type}`}
-        id={`status_${type}`}
-        checked={isChecked}
-        onChange={onChange}
-      />
-
-      {/* If User is Admin show Value otherwise it's hidden */}
-      <input
-        type={isAdmin ? "text" : "hidden"}
-        placeholder={`status_${type}_updated_by`}
-        name="user_id"
-        defaultValue={updatedBy}
-        className="min-w-[25ch] border-0 bg-transparent p-0"
-      />
-      {/* If whne it's status has changed, update this value */}
-      <input
-        type={isAdmin ? "text" : "hidden"}
-        placeholder={`status_${type}_updated_at`}
-        name="updated_at"
-        defaultValue={updatedAt}
-        className="min-w-[25ch] border-0 bg-transparent p-0"
-        readOnly
-      />
+      {statuses.map((status) => (
+        <Status
+          setData={setData}
+          data={data}
+          type={status}
+          key={status}
+          status={data.cut_status}
+          updatedAt={data.cut_updated_at}
+          updatedBy={data.cut_updated_by}
+          can={can}
+          user={user}
+        />
+      ))}
     </div>
   );
 };

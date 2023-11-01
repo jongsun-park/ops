@@ -43,11 +43,13 @@ export const PrimaryButton = ({
   disabled = false,
   className,
   children,
+  onClick,
 }) => (
   <button
     type={type}
     className={`group relative inline-flex items-center overflow-hidden rounded bg-blue-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-blue-500 ${className}`}
     disabled={disabled}
+    onClick={onClick}
   >
     <span className="absolute -end-full transition-all group-hover:end-4">
       <svg
@@ -71,10 +73,10 @@ export const PrimaryButton = ({
   </button>
 );
 
-export const Button = ({ type = "button", children }) => (
+export const Button = ({ type = "button", children, className }) => (
   <button
     type={type}
-    className="group relative inline-flex items-center overflow-hidden rounded border border-current px-8 py-3 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+    className={`group relative inline-flex items-center overflow-hidden rounded border border-current px-8 py-3 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 ${className}`}
   >
     <span className="absolute -end-full transition-all group-hover:end-4">
       <svg

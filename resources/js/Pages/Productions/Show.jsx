@@ -51,12 +51,9 @@ const Show = ({ production, user }) => {
     status,
   } = production;
 
-  console.log(status);
-  console.log(user.can);
-
   const title = `Production Order Details`;
 
-  const auth_user = usePage().props.auth.user;
+  const user_name = usePage().props.auth.user.name;
 
   return (
     <>
@@ -85,38 +82,12 @@ const Show = ({ production, user }) => {
         </section>
 
         <section>
-          <h2 className="mb-3 text-xl font-bold uppercase">Status</h2>
-          <div className="flex flex-col space-y-2">
-            <ProductionOrderStatus
-              id=""
-              user={auth_user}
-              type="loom"
-              title="Loom"
-            />
-            <ProductionOrderStatus
-              user={auth_user}
-              type="woven"
-              title="Woven"
-            />
-            <ProductionOrderStatus
-              id=""
-              user={auth_user}
-              type="cut"
-              title="Cut"
-            />
-            <ProductionOrderStatus
-              id=""
-              user={auth_user}
-              type="stiched"
-              title="Stitched"
-            />
-            <ProductionOrderStatus
-              id=""
-              user={auth_user}
-              type="laundried"
-              title="Laundried"
-            />
-          </div>
+          <ProductionOrderStatus
+            id={status.id}
+            can={user.can.update_status}
+            user={user_name}
+            status={status}
+          />
         </section>
 
         {/*

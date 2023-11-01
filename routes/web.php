@@ -55,8 +55,13 @@ Route::middleware('auth')->group(function () {
     // production
     Route::resource('productions', ProductionController::class);
 
-    Route::patch('/production_order_status/{id}', function (ProductionOrderStatus $productionOrderStatus) {
-        return $productionOrderStatus;
+    Route::patch('/production_order_status/{productionOrderStatus}', function (ProductionOrderStatus $productionOrderStatus) {
+
+        // TODO - Validate
+        $attributes = array_merge($productionOrderStatus->toArray(), request()->toArray());
+        $productionOrderStatus->update($attributes);
+
+        return back()->with('message', 'status updated');
     });
 
     // product
