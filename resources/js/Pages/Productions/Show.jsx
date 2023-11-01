@@ -1,4 +1,5 @@
 import MakingUpOrder from "@/Components/Pro/MakingUpOrder";
+import ProductionDetail from "@/Components/Pro/ProductionDetail";
 import ProductionOrder from "@/Components/Pro/ProductionOrder";
 import ProductionOrderStatus from "@/Components/Pro/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
@@ -29,27 +30,16 @@ const DeleteProductionOder = ({ id }) => (
   </Link>
 );
 
-const Show = ({ production, user }) => {
-  const {
-    id,
-    created_at,
-    updated_at,
-    product_name,
-    product_sku,
-    product_description,
+/**
+ *
+ * TODO
+ * 1. Remove Edit Button - Don't need Edit page as Show page has edit features
+ * 2. PRO Template update with variables
+ * 3. Yarn Table
+ */
 
-    written_by,
-    order_id,
-    customer_name,
-    weave_by,
-    quantity,
-    total_length,
-    note,
-    urgency,
-    wash_option,
-    packing,
-    status,
-  } = production;
+const Show = ({ production, user }) => {
+  const { id, status } = production;
 
   const title = `Production Order Details`;
 
@@ -81,34 +71,14 @@ const Show = ({ production, user }) => {
           </div>
         </section>
 
-        <section>
-          <ProductionOrderStatus
-            id={status.id}
-            can={user.can.update_status}
-            user={user_name}
-            status={status}
-          />
-        </section>
+        <ProductionOrderStatus
+          id={status.id}
+          can={user.can.update_status}
+          user={user_name}
+          status={status}
+        />
 
-        {/*
-        <DetailsList>
-          <Detail dt="Created At" dd={created_at} />
-          <Detail dt="Updated At" dd={updated_at} />
-          <Detail dt="Product Name" dd={product_name} />
-          <Detail dt="Product Sku" dd={product_sku} />
-          <Detail dt="Product Description" dd={product_description} />
-          <Detail dt="Written By" dd={written_by} />
-          <Detail dt="Order Id" dd={order_id} />
-          <Detail dt="Customer Name" dd={customer_name} />
-          <Detail dt="Weave By" dd={weave_by} />
-          <Detail dt="Quantity" dd={quantity} />
-          <Detail dt="Total Length" dd={total_length} />
-          <Detail dt="Note" dd={note} />
-          <Detail dt="Urgency" dd={urgency} />
-          <Detail dt="Wash_option" dd={wash_option} />
-          <Detail dt="Packing" dd={packing} />
-          <Detail dt="Status" dd={status} />
-        </DetailsList> */}
+        <ProductionDetail user={user} production={production} />
       </Main>
     </>
   );

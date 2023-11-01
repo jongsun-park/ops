@@ -1,6 +1,7 @@
 import { useForm } from "@inertiajs/react";
 
 import { PrimaryButton } from "../Inputs";
+import Pannel from "../UI/Pannel";
 import Toggle from "../UI/Toggle";
 
 const Status = ({ type, setData, data, can = false, user = "" }) => {
@@ -98,7 +99,9 @@ const ProductionOrderStatus = ({
   });
 
   const updateStatus = () => {
-    patch(`/production_order_status/${status_id}`, data);
+    patch(`/production_order_status/${status_id}`, {
+      preserveScroll: true,
+    });
   };
 
   const statuses = ["cut", "laundry", "loom", "stitch", "woven"];
@@ -110,19 +113,18 @@ const ProductionOrderStatus = ({
     data.stitch_status &&
     data.woven_status;
 
-  return (
-    <div className="space-y-3">
-      <div className="mb-8 flex flex-row items-center justify-between">
-        <h2 className="mb-3 text-xl font-bold uppercase">Status</h2>
-        <PrimaryButton
-          onClick={updateStatus}
-          disabled={processing}
-          className={isComplete ? "bg-green-700" : "bg-blue-700"}
-        >
-          {isComplete ? "Complete Production Order" : "Update Status"}
-        </PrimaryButton>
-      </div>
+  const button = (
+    <PrimaryButton
+      onClick={updateStatus}
+      disabled={processing}
+      className={isComplete ? "bg-green-700" : "bg-blue-700"}
+    >
+      {isComplete ? "Complete Production Order" : "Update Status"}
+    </PrimaryButton>
+  );
 
+  return (
+    <Pannel title="Status" button={button}>
       {statuses.map((status) => (
         <Status
           setData={setData}
@@ -136,7 +138,7 @@ const ProductionOrderStatus = ({
           user={user}
         />
       ))}
-    </div>
+    </Pannel>
   );
 };
 export default ProductionOrderStatus;

@@ -151,7 +151,8 @@ class ProductionController extends Controller
         $production->update($attributes);
 
         // redirect
-        return to_route('productions.show', ['production' => $production->id]);
+        return back('productions.show', ['production' => $production->id])
+            ->with('message', "Production Updated");
     }
 
 
@@ -175,5 +176,16 @@ class ProductionController extends Controller
             'packings' => Packing::all()->toArray(),
 
         ]);
+    }
+
+
+
+    public function statusUpdate(ProductionOrderStatus $productionOrderStatus)
+    {
+        // TODO Validation
+        $attributes = array_merge($productionOrderStatus->toArray(), request()->toArray());
+        $productionOrderStatus->update($attributes);
+
+        return back()->with('message', 'status updated');
     }
 }

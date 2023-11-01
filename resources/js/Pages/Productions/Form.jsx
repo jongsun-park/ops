@@ -1,10 +1,13 @@
-import Header from "@/Layouts/Header";
-import { Head, useForm } from "@inertiajs/react";
-import { TextInput, PrimaryButton, Button } from "@/Components/Inputs";
-import SelectInput from "@/Components/SelectInput";
-import FormHeader from "@/Components/FormHeader";
 import FormContainer from "@/Components/FormContainer";
+import FormHeader from "@/Components/FormHeader";
+import { TextInput } from "@/Components/Inputs";
+import SelectInput from "@/Components/SelectInput";
+import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
+import { Head, useForm } from "@inertiajs/react";
+
+/* This Page will be Deprecated */
+/* Show page will do Edit Production */
 
 const Form = ({
   auth,
