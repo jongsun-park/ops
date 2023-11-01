@@ -6,8 +6,10 @@ namespace App\Providers;
 
 use App\Models\Product;
 use App\Models\Production;
+use App\Models\ProductionOrderStatus;
 use App\Models\User;
 use App\Models\Yarn;
+use App\Policies\ProductionOrderStatusPolicy;
 use App\Policies\ProductionPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\UserPolicy;
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         Production::class => ProductionPolicy::class,
         Product::class => ProductPolicy::class,
         Yarn::class => YarnPolicy::class,
+        ProductionOrderStatus::class => ProductionOrderStatusPolicy::class,
     ];
 
     /**

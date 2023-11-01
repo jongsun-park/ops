@@ -21,6 +21,7 @@ use App\Models\Label;
 use App\Models\Loom;
 use App\Models\Material;
 use App\Models\Packing;
+use App\Models\ProductionOrderStatus;
 use App\Models\Supplier;
 use App\Models\Unit;
 use App\Models\Urgency;
@@ -53,6 +54,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // production
     Route::resource('productions', ProductionController::class);
+
+    Route::patch('/production_order_status/{id}', function (ProductionOrderStatus $productionOrderStatus) {
+        return $productionOrderStatus;
+    });
 
     // product
     Route::resource('products', ProductController::class);

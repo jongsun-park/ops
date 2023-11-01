@@ -45,7 +45,7 @@ return new class extends Migration
             $table->foreignId('wash_option_id')->constrained();
             $table->foreignId('packing_id')->constrained();
 
-            // $table->foreignId('production_order_status_id')->constrained();
+            $table->foreignId('production_order_status_id')->nullable();
         });
     }
 

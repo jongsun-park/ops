@@ -34,9 +34,12 @@ class DatabaseSeeder extends Seeder
 
         foreach ($productions as $production) {
             // Connect Production with Status
-            ProductionOrderStatus::factory()->create(([
+            $status = ProductionOrderStatus::factory()->create(([
                 'production_id' =>  $production->id
             ]));
+
+            $production->production_order_status_id = $status->id;
+            $production->update();
         }
     }
 }

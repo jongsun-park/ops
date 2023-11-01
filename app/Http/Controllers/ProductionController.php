@@ -6,7 +6,7 @@ use App\Models\Packing;
 use Inertia\Inertia;
 use App\Models\Product;
 use App\Models\Production;
-
+use App\Models\ProductionOrderStatus;
 use App\Models\Urgency;
 use App\Models\WashOption;
 use Illuminate\Http\Request;
@@ -71,6 +71,7 @@ class ProductionController extends Controller
             'urgency' => $production->urgency->name,
             'wash_option' => $production->wash_option->name,
             'packing' => $production->packing->name,
+            'status' => $production->status,
         ];
 
 
@@ -80,6 +81,7 @@ class ProductionController extends Controller
                 'create' => auth()->user()->can('create', Production::class),
                 'update' => auth()->user()->can('update', $production),
                 'delete' => auth()->user()->can('delete', $production),
+                'update_status' => auth()->user()->can('update_status', ProductionOrderStatus::class),
             ]
         ];
 
