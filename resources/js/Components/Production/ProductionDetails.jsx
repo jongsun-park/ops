@@ -3,7 +3,7 @@ import { PrimaryButton } from "../Inputs";
 import TextInput from "../Inputs/Input";
 import Pannel from "../UI/Pannel";
 
-const ProductionDetail = ({ user = false, production = {} }) => {
+const ProductionDetails = ({ user = false, production = {} }) => {
   const canUpdate = user.can.update;
 
   const { data, setData, put, post, processing, errors } = useForm({
@@ -83,4 +83,4 @@ const ProductionDetail = ({ user = false, production = {} }) => {
   );
 };
 
-export default ProductionDetail;
+export default ProductionDetails;

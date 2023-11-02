@@ -1,53 +1,27 @@
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 
+import YarnDetails from "@/Components/Yarn/YarnDetails";
+import { DeleteYarnLink, UpdateYarnLink } from "@/Components/Yarn/YarnLink";
 import Header from "@/Layouts/Header";
-import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { Detail, DetailsList } from "@/Components/DetailsList";
 import Main from "@/Layouts/Main";
 
-const Show = ({ yarn, user }) => {
-  const title = `Yarn - ${yarn?.name}`;
+const Show = ({ yarn, user, options }) => {
+  const title = `Yarn - ${yarn?.sku}`;
 
   return (
     <>
       <Head title={title} />
       <Header>
-        <div className="flex justify-between align-center">
-          <h1 className="flex items-center font-semibold text-3xl text-gray-800 leading-tight">
+        <div className="align-center flex justify-between">
+          <h1 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
-            {user?.can?.update && (
-              <Link
-                href={route("yarns.edit", yarn.id)}
-                className="ml-2"
-                title="Update Yarn"
-              >
-                <PencilSquareIcon className="h-[24px] w-[24px] text-blue-500" />
-              </Link>
-            )}
-            {user?.can?.delete && (
-              <Link
-                href={route("yarns.destroy", yarn.id)}
-                method="delete"
-                as="button"
-                className="ml-2"
-                title="Delete Yarn"
-              >
-                <TrashIcon className="h-[24px] w-[24px] text-red-500" />
-              </Link>
-            )}
+            {user?.can?.update && <UpdateYarnLink id={yarn.id} />}
+            {user?.can?.delete && <DeleteYarnLink id={yarn.id} />}
           </h1>
         </div>
       </Header>
       <Main>
-        <DetailsList>
-          <Detail dt="Name" dd={yarn.name} />
-          <Detail dt="SKU" dd={yarn.sku} />
-          <Detail dt="Supplier" dd={yarn.supplier} />
-          <Detail dt="Color" dd={yarn.color} />
-          <Detail dt="Material" dd={yarn.material} />
-          <Detail dt="Written By" dd={user.name} />
-          <Detail dt="Created at" dd={yarn.created_at} />
-        </DetailsList>
+        <YarnDetails user={user} yarn={yarn} options={options} />
       </Main>
     </>
   );

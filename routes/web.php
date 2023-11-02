@@ -81,19 +81,19 @@ Route::get("/search", function () {
 
 Route::prefix('options')->middleware('auth')->group(function () {
     $options = [
-        'colors' => Color::all()->toArray(),
-        'corners' => Corner::all()->toArray(),
-        'grades' => Grade::all()->toArray(),
-        'hem_sizes' => HemSize::all()->toArray(),
-        'hem_types' => HemType::all()->toArray(),
-        'labels' => Label::all()->toArray(),
-        'looms' => Loom::all()->toArray(),
-        'materials' => Material::all()->toArray(),
-        'packings' => Packing::all()->toArray(),
-        'suppliers' => Supplier::all()->toArray(),
-        'units' => Unit::all()->toArray(),
-        'urgencies' => Urgency::all()->toArray(),
-        'wash_options' => WashOption::all()->toArray(),
+        // 'colors' => Color::all()->toArray(),
+        // 'corners' => Corner::all()->toArray(),
+        // 'grades' => Grade::all()->toArray(),
+        // 'hem_sizes' => HemSize::all()->toArray(),
+        // 'hem_types' => HemType::all()->toArray(),
+        // 'labels' => Label::all()->toArray(),
+        // 'looms' => Loom::all()->toArray(),
+        // 'materials' => Material::all()->toArray(),
+        // 'packings' => Packing::all()->toArray(),
+        // 'suppliers' => Supplier::all()->toArray(),
+        // 'units' => Unit::all()->toArray(),
+        // 'urgencies' => Urgency::all()->toArray(),
+        // 'wash_options' => WashOption::all()->toArray(),
     ];
 
     $classMap = [

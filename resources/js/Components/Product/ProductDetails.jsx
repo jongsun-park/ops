@@ -3,6 +3,10 @@ import { PrimaryButton } from "../Inputs";
 import Input from "../Inputs/Input";
 import Pannel from "../UI/Pannel";
 
+/*
+    TODO: SKU Generator
+*/
+
 const ProductDetails = ({ product, user, options }) => {
   const canUpdate = user.can.update;
 

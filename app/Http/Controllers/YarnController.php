@@ -55,9 +55,9 @@ class YarnController extends Controller
     public function create()
     {
         return Inertia::render('Yarns/Form', [
-            'colors' => Color::all()->toArray(),
-            'grades' => Grade::all()->toArray(),
-            'suppliers' => Supplier::all()->toArray(),
+            // 'colors' => Color::all()->toArray(),
+            // 'grades' => Grade::all()->toArray(),
+            // 'suppliers' => Supplier::all()->toArray(),
             'materials' => Material::all()->toArray(),
         ]);
     }
@@ -86,14 +86,13 @@ class YarnController extends Controller
     {
         $yarn_data = [
             'id' => $yarn->id,
-            'name' => $yarn->name,
+            // 'created_at' => date_format($yarn->created_at, 'Y-m-d'),  // ->diffForHumans(),
+            'colour' => $yarn->colour,
             'sku' => $yarn->sku,
-            'created_at' => $yarn->created_at->diffForHumans(),
-            'user_name' => $yarn->user->name,
-            'grade' => $yarn->grade->name,
-            'color' => $yarn->color->name,
-            'material' => $yarn->material->name,
-            'supplier' => $yarn->supplier->name,
+            'material_id' => $yarn->material->id,
+            'number' => $yarn->number,
+            'core' => $yarn->core,
+            'nm' => $yarn->nm,
         ];
 
         $user_date = [
@@ -108,39 +107,42 @@ class YarnController extends Controller
 
         return Inertia::render('Yarns/Show', [
             'yarn' => $yarn_data,
-            'user' => $user_date
+            'user' => $user_date,
+            'options' => [
+                'materials' => Material::all()->toArray()
+            ]
         ]);
     }
 
     public function edit(Yarn $yarn)
     {
+        return to_route('yarns.show', $yarn->id);
 
-        return Inertia::render('Yarns/Form', [
-            'yarn' => $yarn,
-            'colors' => Color::all()->toArray(),
-            'grades' => Grade::all()->toArray(),
-            'suppliers' => Supplier::all()->toArray(),
-            'materials' => Material::all()->toArray(),
-        ]);
+        // return Inertia::render('Yarns/Form', [
+        //     'yarn' => $yarn,
+        //     'colors' => Color::all()->toArray(),
+        //     'grades' => Grade::all()->toArray(),
+        //     'suppliers' => Supplier::all()->toArray(),
+        //     'materials' => Material::all()->toArray(),
+        // ]);
     }
 
     public function update(Request $request, Yarn $yarn)
     {
         $attributes = $request->validate([
-            'user_id' => 'required',
-            'name' => 'required|max:255',
             'sku' => 'required',
-            'color_id' => '',
-            'grade_id' => '',
+            'colour' => '',
             'material_id' => '',
-            'supplier_id' => '',
+            'number' => '',
+            'core' => '',
+            'nm' => '',
         ]);
 
         // update yarn
         $yarn->update($attributes);
 
         // redirect
-        return to_route('yarns.show',  ['yarn' => $yarn->id]);
+        return back()->with('message', "Yarn Updated");
     }
 
     public function destroy(Yarn $yarn)

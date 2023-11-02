@@ -1,5 +1,5 @@
 import MakingUpOrder from "@/Components/Production/MakingUpOrder";
-import ProductionDetail from "@/Components/Production/ProductionDetail";
+import ProductionDetails from "@/Components/Production/ProductionDetails";
 import {
   DeleteProductionOrder,
   UpdateProductionOrder,
@@ -60,7 +60,7 @@ const Show = ({ production, user }) => {
           status={status}
         />
 
-        <ProductionDetail user={user} production={production} />
+        <ProductionDetails user={user} production={production} />
       </Main>
     </>
   );
