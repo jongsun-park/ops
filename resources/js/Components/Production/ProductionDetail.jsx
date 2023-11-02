@@ -1,6 +1,6 @@
 import { useForm } from "@inertiajs/react";
 import { PrimaryButton } from "../Inputs";
-import TextInput from "../Inputs/TextInput";
+import TextInput from "../Inputs/Input";
 import Pannel from "../UI/Pannel";
 
 const ProductionDetail = ({ user = false, production = {} }) => {

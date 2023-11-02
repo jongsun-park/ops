@@ -1,12 +1,10 @@
 import { useForm } from "@inertiajs/react";
 import { PrimaryButton } from "../Inputs";
-import TextInput from "../Inputs/TextInput";
+import Input from "../Inputs/Input";
 import Pannel from "../UI/Pannel";
 
-const ProductDetails = ({ product, user }) => {
+const ProductDetails = ({ product, user, options }) => {
   const canUpdate = user.can.update;
-
-  console.log(product.colour);
 
   const { data, setData, put, post, processing, errors } = useForm({
     created_at: product.created_at,
@@ -50,41 +48,84 @@ const ProductDetails = ({ product, user }) => {
     </PrimaryButton>
   );
 
-  // TODO - FK Table -> Selector
-
   const inputs = {
     Product: [
-      { id: "name", label: "name" },
-      { id: "sku", label: "sku" },
-      { id: "description", label: "description" },
-      { id: "tf_number", label: "tf_number" },
+      { id: "name", label: "Name" },
+      { id: "sku", label: "SKU" },
+      { id: "description", label: "Description" },
+      { id: "tf_number", label: "TF Number" },
     ],
     Colour: [{ id: "colour", label: "Colour", type: "color" }],
     Loom: [
-      { id: "loom_id", label: "loom_id" },
-      { id: "divs", label: "divs" },
-      { id: "ppcm", label: "ppcm" },
-      { id: "pprepeat", label: "pprepeat" },
+      {
+        id: "loom_id",
+        label: "Select Loom",
+        type: "select",
+        options: options.looms,
+      },
+      { id: "divs", label: "Divisors" },
+      { id: "ppcm", label: "PPCM" },
+      { id: "pprepeat", label: "PPRepeat" },
     ],
     Yarns: [
-      { id: "yarn1_id", label: "yarn1" },
-      { id: "yarn2_id", label: "yarn2" },
-      { id: "yarn3_id", label: "yarn3" },
-      { id: "yarn4_id", label: "yarn4" },
+      {
+        id: "yarn1_id",
+        label: "WEFT 1",
+        type: "select",
+        options: options.yarns,
+      },
+      {
+        id: "yarn2_id",
+        label: "WEFT 2",
+        type: "select",
+        options: options.yarns,
+      },
+      {
+        id: "yarn3_id",
+        label: "WEFT 3",
+        type: "select",
+        options: options.yarns,
+      },
+      {
+        id: "yarn4_id",
+        label: "WEFT 4",
+        type: "select",
+        options: options.yarns,
+      },
     ],
     Cut: [
-      { id: "cut_width", label: "cut_width" },
-      { id: "cut_length", label: "cut_length" },
+      { id: "cut_width", label: "Cut Width" },
+      { id: "cut_length", label: "Cut Length" },
     ],
     Finish: [
-      { id: "finish_width", label: "finish_width" },
-      { id: "finish_length", label: "finish_length" },
+      { id: "finish_width", label: "Finish Width" },
+      { id: "finish_length", label: "Finish Length" },
     ],
     Hem: [
-      { id: "hem_size_id", label: "hem_size" },
-      { id: "hem_type_id", label: "hem_type" },
-      { id: "label_id", label: "label" },
-      { id: "corner_id", label: "corner" },
+      {
+        id: "hem_size_id",
+        label: "Select Hem Size",
+        type: "select",
+        options: options.hem_sizes,
+      },
+      {
+        id: "hem_type_id",
+        label: "Select Hem Type",
+        type: "select",
+        options: options.hem_types,
+      },
+      {
+        id: "label_id",
+        label: "Select Label",
+        type: "select",
+        options: options.labels,
+      },
+      {
+        id: "corner_id",
+        label: "Select Corner",
+        type: "select",
+        options: options.corners,
+      },
     ],
   };
 
@@ -103,18 +144,21 @@ const ProductDetails = ({ product, user }) => {
                 {gruopTitle}
               </h2>
               <div className="grid grid-cols-2 gap-3">
-                {groupInputs.map(({ id, label, type = "text" }) => (
-                  <TextInput
-                    editable={canUpdate}
-                    key={id}
-                    id={id}
-                    label={label}
-                    value={data[id]}
-                    setData={setData}
-                    error={errors[id]}
-                    type={type}
-                  />
-                ))}
+                {groupInputs.map(
+                  ({ id, label, type = "text", options = [] }) => (
+                    <Input
+                      editable={canUpdate}
+                      key={id}
+                      id={id}
+                      label={label}
+                      value={data[id]}
+                      setData={setData}
+                      error={errors[id]}
+                      type={type}
+                      options={options}
+                    />
+                  ),
+                )}
               </div>
             </div>
           );

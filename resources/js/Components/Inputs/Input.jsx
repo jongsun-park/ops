@@ -1,4 +1,6 @@
-const TextInput = ({
+import SelectInput from "./SelectInput";
+
+const Input = ({
   editable,
   placeholder,
   label,
@@ -7,10 +9,25 @@ const TextInput = ({
   type = "text",
   setData,
   error,
+  options,
 }) => {
   const onChange = (e) => {
+    if (!editable) return;
     setData(e.target.name, e.target.value);
   };
+
+  if (type === "select") {
+    return (
+      <SelectInput
+        editable={editable}
+        label={label}
+        selected={value}
+        error={error}
+        onChange={(value) => setData(id, value)}
+        options={options}
+      />
+    );
+  }
 
   return (
     <div>
@@ -46,4 +63,4 @@ const TextInput = ({
   );
 };
 
-export default TextInput;
+export default Input;

@@ -148,7 +148,17 @@ class ProductController extends Controller
 
         return Inertia::render('Products/Show', [
             'product' => $product_data,
-            'user' => $user_date
+            'user' => $user_date,
+            'options' => [
+                'yarns' => Yarn::select('id', 'name')->orderBy('name')->get(),
+                'units' => Unit::all()->toArray(),
+                'looms' => Loom::all()->toArray(),
+                'labels' => Label::all()->toArray(),
+                'hem_types' => HemType::all()->toArray(),
+                'hem_sizes' => HemSize::all()->toArray(),
+                'corners' => Corner::all()->toArray(),
+            ]
+
         ]);
     }
 
@@ -157,17 +167,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-
-        return Inertia::render('Products/Form', [
-            'product' => $product,
-            'yarns' => Yarn::select('id', 'name')->orderBy('name')->get(),
-            'units' => Unit::all()->toArray(),
-            'looms' => Loom::all()->toArray(),
-            'labels' => Label::all()->toArray(),
-            'hem_types' => HemType::all()->toArray(),
-            'hem_sizes' => HemSize::all()->toArray(),
-            'corners' => Corner::all()->toArray(),
-        ]);
+        return to_route('products.show', $product->id);
     }
 
     /**
@@ -176,21 +176,35 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $attributes = $request->validate([
-            'user_id' => 'required',
-            'name' => 'required|max:255',
-            'sku' => 'required',
-            'description' => '',
-            'yarn1_id' => '',
-            'yarn2_id' => '',
-            'yarn3_id' => '',
-            'yarn4_id' => '',
+            "created_at" => '',
+            "cut_length" => '',
+            "cut_width" => '',
+            "description" => '',
+            "divs" => '',
+            "finish_length" => '',
+            "finish_width" => '',
+            "colour" => '',
+            "name" =>  'required|max:255',
+            "ppcm" => '',
+            "pprepeat" => '',
+            "sku" =>  'required|max:255',
+            "tf_number" => '',
+            "corner_id" => '',
+            "hem_size_id" => '',
+            "hem_type_id" => '',
+            "label_id" => '',
+            "loom_id" => '',
+            "yarn1_id" => '',
+            "yarn2_id" => '',
+            "yarn3_id" => '',
+            "yarn4_id" => '',
         ]);
 
         // update product
         $product->update($attributes);
 
         // redirect
-        return to_route('products.index');
+        return back()->with('message', 'Product Updated');
     }
 
     public function destroy(Product $product)
