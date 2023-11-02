@@ -1,11 +1,11 @@
-import MakingUpOrder from "@/Components/Pro/MakingUpOrder";
-import ProductionDetail from "@/Components/Pro/ProductionDetail";
+import MakingUpOrder from "@/Components/Production/MakingUpOrder";
+import ProductionDetail from "@/Components/Production/ProductionDetail";
 import {
   DeleteProductionOrder,
   UpdateProductionOrder,
-} from "@/Components/Pro/ProductionLink";
-import ProductionOrder from "@/Components/Pro/ProductionOrder";
-import ProductionOrderStatus from "@/Components/Pro/ProductionOrderStatus";
+} from "@/Components/Production/ProductionLink";
+import ProductionOrder from "@/Components/Production/ProductionOrder";
+import ProductionOrderStatus from "@/Components/Production/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";

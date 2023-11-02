@@ -54,6 +54,9 @@ class ProductFactory extends Factory
             'sku' => 'sku-' . fake()->uuid(),
             'name' => fake()->words(3, true),
             'description' => fake()->words(10, true),
+            'colour' => fake()->hexColor(),
+
+
             'yarn1_id' => $yarn_odd_id,
             'yarn2_id' => $yarn_even_id,
             'yarn3_id' => $yarn_odd_id,
@@ -74,6 +77,8 @@ class ProductFactory extends Factory
             'hem_type_id' => HemType::all()->random(1)->first()->id,
             'hem_size_id' => HemSize::all()->random(1)->first()->id,
             'corner_id' => Corner::all()->random(1)->first()->id,
+
+
         ];
     }
 }

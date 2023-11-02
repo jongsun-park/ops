@@ -46,24 +46,25 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+
             $table->foreignId('yarn1_id')->constrained('yarns');
             $table->foreignId('yarn2_id')->constrained('yarns');
             $table->foreignId('yarn3_id')->constrained('yarns');
             $table->foreignId('yarn4_id')->constrained('yarns');
 
-
             $table->string('name')->unique();
             $table->string('sku')->unique();
-            $table->string('description');
+            $table->string('description')->nullable();
+            $table->string('colour')->nullable();
 
-            $table->string('tf_number');
-            $table->string('divs');
-            $table->string('ppcm');
-            $table->string('pprepeat');
-            $table->string('cut_width');
-            $table->string('cut_length');
-            $table->string('finish_width');
-            $table->string('finish_length');
+            $table->string('tf_number')->nullable();
+            $table->string('divs')->nullable();
+            $table->string('ppcm')->nullable();
+            $table->string('pprepeat')->nullable();
+            $table->string('cut_width')->nullable();
+            $table->string('cut_length')->nullable();
+            $table->string('finish_width')->nullable();
+            $table->string('finish_length')->nullable();
 
             $table->foreignId('unit_id')->constrained()->noActionOnDelete();
             $table->foreignId('loom_id')->constrained()->noActionOnDelete();
