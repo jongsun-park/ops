@@ -14,7 +14,7 @@ const YarnDetails = ({ yarn, user, options }) => {
 
     sku: yarn.sku,
     number: yarn.number,
-    core: yarn.core,
+    core: yarn.core ?? 0,
     nm: yarn.nm,
   });
 
@@ -30,7 +30,7 @@ const YarnDetails = ({ yarn, user, options }) => {
     if (data.core == 0 || data.core == 1) {
       newSku = selectedMaterialCode + data.number + data.nm;
     } else {
-      newSku = selectedMaterialCode + data.number + data.core + data.nm;
+      newSku = selectedMaterialCode + data.number + data.core + "/" + data.nm;
     }
 
     setData("sku", newSku);

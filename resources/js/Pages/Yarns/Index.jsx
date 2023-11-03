@@ -31,22 +31,11 @@ const Yarn = ({ yarns = [], filters, can = {} }) => {
       <Main>
         <div className="space-y-2">
           {yarns.data.map(
-            ({
-              id,
-              name,
-              sku,
-              supplier,
-              user_name,
-              created_at,
-              color,
-              material,
-            }) => (
+            ({ id, sku, user_name, created_at, colour, material }) => (
               <Link href={route("yarns.show", id)} key={id} className="block">
                 <DetailsList>
-                  <Detail dt="Name" dd={name} />
                   <Detail dt="SKU" dd={sku} />
-                  <Detail dt="Supplier" dd={supplier} />
-                  <Detail dt="Color" dd={color} />
+                  <Detail dt="Color" dd={colour} />
                   <Detail dt="Material" dd={material} />
                   <Detail dt="Written By" dd={user_name} />
                   <Detail dt="Created at" dd={created_at} />

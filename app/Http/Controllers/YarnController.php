@@ -35,10 +35,8 @@ class YarnController extends Controller
                 'sku' => $yarn->sku,
                 'created_at' => $yarn->created_at->diffForHumans(),
                 'user_name' => $yarn->user->name,
-                'grade' => $yarn->grade->name,
-                'color' => $yarn->color->name,
+                'colour' => $yarn->colour,
                 'material' => $yarn->material->name,
-                'supplier' => $yarn->supplier->name,
             ]);
 
         $filters = request()->only(['search']);
@@ -117,14 +115,6 @@ class YarnController extends Controller
     public function edit(Yarn $yarn)
     {
         return to_route('yarns.show', $yarn->id);
-
-        // return Inertia::render('Yarns/Form', [
-        //     'yarn' => $yarn,
-        //     'colors' => Color::all()->toArray(),
-        //     'grades' => Grade::all()->toArray(),
-        //     'suppliers' => Supplier::all()->toArray(),
-        //     'materials' => Material::all()->toArray(),
-        // ]);
     }
 
     public function update(Request $request, Yarn $yarn)

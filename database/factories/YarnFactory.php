@@ -60,7 +60,12 @@ class YarnFactory extends Factory
         $core = fake()->numberBetween(1, 10);
         $nm = fake()->numberBetween(0, 10);
 
-        $sku = $material->code . $number . $core . $nm;
+        $sku = "";
+        if ($core == "0" or $core == "1") {
+            $sku = $material->code . $number .  $nm;
+        } else {
+            $sku = $material->code . $number . $core . "/" . $nm;
+        }
 
         return [
             'user_id' => $user_id,
