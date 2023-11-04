@@ -17,12 +17,15 @@ export default function Authenticated({ user, header, children, className }) {
     { url: "yarns.index", name: "Yarns" },
   ];
 
-  const adminRoutes = [
-    { url: "options.index", name: "Options" },
-    { url: "users.index", name: "Users" },
-  ];
+  const adminRoutes = [{ url: "users.index", name: "Users" }];
 
   const isAdmin = usePage().props.auth.user.isAdmin || false;
+
+  const optionsRoutes = [
+    { url: "looms", name: "Looms" },
+    { url: "wash_options", name: "Wash Options" },
+    { url: "materials", name: "Materials" },
+  ];
 
   return (
     <div className={`min-h-screen bg-gray-100 ${className}`}>
@@ -58,6 +61,24 @@ export default function Authenticated({ user, header, children, className }) {
                       {name}
                     </NavLink>
                   ))}
+
+                {isAdmin && (
+                  <Dropdown>
+                    <Dropdown.Trigger className="flex h-full ">
+                      <button className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out hover:border-gray-300 hover:text-gray-700 focus:border-gray-300 focus:text-gray-700 focus:outline-none">
+                        Options
+                      </button>
+                    </Dropdown.Trigger>
+
+                    <Dropdown.Content>
+                      {optionsRoutes.map(({ url, name }) => (
+                        <Dropdown.Link key={url} href={`/${url}`}>
+                          {name}
+                        </Dropdown.Link>
+                      ))}
+                    </Dropdown.Content>
+                  </Dropdown>
+                )}
               </div>
             </div>
 

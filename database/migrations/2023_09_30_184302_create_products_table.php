@@ -19,7 +19,13 @@ return new class extends Migration
 
         Schema::create('looms', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
+
+            $table->foreignId('yarn_id')->nullable();
             $table->string('name');
+            $table->string('density')->nullable();
+            $table->string('make')->nullable();
+            $table->string('speed')->nullable();
         });
 
         Schema::create('labels', function (Blueprint $table) {

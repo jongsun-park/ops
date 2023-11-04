@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LoomController;
+use App\Http\Controllers\MaterialController;
 use App\Models\User;
 use App\Models\Yarn;
 use Inertia\Inertia;
@@ -12,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WashOptionController;
 use App\Models\Color;
 use App\Models\Corner;
 use App\Models\Grade;
@@ -69,111 +72,25 @@ Route::middleware('admin')->group(function () {
     // user
     Route::get("/users", [UserController::class, 'index'])->name('users.index');
 
-
     Route::get("/users/{user}/edit", [UserController::class, 'edit'])->name('users.edit');
     Route::put("/users/{user}", [UserController::class, 'update'])->name('users.update');
     Route::delete("/users/{user}", [UserController::class, 'destroy'])->name('users.destroy');
+});
+
+
+Route::middleware('admin')->group(function () {
+    // options
+    Route::resources([
+        'looms' => LoomController::class,
+        'wash_options' => WashOptionController::class,
+        'materials' => MaterialController::class,
+    ]);
 });
 
 Route::get("/search", function () {
     return "SEARCH PAGE - LATER";
 });
 
-Route::prefix('options')->middleware('auth')->group(function () {
-    $options = [
-        // 'colors' => Color::all()->toArray(),
-        // 'corners' => Corner::all()->toArray(),
-        // 'grades' => Grade::all()->toArray(),
-        // 'hem_sizes' => HemSize::all()->toArray(),
-        // 'hem_types' => HemType::all()->toArray(),
-        // 'labels' => Label::all()->toArray(),
-        // 'looms' => Loom::all()->toArray(),
-        // 'materials' => Material::all()->toArray(),
-        // 'packings' => Packing::all()->toArray(),
-        // 'suppliers' => Supplier::all()->toArray(),
-        // 'units' => Unit::all()->toArray(),
-        // 'urgencies' => Urgency::all()->toArray(),
-        // 'wash_options' => WashOption::all()->toArray(),
-    ];
-
-    $classMap = [
-        'colors' => Color::class,
-        'corners' => Corner::class,
-        'grades' => Grade::class,
-        'hem_sizes' => HemSize::class,
-        'hem_types' => HemType::class,
-        'labels' => Label::class,
-        'looms' => Loom::class,
-        'materials' => Material::class,
-        'packings' => Packing::class,
-        'suppliers' => Supplier::class,
-        'units' => Unit::class,
-        'urgencies' => Urgency::class,
-        'wash_options' => WashOption::class,
-    ];
-
-    Route::get('/', function () use ($options, $classMap) {
-        return Inertia::render('Options/Index', [
-            'options_keys' => array_keys($options),
-            'options' => Color::all()->toArray(), // default
-            'tableName' => 'colors' // default
-        ]);
-    })->name('options.index');
-
-    Route::get('/{tableName}', function ($tableName) use ($options) {
-
-        // case - invalid options
-        if (!isset($options[$tableName])) return redirect('/');
-
-        return Inertia::render('Options/Index', [
-            'options_keys' => array_keys($options),
-            'options' =>  $options[$tableName],
-            'tableName' => $tableName
-        ]);
-    });
-
-    Route::post('/{tableName}', function (Request $request, $tableName) use ($options, $classMap) {
-
-        // case - invalid options
-        if (!isset($options[$tableName])) {
-            return back()->with('error', 'Fail to add new option');
-        }
-
-        $attributes = $request->validate(
-            ['name' => "required|unique:{$tableName},name"]
-        );
-
-        $classMap[$tableName]::create($attributes);
-
-        return back()->with('success', 'Success to create');
-    });
-
-    Route::post('/{tableName}/{id}/edit', function (Request $request, $tableName, $id) use ($options, $classMap) {
-
-        // case - invalid options
-        if (!isset($options[$tableName])) {
-            return back()->with('error', 'Fail to update option');
-        }
-
-        $attributes = $request->validate(
-            ['name' => 'required']
-        );
-
-        $classMap[$tableName]::find($id)->update($attributes);
-
-        return back()->with('success', 'Success to create');
-    });
-
-    Route::delete('/{tableName}/{id}', function ($tableName, $id) use ($options, $classMap) {
-
-        // case - invalid options
-        if (!isset($options[$tableName])) return redirect('/options');
-
-        $classMap[$tableName]::find($id)->delete();
-
-        return back()->with('success', 'Success to delete');
-    });
-});
 
 
 require __DIR__ . '/auth.php';

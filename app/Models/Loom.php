@@ -2,16 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Yarn;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Loom extends Model
 {
     use HasFactory;
 
-    public $timestamps = false;
+    protected $guarded = [];
 
-    protected $fillable = [
-        'name'
-    ];
+    public function yarn()
+    {
+        return $this->belongsTo(Yarn::class);
+    }
 }

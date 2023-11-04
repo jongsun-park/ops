@@ -18,8 +18,6 @@ const YarnDetails = ({ yarn, user, options }) => {
     nm: yarn.nm,
   });
 
-  console.log(errors);
-
   useEffect(() => {
     const selectedMaterialCode = options.materials.filter(
       ({ id }) => id === data.material_id,
