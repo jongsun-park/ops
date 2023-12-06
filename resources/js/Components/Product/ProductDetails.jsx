@@ -10,6 +10,10 @@ import Pannel from "../UI/Pannel";
 const ProductDetails = ({ product, user, options }) => {
   const canUpdate = user.can.update;
 
+  // add name prop in each yarn 1
+
+  const yarns = options.yarns.map((yarn) => ({ ...yarn, name: yarn.sku }));
+
   const { data, setData, put, post, processing, errors } = useForm({
     created_at: product.created_at,
     cut_length: product.cut_length,
@@ -76,25 +80,25 @@ const ProductDetails = ({ product, user, options }) => {
         id: "yarn1_id",
         label: "WEFT 1",
         type: "select",
-        options: options.yarns,
+        options: yarns,
       },
       {
         id: "yarn2_id",
         label: "WEFT 2",
         type: "select",
-        options: options.yarns,
+        options: yarns,
       },
       {
         id: "yarn3_id",
         label: "WEFT 3",
         type: "select",
-        options: options.yarns,
+        options: yarns,
       },
       {
         id: "yarn4_id",
         label: "WEFT 4",
         type: "select",
-        options: options.yarns,
+        options: yarns,
       },
     ],
     Cut: [

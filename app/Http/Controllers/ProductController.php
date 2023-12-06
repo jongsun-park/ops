@@ -150,7 +150,7 @@ class ProductController extends Controller
             'product' => $product_data,
             'user' => $user_date,
             'options' => [
-                'yarns' => Yarn::select('id', 'name')->orderBy('name')->get(),
+                'yarns' => Yarn::select('id', 'sku')->orderBy('sku')->get(),
                 'units' => Unit::all()->toArray(),
                 'looms' => Loom::all()->toArray(),
                 'labels' => Label::all()->toArray(),
