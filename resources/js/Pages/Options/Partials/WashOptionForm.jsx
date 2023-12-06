@@ -5,20 +5,20 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { useForm } from "@inertiajs/react";
 
 const InputGroupContainer = ({ title, children }) => (
-  <section className=" rounded bg-white p-5">
+  <section className="rounded bg-white p-5">
     {title ?? <h2 className="font-bold text-blue-500">{title}</h2>}
     <div className="mt-3 space-y-2 md:columns-2">{children}</div>
   </section>
 );
 
-const WashOptionForm = ({ selected = {}, className }) => {
+const WashOptionForm = ({ selected = {}, className, setIsCreateOption }) => {
   const optionTitle = "Wash Option";
   const entry = "wash_options";
 
   const { id, name } = selected;
 
   const init = {
-    machine_name: selected.name ?? selected.machine_name ?? "",
+    machine_name: selected.machine_name ?? "",
     machine_program: selected.machine_program ?? "",
     dryer_name: selected.dryer_name ?? "",
     dryer_program: selected.dryer_program ?? "",
@@ -92,13 +92,16 @@ const WashOptionForm = ({ selected = {}, className }) => {
         })
       : post(`/${entry}`, {
           preserveScroll: true,
-          onSuccess: () => setData(resetInit),
+          onSuccess: () => {
+            setData(resetInit);
+            setIsCreateOption(false);
+          },
         });
   };
 
   const onDelete = (e) => {
     e.preventDefault();
-    destroy(`/${entry}/${id}`, { preserveScroll: true });
+    destroy(`/${entry}/${id}`);
   };
 
   const button = id ? (
@@ -126,7 +129,7 @@ const WashOptionForm = ({ selected = {}, className }) => {
       <InputGroupContainer title="Washing Machine Options">
         {generateInputs(machine_inputs)}
       </InputGroupContainer>
-      <InputGroupContainer title="Washing Machine Options">
+      <InputGroupContainer title="Dryper Options">
         {generateInputs(dryer_inputs)}
       </InputGroupContainer>
       <InputGroupContainer title="Rest Options">
