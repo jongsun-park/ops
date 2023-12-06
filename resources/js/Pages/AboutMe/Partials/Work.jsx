@@ -90,7 +90,7 @@ const Work = () => {
               </p>
 
               <Button className="mt-10">
-                <a href="mailto:jongsun-dev@gmail.com">Ping me via email</a>
+                <a href="mailto:jongsun.coder@gmail.com">Ping me via email</a>
               </Button>
             </div>
 

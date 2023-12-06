@@ -18,7 +18,15 @@ return new class extends Migration
 
         Schema::create('wash_options', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('machine_name')->nullable();
+            $table->string('machine_program')->nullable();
+            $table->string('dryer_name')->nullable();
+            $table->string('dryer_program')->nullable();
+            $table->string('detergent_type')->nullable();
+            $table->string('detergent_amount')->nullable();
+            $table->string('oba')->nullable();
+            $table->string('softener')->nullable();
+            $table->string('other')->nullable();
         });
 
         Schema::create('packings', function (Blueprint $table) {

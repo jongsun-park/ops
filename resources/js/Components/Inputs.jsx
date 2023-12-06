@@ -47,7 +47,7 @@ export const PrimaryButton = ({
 }) => (
   <button
     type={type}
-    className={`group relative inline-flex items-center overflow-hidden rounded bg-blue-600 px-8 py-3 text-white focus:outline-none focus:ring active:bg-blue-500 ${className}`}
+    className={`group relative inline-flex items-center overflow-hidden rounded border-2 border-blue-500 bg-blue-400 px-8 py-3 text-white hover:bg-blue-500 focus:outline-none focus:ring active:bg-blue-500 ${className}`}
     disabled={disabled}
     onClick={onClick}
   >
@@ -82,7 +82,7 @@ export const Button = ({
 }) => (
   <button
     type={type}
-    className={`group relative inline-flex items-center overflow-hidden rounded border border-current px-8 py-3 text-indigo-600 focus:outline-none focus:ring active:text-indigo-500 ${className}`}
+    className={`group relative inline-flex items-center overflow-hidden rounded border-2 border-current px-6 py-3 font-bold text-blue-600 focus:outline-none focus:ring active:text-blue-500 ${className}`}
     disabled={disabled}
     onClick={onClick}
   >
@@ -105,5 +105,16 @@ export const Button = ({
     <span className="text-sm font-medium transition-all group-hover:me-4">
       {children}
     </span>
+  </button>
+);
+
+export const ToggleButton = (props) => (
+  <button
+    onClick={props.onClick}
+    className={`mb-2 mr-2  rounded border-2 border-blue-500 p-2 font-bold text-blue-500 hover:bg-blue-500 hover:text-white ${
+      props.active ? "bg-blue-400 text-white" : ""
+    }`}
+  >
+    {props.children}
   </button>
 );

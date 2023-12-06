@@ -10,6 +10,7 @@ const Input = ({
   setData,
   error,
   options,
+  className,
 }) => {
   const onChange = (e) => {
     if (!editable) return;
@@ -30,7 +31,7 @@ const Input = ({
   }
 
   return (
-    <div>
+    <div className={className}>
       <label
         // htmlFor={id ?? label}
         className={`relative block overflow-hidden rounded-md  px-3 pt-3   ${

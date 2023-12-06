@@ -1,26 +1,26 @@
 import Main from "@/Layouts/Main";
 import { Head } from "@inertiajs/react";
 import { useState } from "react";
-import LoomForm from "./Partials/LoomForm";
 import OptionHeader from "./Partials/OptionHeader";
 import OptionToggles from "./Partials/OptionToggles";
+import WashOptionForm from "./Partials/WashOptionForm";
 
-const Looms = ({ looms, yarns }) => {
-  const options = looms;
-  const optionTitle = "Loom";
+const WashOptions = ({ washOptions }) => {
+  const options = washOptions.map((op) => ({
+    ...op,
+    name: op.machine_name + " - " + op.machine_program,
+  }));
+  const optionTitle = "Wash Option";
 
   const [isCreateOption, setIsCreateOption] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
   const createOptionForm = (
-    <LoomForm
-      yarns={yarns}
-      className="mb-10 bg-white shadow-xl shadow-blue-100"
-    />
+    <WashOptionForm className="mb-10 bg-white shadow-xl shadow-blue-100" />
   );
 
   const updateOptionForm = (
-    <LoomForm key={selectedOption.id} loom={selectedOption} yarns={yarns} />
+    <WashOptionForm key={selectedOption.id} selected={selectedOption} />
   );
 
   return (
@@ -51,4 +51,4 @@ const Looms = ({ looms, yarns }) => {
   );
 };
 
-export default Looms;
+export default WashOptions;

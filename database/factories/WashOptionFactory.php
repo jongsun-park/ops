@@ -17,7 +17,15 @@ class WashOptionFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->words(3, true)
+            'machine_name' => fake()->words(2, true),
+            'machine_program' => fake()->words(3, true),
+            'dryer_name' => fake()->words(1, true),
+            'dryer_program' => fake()->words(2, true),
+            'detergent_type' => fake()->words(1, true),
+            'detergent_amount' => "100 ml",
+            'oba' => fake()->words(1, true),
+            'softener' => "200 ml",
+            'other' => fake()->paragraph(1)
         ];
     }
 }
