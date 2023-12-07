@@ -11,10 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('urgencies', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-        });
 
         Schema::create('wash_options', function (Blueprint $table) {
             $table->id();
@@ -37,19 +33,28 @@ return new class extends Migration
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->date('weave_by'); // date
+            $table->date('started_by')->nullable(); // date
+            $table->date('examined_by')->nullable(); // date
 
             $table->foreignId('product_id')->nullable();
             $table->foreignId('user_id')->constrained();
 
             $table->string('order_id')->nullable();
             $table->string('customer_name')->nullable();
-            $table->string('weave_by')->nullable();
             $table->string('quantity')->nullable();
             $table->string('total_length')->nullable();
             $table->string('number_of_repeats')->nullable();
             $table->string('note')->nullable();
+            $table->string('nc_number')->nullable();
 
-            $table->foreignId('urgency_id')->constrained();
+            $table->string('urgency')->nullable();
+            // It should be calculate and then save
+            // when index is loaded then check unfulfillted production
+            // then update its urgencies
+            // required due date
+
+
             $table->foreignId('wash_option_id')->constrained();
             $table->foreignId('packing_id')->constrained();
 

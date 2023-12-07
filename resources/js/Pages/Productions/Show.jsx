@@ -1,11 +1,6 @@
 import MakingUpOrder from "@/Components/Production/MakingUpOrder";
-import ProductionDetails from "@/Components/Production/ProductionDetails";
-import {
-  DeleteProductionOrder,
-  UpdateProductionOrder,
-} from "@/Components/Production/ProductionLink";
+import { DeleteProductionOrder } from "@/Components/Production/ProductionLink";
 import ProductionOrder from "@/Components/Production/ProductionOrder";
-import ProductionOrderStatus from "@/Components/Production/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
@@ -34,7 +29,7 @@ const Show = ({ production, user }) => {
         <div className="align-center flex justify-between">
           <h2 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
-            {user?.can?.update && <UpdateProductionOrder id={id} />}
+            {/* {user?.can?.update && <UpdateProductionOrder id={id} />} */}
             {user?.can?.delete && <DeleteProductionOrder id={id} />}
           </h2>
         </div>
@@ -45,7 +40,10 @@ const Show = ({ production, user }) => {
             <Swiper
               spaceBetween={50}
               slidesPerView={1}
-              slides={[<ProductionOrder />, <MakingUpOrder />]}
+              slides={[
+                <ProductionOrder production={production} />,
+                <MakingUpOrder />,
+              ]}
             />
             <p className="text-sm font-bold text-blue-500">
               Swipe to change Production Order and Making Up Order
@@ -53,14 +51,14 @@ const Show = ({ production, user }) => {
           </div>
         </section>
 
-        <ProductionOrderStatus
+        {/* <ProductionOrderStatus
           id={status.id}
           can={user.can.update_status}
           user={user_name}
           status={status}
         />
 
-        <ProductionDetails user={user} production={production} />
+        <ProductionDetails user={user} production={production} /> */}
       </Main>
     </>
   );

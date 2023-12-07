@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Packing;
+use App\Models\Yarn;
 use Inertia\Inertia;
+use App\Models\Packing;
 use App\Models\Product;
-use App\Models\Production;
-use App\Models\ProductionOrderStatus;
 use App\Models\Urgency;
+use App\Models\Production;
 use App\Models\WashOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ProductionOrderStatus;
 
 class ProductionController extends Controller
 {
@@ -53,29 +54,68 @@ class ProductionController extends Controller
     public function show(Production $production)
     {
 
+        // $production_data = [
+        //     'id' => $production->id,
+        //     'created_at' => $production->created_at->diffForHumans(),
+        //     'updated_at' => $production->updated_at->diffForHumans(),
+        //     'product_name' => $production->product->name,
+        //     'product_sku' => $production->product->sku,
+        //     'product_description' => $production->product->description,
+
+        //     'written_by' => $production->user->name,
+        //     'order_id' => $production->order_id,
+        //     'customer_name' => $production->customer_name,
+        //     'weave_by' => $production->weave_by,
+        //     'quantity' => $production->quantity,
+        //     'total_length' => $production->total_length,
+        //     'note' => $production->note,
+        //     'urgency' => $production->urgency->name,
+        //     'wash_option' => $production->wash_option->name,
+        //     'packing' => $production->packing->name,
+        //     'status' => $production->status,
+
+        //     'user_id' => $production->user_id,
+        //     'product_id' => $production->product_id,
+        // ];
+
         $production_data = [
             'id' => $production->id,
-            'created_at' => $production->created_at->diffForHumans(),
-            'updated_at' => $production->updated_at->diffForHumans(),
-            'product_name' => $production->product->name,
-            'product_sku' => $production->product->sku,
-            'product_description' => $production->product->description,
+            'note' => $production->note,
+            'order_id_customer_name' => $production->order_id . ' - ' . $production->customer_name,
+            'product' => [
+                'name' => $production->product->name,
+                'sku' => $production->product->sku,
+                'description' => $production->product->description,
+                'tf' => $production->product->tf_number,
+                'divisors' => $production->product->divs,
+                'pprepeat' => $production->product->pprepeat,
 
-            'written_by' => $production->user->name,
-            'order_id' => $production->order_id,
-            'customer_name' => $production->customer_name,
-            'weave_by' => $production->weave_by,
+            ],
+            'yarns' => [
+                'warp' => $production->product->loom->yarn,
+                'werf1' => $production->product->yarn1,
+                'werf2' => $production->product->yarn2,
+                'werf3' => $production->product->yarn3,
+                'werf4' => $production->product->yarn4,
+            ],
+
             'quantity' => $production->quantity,
             'total_length' => $production->total_length,
-            'note' => $production->note,
-            'urgency' => $production->urgency->name,
-            'wash_option' => $production->wash_option->name,
-            'packing' => $production->packing->name,
+
+            'urgency' => '', // TODO: Calculate Urgency
+
+            'date' => [
+                'printed' => $production->created_at->isoFormat('YYYY-MM-DD'),
+                'weave_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
+                'started_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
+                'examined_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
+            ],
+            'wash_options' => $production->washOptions,
             'status' => $production->status,
 
-            'user_id' => $production->user_id,
-            'product_id' => $production->product_id,
+            'nc_number' => $production->nc_number,
         ];
+
 
 
 

@@ -21,11 +21,6 @@ class Production extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function urgency()
-    {
-        return $this->belongsTo(Urgency::class);
-    }
-
     public function wash_option()
     {
         return $this->belongsTo(WashOption::class);

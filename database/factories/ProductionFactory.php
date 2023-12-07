@@ -31,10 +31,6 @@ class ProductionFactory extends Factory
         ])->id;
         $product_id = Product::factory()->create()->id;
 
-        if (!Urgency::first()) {
-            Urgency::factory(5)->create();
-        }
-
         if (!WashOption::first()) {
             WashOption::factory(5)->create();
         }
@@ -43,19 +39,28 @@ class ProductionFactory extends Factory
             Packing::factory(5)->create();
         }
 
+        $fakeDate = fake()->dateTimeBetween('+2 week', '+5 week');
+
         return [
+            // DATE
+            'weave_by' => $fakeDate,
+            // 'started_by' => $fakeDate,
+            // 'examined_by' => $fakeDate,
+
             'user_id' => $user_id,
             'product_id' => $product_id,
 
             'order_id' => fake()->words(1, true),
             'customer_name' => fake()->words(2, true),
-            'weave_by' => fake()->words(1, true),
+
             'quantity' => fake()->words(1, true),
             'total_length' => fake()->words(1, true),
             'number_of_repeats' => fake()->words(1, true),
             'note' => fake()->words(3, true),
+            'nc_number' => fake()->words(1, true),
 
-            'urgency_id' => Urgency::all()->random(1)->first()->id,
+            'urgency' => fake()->words(1, true),
+
             'wash_option_id' => WashOption::all()->random(1)->first()->id,
             'packing_id' => Packing::all()->random(1)->first()->id,
         ];

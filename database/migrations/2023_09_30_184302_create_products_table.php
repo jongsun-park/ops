@@ -61,7 +61,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('sku')->unique();
             $table->string('description')->nullable();
-            $table->string('colour')->nullable();
+            $table->string('colour')->nullable(); // ??
 
             $table->string('tf_number')->nullable();
             $table->string('divs')->nullable();
