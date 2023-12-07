@@ -4,23 +4,12 @@ import ProductionOrder from "@/Components/Production/ProductionOrder";
 import Swiper from "@/Components/UI/Swiper";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
-import { Head, usePage } from "@inertiajs/react";
-
-/**
- *
- * TODO
- * 1. Remove Edit Button - Don't need Edit page as Show page has edit features
- * 2. PRO Template update with variables
- * 3. Yarn Table
- * 4. Product ID / User ID - Make it as Select not Text Input
- */
+import { Head } from "@inertiajs/react";
 
 const Show = ({ production, user }) => {
   const { id, status } = production;
 
   const title = `Production Order Details`;
-
-  const user_name = usePage().props.auth.user.name;
 
   return (
     <>

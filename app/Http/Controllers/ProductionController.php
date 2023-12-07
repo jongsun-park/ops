@@ -88,16 +88,38 @@ class ProductionController extends Controller
                 'description' => $production->product->description,
                 'tf' => $production->product->tf_number,
                 'divisors' => $production->product->divs,
+                'ppcm' =>  $production->product->ppcm,
                 'pprepeat' => $production->product->pprepeat,
 
             ],
             'yarns' => [
-                'warp' => $production->product->loom->yarn,
-                'werf1' => $production->product->yarn1,
-                'werf2' => $production->product->yarn2,
-                'werf3' => $production->product->yarn3,
-                'werf4' => $production->product->yarn4,
+                'warp' => [
+                    'sku' => $production->product->loom->yarn->sku,
+                    'material' => $production->product->loom->yarn->material->name,
+                    'colour' => $production->product->loom->yarn->colour
+                ],
+                'werf1' =>  [
+                    'sku' => $production->product->yarn1->sku,
+                    'material' => $production->product->yarn1->material->name,
+                    'colour' => $production->product->yarn1->colour
+                ],
+                'werf2' =>  [
+                    'sku' => $production->product->yarn2->sku,
+                    'material' => $production->product->yarn2->material->name,
+                    'colour' => $production->product->yarn2->colour
+                ],
+                'werf3' =>  [
+                    'sku' => $production->product->yarn3->sku,
+                    'material' => $production->product->yarn3->material->name,
+                    'colour' => $production->product->yarn3->colour
+                ],
+                'werf4' => [
+                    'sku' => $production->product->yarn4->sku,
+                    'material' => $production->product->yarn4->material->name,
+                    'colour' => $production->product->yarn4->colour
+                ],
             ],
+            'loom' => $production->product->loom->name,
 
             'quantity' => $production->quantity,
             'total_length' => $production->total_length,
@@ -105,10 +127,10 @@ class ProductionController extends Controller
             'urgency' => '', // TODO: Calculate Urgency
 
             'date' => [
-                'printed' => $production->created_at->isoFormat('YYYY-MM-DD'),
-                'weave_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
-                'started_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
-                'examined_by' => $production->weave_by->isoFormat('YYYY-MM-DD'),
+                'printed' => date_format($production->created_at, 'Y-m-d'),
+                'weave_by' => $production->weave_by,
+                'started_by' => $production->started_by,
+                'examined_by' => $production->examined_by,
             ],
             'wash_options' => $production->washOptions,
             'status' => $production->status,

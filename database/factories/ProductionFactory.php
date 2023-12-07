@@ -39,7 +39,7 @@ class ProductionFactory extends Factory
             Packing::factory(5)->create();
         }
 
-        $fakeDate = fake()->dateTimeBetween('+2 week', '+5 week');
+        $fakeDate = date_format(fake()->dateTimeBetween('+2 week', '+5 week'), 'Y-m-d');
 
         return [
             // DATE

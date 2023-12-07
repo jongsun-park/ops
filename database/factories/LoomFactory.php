@@ -23,7 +23,7 @@ class LoomFactory extends Factory
         $yarn_id = Yarn::first() ? Yarn::first()->id : Yarn::factory()->create()->id;
 
         return [
-            'name' => fake()->words(3, true),
+            'name' => fake()->words(1, true),
             'yarn_id' => $yarn_id
         ];
     }
