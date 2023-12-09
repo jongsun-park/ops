@@ -1,6 +1,6 @@
 import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const exampleOptions = [
   { id: 1, name: "Wade Cooper" },
@@ -11,7 +11,12 @@ const exampleOptions = [
   { id: 6, name: "Hellen Schmidt" },
 ];
 
-export default function OpsComboBox({ options = exampleOptions }) {
+export default function OpsComboBox({
+  options = exampleOptions,
+  name,
+  value,
+  setData,
+}) {
   const [selected, setSelected] = useState(options[0]);
   const [query, setQuery] = useState("");
 
@@ -24,6 +29,11 @@ export default function OpsComboBox({ options = exampleOptions }) {
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, "")),
         );
+
+  // update data.[name] value when option has been changed
+  useEffect(() => {
+    setData(name, selected.id);
+  }, [selected]);
 
   return (
     <Combobox value={selected} onChange={setSelected}>
@@ -71,7 +81,7 @@ export default function OpsComboBox({ options = exampleOptions }) {
                       active ? "bg-blue-600 text-white" : "text-gray-900"
                     }`
                   }
-                  value={option.id}
+                  value={option}
                 >
                   {({ selected, active }) => (
                     <>

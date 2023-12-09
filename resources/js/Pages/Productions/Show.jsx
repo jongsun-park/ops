@@ -8,11 +8,7 @@ import { Head } from "@inertiajs/react";
 import Form from "./Partials/Form";
 
 const Show = ({ production, user, looms, products, wash_options }) => {
-  const { id, status } = production;
-
-  const title = `Production Order Details`;
-
-  console.log(looms);
+  const title = production ? "Production Order Details" : "Create Production";
 
   return (
     <>
@@ -51,13 +47,11 @@ const Show = ({ production, user, looms, products, wash_options }) => {
         />
 
         <ProductionOrderStatus
-          id={status.id}
+          id={production.status.id}
           can={user.can.update_status}
           user={user.name}
-          status={status}
+          status={production.status}
         />
-
-        {/* <ProductionDetails user={user} production={production} /> */}
       </Main>
     </>
   );

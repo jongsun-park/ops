@@ -6,10 +6,11 @@ const FormContainer = ({
   processing,
   buttonText,
   children,
+  className,
 }) => (
-  <form onSubmit={onSubmit} className="mx-auto mb-0 mt-8 max-w-md space-y-4">
+  <form onSubmit={onSubmit} className="mx-auto mb-0 mt-8 space-y-4">
     <div className="space-y-12">
-      <div className="pb-12 space-y-4">{children}</div>
+      <div className="space-y-4 pb-12">{children}</div>
     </div>
 
     <div className="mt-6 flex items-center justify-end gap-x-2">

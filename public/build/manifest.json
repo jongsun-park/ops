@@ -108,7 +108,7 @@
     "src": "resources/js/Pages/AboutMe/Partials/svgs/wordpress-color-svgrepo-com.svg"
   },
   "resources/js/app.css": {
-    "file": "assets/app-685fc3a8.css",
+    "file": "assets/app-28d20ad1.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
@@ -142,9 +142,9 @@
       "assets/ops_screenshot-a5a4cd4f.png"
     ],
     "css": [
-      "assets/app-685fc3a8.css"
+      "assets/app-28d20ad1.css"
     ],
-    "file": "assets/app-693dc050.js",
+    "file": "assets/app-6c9a44b2.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }

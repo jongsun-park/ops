@@ -82,8 +82,11 @@ class ProductionController extends Controller
         $production_data = [
             'id' => $production->id,
             'note' => $production->note,
+            'order_id' => $production->order_id,
+            'customer_name' => $production->customer_name,
             'order_id_customer_name' => $production->order_id . ' - ' . $production->customer_name,
             'product' => [
+                'id' => $production->product->id,
                 'name' => $production->product->name,
                 'sku' => $production->product->sku,
                 'description' => $production->product->description,
@@ -91,6 +94,10 @@ class ProductionController extends Controller
                 'divisors' => $production->product->divs,
                 'ppcm' =>  $production->product->ppcm,
                 'pprepeat' => $production->product->pprepeat,
+                'loom' => [
+                    'id' => $production->product->loom->id,
+                    'name' => $production->product->loom->name,
+                ]
 
             ],
             'yarns' => [
@@ -120,16 +127,14 @@ class ProductionController extends Controller
                     'colour' => $production->product->yarn4->colour
                 ],
             ],
-            'loom' => $production->product->loom->name,
 
             'quantity' => $production->quantity,
             'total_length' => $production->total_length,
 
-            'urgency' => '', // TODO: Calculate Urgency
+            'urgency' => $production->urgency,
 
             'date' => [
                 'printed' => date_format($production->created_at, 'Y-m-d'),
-
                 'weave_by' => $production->date_weave_by,
                 'started' => $production->date_started,
                 'examined' => $production->date_examined,

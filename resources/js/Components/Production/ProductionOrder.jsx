@@ -17,7 +17,6 @@ const Yarn = ({ idx = "-", yarn }) => {
 
 const ProductionOrder = ({ production }) => {
   const {
-    id,
     note,
     order_id_customer_name,
     product,
@@ -25,12 +24,11 @@ const ProductionOrder = ({ production }) => {
     quantity,
     total_length,
     urgency,
-    loom,
     date,
-    wash_options,
-    status,
     nc_number,
   } = production;
+
+  const loom = product.loom.name;
 
   return (
     <div className="min-w-[920px] rounded-md bg-white p-4 text-sm shadow">
