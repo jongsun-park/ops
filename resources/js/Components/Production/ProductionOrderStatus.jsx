@@ -117,14 +117,16 @@ const ProductionOrderStatus = ({
     <PrimaryButton
       onClick={updateStatus}
       disabled={processing}
-      className={isComplete ? "bg-green-700" : "bg-blue-700"}
+      className={
+        isComplete ? "border-green-700 bg-green-700 hover:border-blue-700" : ""
+      }
     >
       {isComplete ? "Complete Production Order" : "Update Status"}
     </PrimaryButton>
   );
 
   return (
-    <Pannel title="Status" button={button}>
+    <Pannel title="Edit Status" button={button}>
       {statuses.map((status) => (
         <Status
           setData={setData}

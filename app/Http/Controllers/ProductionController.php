@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loom;
 use App\Models\Yarn;
 use Inertia\Inertia;
 use App\Models\Packing;
@@ -128,20 +129,21 @@ class ProductionController extends Controller
 
             'date' => [
                 'printed' => date_format($production->created_at, 'Y-m-d'),
-                'weave_by' => $production->weave_by,
-                'started_by' => $production->started_by,
-                'examined_by' => $production->examined_by,
+
+                'weave_by' => $production->date_weave_by,
+                'started' => $production->date_started,
+                'examined' => $production->date_examined,
+                'washed' => $production->date_washed,
+                'shipped' => $production->date_shipped,
             ],
-            'wash_options' => $production->washOptions,
+            'wash_option' => $production->wash_option,
             'status' => $production->status,
 
             'nc_number' => $production->nc_number,
         ];
 
-
-
-
         $user_data = [
+            'name' => auth()->user()->name,
             'can' => [
                 'create' => auth()->user()->can('create', Production::class),
                 'update' => auth()->user()->can('update', $production),
@@ -150,9 +152,19 @@ class ProductionController extends Controller
             ]
         ];
 
+        $wash_options = WashOption::get(['id', 'machine_name', 'machine_program'])->map(function ($option) {
+            return [
+                'id', $option->id,
+                'name' => "MN: " . $option->machine_name . " / MP: " . $option->machine_program
+            ];
+        });
+
         return Inertia::render('Productions/Show', [
             'production' => $production_data,
             'user' => $user_data,
+            'looms' => Loom::get(['id', 'name']),
+            'products' => Product::get(['id', 'name']),
+            'wash_options' => $wash_options,
         ]);
     }
 

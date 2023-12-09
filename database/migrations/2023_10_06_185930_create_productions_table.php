@@ -33,9 +33,11 @@ return new class extends Migration
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('weave_by'); // date
-            $table->date('started_by')->nullable(); // date
-            $table->date('examined_by')->nullable(); // date
+            $table->date('date_weave_by'); // date
+            $table->date('date_started')->nullable(); // date
+            $table->date('date_examined')->nullable(); // date
+            $table->date('date_washed')->nullable(); //
+            $table->date('date_shipped')->nullable(); // date
 
             $table->foreignId('product_id')->nullable();
             $table->foreignId('user_id')->constrained();

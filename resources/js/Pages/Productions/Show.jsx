@@ -1,15 +1,18 @@
 import MakingUpOrder from "@/Components/Production/MakingUpOrder";
-import { DeleteProductionOrder } from "@/Components/Production/ProductionLink";
 import ProductionOrder from "@/Components/Production/ProductionOrder";
+import ProductionOrderStatus from "@/Components/Production/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
 import Header from "@/Layouts/Header";
 import Main from "@/Layouts/Main";
 import { Head } from "@inertiajs/react";
+import Form from "./Partials/Form";
 
-const Show = ({ production, user }) => {
+const Show = ({ production, user, looms, products, wash_options }) => {
   const { id, status } = production;
 
   const title = `Production Order Details`;
+
+  console.log(looms);
 
   return (
     <>
@@ -19,7 +22,7 @@ const Show = ({ production, user }) => {
           <h2 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
             {/* {user?.can?.update && <UpdateProductionOrder id={id} />} */}
-            {user?.can?.delete && <DeleteProductionOrder id={id} />}
+            {/* {user?.can?.delete && <DeleteProductionOrder id={id} />} */}
           </h2>
         </div>
       </Header>
@@ -31,7 +34,7 @@ const Show = ({ production, user }) => {
               slidesPerView={1}
               slides={[
                 <ProductionOrder production={production} />,
-                <MakingUpOrder />,
+                <MakingUpOrder production={production} />,
               ]}
             />
             <p className="text-sm font-bold text-blue-500">
@@ -40,14 +43,21 @@ const Show = ({ production, user }) => {
           </div>
         </section>
 
-        {/* <ProductionOrderStatus
+        <Form
+          production={production}
+          looms={looms}
+          products={products}
+          wash_options={wash_options}
+        />
+
+        <ProductionOrderStatus
           id={status.id}
           can={user.can.update_status}
-          user={user_name}
+          user={user.name}
           status={status}
         />
 
-        <ProductionDetails user={user} production={production} /> */}
+        {/* <ProductionDetails user={user} production={production} /> */}
       </Main>
     </>
   );

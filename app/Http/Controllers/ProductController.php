@@ -136,7 +136,7 @@ class ProductController extends Controller
 
         ];
 
-        $user_date = [
+        $user_data = [
             'id' => $product->user->id,
             'name' => $product->user->name,
             'email' => $product->user->email,
@@ -148,7 +148,7 @@ class ProductController extends Controller
 
         return Inertia::render('Products/Show', [
             'product' => $product_data,
-            'user' => $user_date,
+            'user' => $user_data,
             'options' => [
                 'yarns' => Yarn::select('id', 'sku')->orderBy('sku')->get(),
                 'units' => Unit::all()->toArray(),

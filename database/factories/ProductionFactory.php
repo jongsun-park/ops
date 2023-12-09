@@ -43,7 +43,7 @@ class ProductionFactory extends Factory
 
         return [
             // DATE
-            'weave_by' => $fakeDate,
+            'date_weave_by' => $fakeDate,
             // 'started_by' => $fakeDate,
             // 'examined_by' => $fakeDate,
 

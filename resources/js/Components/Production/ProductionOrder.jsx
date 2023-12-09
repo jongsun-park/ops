@@ -16,10 +16,6 @@ const Yarn = ({ idx = "-", yarn }) => {
 };
 
 const ProductionOrder = ({ production }) => {
-  console.log(production);
-
-  console.log(Object.keys(production));
-
   const {
     id,
     note,
@@ -68,15 +64,15 @@ const ProductionOrder = ({ production }) => {
             <Grid label="DESC" value={product.description} />
           </div>
 
-          <div className="col-span-5">
+          <div className="col-span-4">
             <Grid label="PRO PRINTED" value={date.printed} />
             <Grid label="PRO WEAVE BY" value={date.weave_by} />
             <Grid label="URGENCY" value={urgency} />
           </div>
-          <Cell className="col-span-2 grid h-full grid-cols-1 text-xl">
+          <Cell className="col-span-3 grid h-full grid-cols-1 rounded-md border-2 border-gray-200 text-xl">
             <span className="font-bold">LOOM</span>
             <span>{loom}</span>
-            <div></div>
+            <span></span>
           </Cell>
         </>
         {/* ROW 3 */}
@@ -91,7 +87,7 @@ const ProductionOrder = ({ production }) => {
             <Grid label="# of Repeats" value={product.pprepeat} />
           </div>
           <div className="col-span-7">
-            <div className="p-2">
+            <div>
               <p className="mb-2 font-bold">Yarn Batch</p>
               {/* Table */}
               <div className="grid grid-cols-5 gap-y-3 rounded border-2 border-gray-200 p-2">
@@ -113,11 +109,11 @@ const ProductionOrder = ({ production }) => {
         <>
           <Cell className="col-span-4 grid grid-cols-1" border>
             <div className="font-bold">Started by</div>
-            <div>{date.started_by}</div>
+            <div>{date.started}</div>
           </Cell>
           <Cell className="col-span-4 grid grid-cols-1" border>
             <div className="font-bold">Quality checked (examined) by</div>
-            <div>{date.examined_by}</div>
+            <div>{date.examined}</div>
           </Cell>
           <Cell className="col-span-4 grid grid-cols-1" border>
             <div className="font-bold">Nonconformance</div>
