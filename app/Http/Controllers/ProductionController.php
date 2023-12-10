@@ -54,31 +54,6 @@ class ProductionController extends Controller
 
     public function show(Production $production)
     {
-
-        // $production_data = [
-        //     'id' => $production->id,
-        //     'created_at' => $production->created_at->diffForHumans(),
-        //     'updated_at' => $production->updated_at->diffForHumans(),
-        //     'product_name' => $production->product->name,
-        //     'product_sku' => $production->product->sku,
-        //     'product_description' => $production->product->description,
-
-        //     'written_by' => $production->user->name,
-        //     'order_id' => $production->order_id,
-        //     'customer_name' => $production->customer_name,
-        //     'weave_by' => $production->weave_by,
-        //     'quantity' => $production->quantity,
-        //     'total_length' => $production->total_length,
-        //     'note' => $production->note,
-        //     'urgency' => $production->urgency->name,
-        //     'wash_option' => $production->wash_option->name,
-        //     'packing' => $production->packing->name,
-        //     'status' => $production->status,
-
-        //     'user_id' => $production->user_id,
-        //     'product_id' => $production->product_id,
-        // ];
-
         $production_data = [
             'id' => $production->id,
             'note' => $production->note,
@@ -159,7 +134,7 @@ class ProductionController extends Controller
 
         $wash_options = WashOption::get(['id', 'machine_name', 'machine_program'])->map(function ($option) {
             return [
-                'id', $option->id,
+                'id' => $option->id,
                 'name' => "MN: " . $option->machine_name . " / MP: " . $option->machine_program
             ];
         });
@@ -177,58 +152,96 @@ class ProductionController extends Controller
     {
         // validate the request
         $attributes = $request->validate([
-            'product_id' => 'required|exists:App\Models\Product,id',
-            'user_id' => 'required|exists:App\Models\User,id',
-            'order_id' => '',
-            'customer_name' => '',
-            'weave_by' => '',
-            'quantity' => '',
-            'total_length' => '',
-            'number_of_repeats' => '',
-            'note' => '',
-            'urgency_id' => '',
-            'wash_option_id' => '',
-            'packing_id' => '',
+            // dates
+            "date_examined" => "",
+            "date_printed" => "",
+            "date_shipped" => "",
+            "date_started" => "",
+            "date_washed" => "",
+            "date_weave_by" => "required",
+            // fk
+            "product_id" => 'required|exists:App\Models\Product,id',
+            "wash_option_id" => 'required|exists:App\Models\WashOption,id',
+            // others
+            "order_id" => "",
+            "customer_name" => "",
+            "quantity" => "",
+            "total_length" => "",
+            "urgency" => "",
+            "nc_number" => "",
+            "note" => "",
         ]);
 
+        $attributes['user_id'] = auth()->user()->id;
+        // $attributes['production_order_status_id'] = ProductionOrderStatus::cre;
+
         // create Production
-        $id = Production::create($attributes)->id;
+        $production_id = Production::create($attributes)->id;
+
+
+        // TODO: Need to optimized
+        $production = Production::find($production_id);
+        if (
+            empty($production->production_order_status_id)
+        ) {
+            // create Production Order Status
+            $status_id = ProductionOrderStatus::factory()->create(['production_id' => $production_id])->id;
+            // insert status ID to Production
+            $production->production_order_status_id = $status_id;
+            $production->update();
+        }
 
         // redirect
-        return to_route('productions.show', ['production' => $id]);
+        return to_route('productions.show', ['production' => $production_id]);
     }
 
 
     public function create()
     {
+        $user_data = [
+            'name' => auth()->user()->name,
+            'can' => [
+                'create' => auth()->user()->can('create', Production::class),
+            ]
+        ];
 
-        return Inertia::render('Productions/Form', [
-            'products' => Product::select('id', 'name')->orderBy('name')->get(),
-            'urgencies' => Urgency::all()->toArray(),
-            'wash_options' => WashOption::all()->toArray(),
-            'packings' => Packing::all()->toArray(),
+        $wash_options = WashOption::get(['id', 'machine_name', 'machine_program'])->map(function ($option) {
+            return [
+                'id' => $option->id,
+                'name' => "MN: " . $option->machine_name . " / MP: " . $option->machine_program
+            ];
+        });
+
+        return Inertia::render('Productions/Create', [
+            'user' => $user_data,
+            'looms' => Loom::get(['id', 'name']),
+            'products' => Product::get(['id', 'name']),
+            'wash_options' => $wash_options,
 
         ]);
     }
 
     public function update(Request $request, Production $production)
     {
-
         $attributes = $request->validate([
-            'product_id' => 'required|exists:App\Models\Product,id',
-            'user_id' => 'required|exists:App\Models\User,id',
-            // 'product_id' => '',
-            // 'user_id' => '',
-            'order_id' => '',
-            'customer_name' => '',
-            'weave_by' => '',
-            'quantity' => '',
-            'total_length' => '',
-            'number_of_repeats' => '',
-            'note' => '',
-            'urgency_id' => '',
-            'wash_option_id' => '',
-            'packing_id' => '',
+            // dates
+            "date_examined" => "",
+            "date_printed" => "",
+            "date_shipped" => "",
+            "date_started" => "",
+            "date_washed" => "",
+            "date_weave_by" => "",
+            // fk
+            "product_id" => 'required|exists:App\Models\Product,id',
+            "wash_option_id" => 'required|exists:App\Models\WashOption,id',
+            // others
+            "order_id" => "",
+            "customer_name" => "",
+            "quantity" => "",
+            "total_length" => "",
+            "urgency" => "",
+            "nc_number" => "",
+            "note" => "",
         ]);
 
         // update products
@@ -243,6 +256,11 @@ class ProductionController extends Controller
     public function destroy(Production $production)
     {
         $production->delete();
+        // also delete status
+        if (!empty($production->production_order_status_id)) {
+            ProductionOrderStatus::find($production->production_order_status_id)->delete();
+        }
+
         return to_route('productions.index');
     }
 

@@ -1,4 +1,5 @@
 import MakingUpOrder from "@/Components/Production/MakingUpOrder";
+import { DeleteProductionOrder } from "@/Components/Production/ProductionLink";
 import ProductionOrder from "@/Components/Production/ProductionOrder";
 import ProductionOrderStatus from "@/Components/Production/ProductionOrderStatus";
 import Swiper from "@/Components/UI/Swiper";
@@ -8,7 +9,7 @@ import { Head } from "@inertiajs/react";
 import Form from "./Partials/Form";
 
 const Show = ({ production, user, looms, products, wash_options }) => {
-  const title = production ? "Production Order Details" : "Create Production";
+  const title = "Production Order Details";
 
   return (
     <>
@@ -18,7 +19,7 @@ const Show = ({ production, user, looms, products, wash_options }) => {
           <h2 className="flex items-center text-3xl font-semibold leading-tight text-gray-800">
             {title}
             {/* {user?.can?.update && <UpdateProductionOrder id={id} />} */}
-            {/* {user?.can?.delete && <DeleteProductionOrder id={id} />} */}
+            {user?.can?.delete && <DeleteProductionOrder id={production.id} />}
           </h2>
         </div>
       </Header>

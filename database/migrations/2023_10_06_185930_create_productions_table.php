@@ -37,6 +37,7 @@ return new class extends Migration
             $table->date('date_started')->nullable(); // date
             $table->date('date_examined')->nullable(); // date
             $table->date('date_washed')->nullable(); //
+            $table->date('date_printed')->nullable(); //
             $table->date('date_shipped')->nullable(); // date
 
             $table->foreignId('product_id')->nullable();
@@ -58,7 +59,7 @@ return new class extends Migration
 
 
             $table->foreignId('wash_option_id')->constrained();
-            $table->foreignId('packing_id')->constrained();
+            // $table->foreignId('packing_id')->constrained();
 
             $table->foreignId('production_order_status_id')->nullable();
         });

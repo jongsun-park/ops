@@ -14,7 +14,8 @@ const Status = ({ type, setData, data, can = false, user = "" }) => {
       setData({
         ...data,
         [`${type}_status`]: !status,
-        [`${type}_updated_at`]: new Date(Date.now()).toISOString(),
+        [`${type}_updated_at`]: new Date(Date.now()).toISOString().slice(0, -1),
+        //   .split("T")[0],
         [`${type}_updated_by`]: user,
       });
     } else {
@@ -63,7 +64,7 @@ const Status = ({ type, setData, data, can = false, user = "" }) => {
       />
       {/* If whne it's status has changed, update this value */}
       <input
-        type={can ? "text" : "hidden"}
+        type={can ? "datetime-local" : "hidden"}
         placeholder={`${type}_updated_at`}
         name={`${type}_updated_at`}
         value={updated_at ?? ""}
@@ -133,9 +134,6 @@ const ProductionOrderStatus = ({
           data={data}
           type={status}
           key={status}
-          status={data.cut_status}
-          updatedAt={data.cut_updated_at}
-          updatedBy={data.cut_updated_by}
           can={can}
           user={user}
         />

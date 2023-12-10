@@ -35,9 +35,9 @@ class ProductionFactory extends Factory
             WashOption::factory(5)->create();
         }
 
-        if (!Packing::first()) {
-            Packing::factory(5)->create();
-        }
+        // if (!Packing::first()) {
+        //     Packing::factory(5)->create();
+        // }
 
         $fakeDate = date_format(fake()->dateTimeBetween('+2 week', '+5 week'), 'Y-m-d');
 
@@ -62,7 +62,7 @@ class ProductionFactory extends Factory
             'urgency' => fake()->words(1, true),
 
             'wash_option_id' => WashOption::all()->random(1)->first()->id,
-            'packing_id' => Packing::all()->random(1)->first()->id,
+            // 'packing_id' => Packing::all()->random(1)->first()->id,
         ];
     }
 }
