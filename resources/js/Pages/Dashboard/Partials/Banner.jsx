@@ -23,7 +23,9 @@ const Page = ({ title, description, link, bg }) => (
     }}
   >
     <h2 className="text-4xl font-bold text-blue-600">{title}</h2>
-    <p className="text-md max-w-[70ch]">{description}</p>
+    <p className="text-md max-w-[70ch] bg-white/60 md:bg-transparent">
+      {description}
+    </p>
     <a
       href={link.url}
       target="_blank"

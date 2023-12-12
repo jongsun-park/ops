@@ -251,8 +251,6 @@ class ProductionController extends Controller
         return back()->with('message', "Production Updated");
     }
 
-
-
     public function destroy(Production $production)
     {
         $production->delete();
