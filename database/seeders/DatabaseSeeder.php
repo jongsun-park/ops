@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
 
 
         // Production Factory without Status
-        $productions = Production::factory(10)->create();
+        $productions = Production::factory(100)->create();
 
         foreach ($productions as $production) {
             // Connect Production with Status

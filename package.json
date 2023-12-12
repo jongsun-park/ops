@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "@heroicons/react": "^2.0.18",
+        "echarts": "^5.4.3",
+        "echarts-for-react": "^3.0.2",
         "framer-motion": "^10.16.4",
         "react-transition-group": "^4.4.5",
         "styled-components": "^6.1.0",

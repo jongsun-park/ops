@@ -2,6 +2,8 @@ import Main from "@/Layouts/Main";
 import { Head } from "@inertiajs/react";
 import Banner from "./Partials/Banner";
 import NotCompletedProduction from "./Partials/NotCompletedProduction";
+import Stats from "./Partials/Stats";
+import UrgentProduction from "./Partials/UrgentProduction";
 
 export const Section = ({ heading = "", children, className = "" }) => {
   return (
@@ -26,25 +28,17 @@ export default function Dashboard() {
       <Head title="Dashboard" />
       <Main className="space-y-10">
         <Banner />
+        <Stats />
         <NotCompletedProduction />
-        <Section
-          heading="Filtered production orders based on urgencies"
-          className="my-5 flex flex-row space-x-3"
-        >
-          <PlaceHolder />
-          <PlaceHolder />
-          <PlaceHolder />
-          <PlaceHolder />
-          <PlaceHolder />
-        </Section>
-        <Section
+        <UrgentProduction />
+        {/* <Section
           heading="Orders scheduled for the near future"
           className="my-5 flex flex-col space-y-3"
         >
           <PlaceHolder className="min-h-[100px]" />
           <PlaceHolder className="min-h-[100px]" />
           <PlaceHolder className="min-h-[100px]" />
-        </Section>
+        </Section> */}
       </Main>
     </>
   );

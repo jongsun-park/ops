@@ -6,8 +6,8 @@ import "swiper/css/effect-creative";
 import "swiper/css/pagination";
 import { EffectCreative, Pagination } from "swiper/modules";
 
-import aboutProjectBG from "./3d-render-smartphone-with-hand-fill-online-survey.jpg";
-import aboutMeBG from "./digital_artist_male.jpg";
+import aboutProjectBG from "./images/3d-render-smartphone-with-hand-fill-online-survey.jpg";
+import aboutMeBG from "./images/digital_artist_male.jpg";
 
 // https://codesandbox.io/p/sandbox/ch5rmf?file=%2Fsrc%2FApp.jsx%3A17%2C6
 
@@ -22,7 +22,10 @@ const Page = ({ title, description, link, bg }) => (
       backgroundColor: "white",
     }}
   >
-    <h2 className="text-4xl font-bold text-blue-600">{title}</h2>
+    <h2
+      className="text-4xl font-bold text-blue-600"
+      dangerouslySetInnerHTML={{ __html: title }}
+    />
     <p className="text-md max-w-[70ch] bg-white/60 md:bg-transparent">
       {description}
     </p>
@@ -40,7 +43,7 @@ const Page = ({ title, description, link, bg }) => (
 // <a href="https://www.freepik.com/free-photo/3d-render-smartphone-with-hand-fill-online-survey_33309533.htm#page=3&query=3d&position=2&from_view=search&track=sph&uuid=b56e765c-f7e0-414d-9cb0-994a1e364448">Image by upklyak</a> on Freepik
 const AboutProject = () => (
   <Page
-    title="About Project"
+    title="About Project <ins>Ops</ins>"
     description="Constructed using Laravel (PHP) and MySQL, this application is tailored to
     optimize Production Order management. The admin user can create products
     and production orders with various options, and designers or weavers can
@@ -54,7 +57,7 @@ const AboutProject = () => (
 // <a href="https://www.freepik.com/free-psd/3d-nft-icon-digital-artist-male_25469816.htm#query=3d%20illustration&position=11&from_view=keyword&track=ais&uuid=c24c052d-a8cd-441c-8ecc-815ea95f0336">Image by Graphue</a> on Freepik
 const AboutMe = () => (
   <Page
-    title="About Me"
+    title="Hi, I'm <ins>Jongsun Park</ins>"
     description="I'm a self-motivated developer and designer specializing in building websites with CMS like WordPress. I stay updated on industry trends, collaborate with local businesses, and provide responsive, tailored solutions based on their models and target customers."
     link={{ text: "Online CV", url: "https://jongsun.co.uk/about-me" }}
     bg={aboutMeBG}

@@ -23,8 +23,8 @@ const NotCompletedProduction = () => {
   useEffect(() => {
     const getProductions = async () => {
       const res = filter
-        ? await fetch(`/api/productions?filter=${filter}`)
-        : await fetch("/api/productions");
+        ? await fetch(`/api/productions/filter/${filter}`)
+        : await fetch("/api/productions/filter");
       const { productions } = await res.json();
       setFilteredProductions(productions);
     };
@@ -35,9 +35,9 @@ const NotCompletedProduction = () => {
   }, [filter]);
 
   return (
-    <section>
-      <div className="flex flex-row justify-between">
-        <h2 className="text-2xl font-bold text-blue-500">
+    <section className="p-5 sm:p-0">
+      <div className="flex flex-col justify-between lg:flex-row">
+        <h2 className="mb-3 text-2xl font-bold text-blue-500 lg:mb-0">
           Tasks must be completed
         </h2>
         {/* TODO - Needs more clear label */}
@@ -61,14 +61,14 @@ const NotCompletedProduction = () => {
 
       <div className="my-5">
         {loading ? (
-          <div>loading</div>
+          <div>loading...</div>
         ) : (
-          <div className="flex flex-row flex-wrap gap-2">
+          <div className="grid grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-6">
             {filteredProductions.map((production) => (
               <Link
                 href={`/productions/${production.id}`}
                 key={production.id}
-                className="rounded border-2 border-gray-200 p-5 hover:cursor-pointer hover:bg-blue-200"
+                className="rounded border-2 border-gray-200 p-5 hover:cursor-pointer hover:bg-blue-200 "
               >
                 <div>Produciton ID: {production.id}</div>
                 <div>Weave By: {production.date_weave_by}</div>
