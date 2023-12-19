@@ -116,7 +116,7 @@
     "src": "resources/js/Pages/Dashboard/Partials/images/digital_artist_male.jpg"
   },
   "resources/js/app.css": {
-    "file": "assets/app-c4d41848.css",
+    "file": "assets/app-47c0040f.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.jsx": {
@@ -152,9 +152,9 @@
       "assets/digital_artist_male-140c2ad7.jpg"
     ],
     "css": [
-      "assets/app-c4d41848.css"
+      "assets/app-47c0040f.css"
     ],
-    "file": "assets/app-4227cd21.js",
+    "file": "assets/app-4362e1e7.js",
     "isEntry": true,
     "src": "resources/js/app.jsx"
   }

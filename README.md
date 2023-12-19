@@ -1,66 +1,92 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# OPS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Order Production Management System
 
-## About Laravel
+OPS, a production order system seamlessly integrated with Laravel and React, boasts role-based database access for tailored user experiences. Hosted on Digital Ocean and meticulously managed on GitHub, it combines robust functionality with reliable performance, emphasizing a commitment to excellence in production order management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![OPS Dashboard Preview](./public/ops_dashboard_preview.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Challenges in Production Tracking: Transitioning from Excel to a Robust Integrated System
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The comprehensive demands of the production workflow necessitated a meticulous tracking of process details, a task initially managed through Microsoft Excel. However, as the production process became increasingly interconnected with various files and data sources, the limitations of Excel became evident. The complexity of relationships between different files presented challenges for the main production file in maintaining and organizing data effectively.
 
-## Learning Laravel
+Simultaneously, issues arising from partially updated data compromised the reliability and accuracy of the tracking process, raising concerns about the integrity of information crucial for making informed production decisions. Recognizing these challenges, there was a realization that transitioning from Excel to a more robust and integrated system was imperative to streamline the production tracking process and meet the evolving demands of the workflow.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Solutions
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+I have a task at hand that involves the comprehensive transfer of data from Excel to a database. The objective is not only to execute a seamless migration but also to establish a system that facilitates easy and efficient maintenance going forward. This entails a careful consideration of data structures, relationships, and dependencies to ensure that the transition is not only successful but also sets the stage for a streamlined and easily manageable database. By addressing these aspects, the goal is to create a robust and organized database environment that enhances data accessibility, integrity, and overall maintenance efficiency.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Tech Stacks
 
-## Laravel Sponsors
+- PHP & [Laravel](https://laravel.com/docs/10.x/) - Backend & API
+- JavaScript & [React](https://react.dev/) & [Inertiajs](https://inertiajs.com/) - Frontend
+- [tailwindcss](https://tailwindcss.com/) - CSS framework
+- [echarts](https://echarts.apache.org/en/index.html) - Chart Library
+- [framer](https://www.framer.com/) - Animation
+- [Digital Ocean](https://try.digitalocean.com/) - Deploment
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Policies
 
-### Premium Partners
+Distinct permissions are assigned to each role, with their implementation executed through Laravel policies.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+The administrator possesses comprehensive access, including the ability to delete items and add users. Designers are empowered to create products and production orders, while Updators can update order statuses. Guests are granted read-only access to production and product details.
 
-## Contributing
+## Production Order
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+![Production Order Preview](./public/production_order_preview.png)
 
-## Code of Conduct
+The Production Order Preview encompasses output data distributed across multiple tables, incorporating detailed information about products within the yarn data. Additionally, it tracks the status of the production order, a parameter that can be updated by users with the Updator role.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Tables
 
-## Security Vulnerabilities
+![OPS ERD](./public/ops_erd.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Yarn
 
-## License
+- colour: hex string, entered by user
+- sku: generated from material code, yarn number, core and nm
+- material: imported from material table
+- yarn number: number, entered by user
+- yurn core: number, entered by user
+- nm: number, entered by user
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Product
+
+- name: product name
+- sku: generated from product attributeds
+- description: string, entered by user
+- tf: string, entered by user
+- colour: hex string, entered by user
+- loom: imported from loom table
+- yarns: 4 yarns linked to yarn table
+- cut (w/h): string, entered by user
+- finish (w/h): string, entered by user
+- hem_size: imported from hem size table
+- hem_type: imported from hem type table
+- label: imported from label table
+- corner: imported from corenr table
+
+Production
+
+- product: imported from product table
+- wash_option: imported from wash option table
+- status: imported from status table
+- other options: string, entered by user
+
+Status
+
+- linked to one production order
+- cut & luarndy & loom & stitch & woven
+- updated_by: imported from user
+- updated_at: date time, updated date
+
+## Ongoing Projects: Seeking Suggestions for Performance and User Experience Enhancements
+
+These projects are currently in progress, with numerous tasks aimed at enhancing performance and user experiences. If you have any suggestions, please feel free to send me messages. Thank you.
+
+What is in mind
+
+- Consider using API instead of sending data as props via Inertia
+- Enhance UI components for the List view
+- Implement email notifications for status updates
+- Code Splitting
