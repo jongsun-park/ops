@@ -2,34 +2,17 @@
 
 use App\Http\Controllers\LoomController;
 use App\Http\Controllers\MaterialController;
-use App\Models\User;
-use App\Models\Yarn;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
+
 use App\Http\Controllers\YarnController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WashOptionController;
-use App\Models\Color;
-use App\Models\Corner;
-use App\Models\Grade;
-use App\Models\HemSize;
-use App\Models\HemType;
-use App\Models\Label;
-use App\Models\Loom;
-use App\Models\Material;
-use App\Models\Packing;
-use App\Models\ProductionOrderStatus;
-use App\Models\Supplier;
-use App\Models\Unit;
-use App\Models\Urgency;
-use App\Models\WashOption;
-use Illuminate\Database\Eloquent\Model;
 
 Route::get('/', function () {
     if (Auth::user()?->isAdmin()) {

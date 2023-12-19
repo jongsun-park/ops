@@ -35,7 +35,7 @@ const NotCompletedProduction = () => {
   }, [filter]);
 
   return (
-    <section className="p-5 sm:p-0">
+    <section className="min-h-[285px] p-5 sm:p-0">
       <div className="flex flex-col justify-between lg:flex-row">
         <h2 className="mb-3 text-2xl font-bold text-blue-500 lg:mb-0">
           Tasks must be completed

@@ -1,10 +1,10 @@
-import { useEffect } from "react";
 import Checkbox from "@/Components/Checkbox";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useEffect } from "react";
 
 export default function Login({ status, canResetPassword }) {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -30,7 +30,7 @@ export default function Login({ status, canResetPassword }) {
       <Head title="Log in" />
 
       {status && (
-        <div className="mb-4 font-medium text-sm text-green-600">{status}</div>
+        <div className="mb-4 text-sm font-medium text-green-600">{status}</div>
       )}
 
       <form onSubmit={submit}>
@@ -67,7 +67,7 @@ export default function Login({ status, canResetPassword }) {
           <InputError message={errors.password} className="mt-2" />
         </div>
 
-        <div className="block mt-4">
+        <div className="mt-4 block">
           <label className="flex items-center">
             <Checkbox
               name="remember"
@@ -78,19 +78,24 @@ export default function Login({ status, canResetPassword }) {
           </label>
         </div>
 
-        <div className="flex items-center justify-end mt-4">
+        <div className="mt-4 flex items-center justify-end space-x-3">
           {canResetPassword && (
             <Link
               href={route("password.request")}
-              className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Forgot your password?
+              Reset Password?
             </Link>
           )}
 
-          <PrimaryButton className="ml-4" disabled={processing}>
-            Log in
-          </PrimaryButton>
+          <Link
+            href={route("register")}
+            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            Register?
+          </Link>
+
+          <PrimaryButton disabled={processing}>Log in</PrimaryButton>
         </div>
       </form>
     </>
